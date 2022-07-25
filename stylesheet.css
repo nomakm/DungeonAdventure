@@ -1,0 +1,39 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap');
+}
+.root {
+    -fx-background-color: radial-gradient(center 50% 50% , radius 100% , #ee1d1d, #550808);
+    -fx-font-family: Cinzel;
+}
+
+.label,
+.button {
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
+
+#myWelcomeLabel {
+    -fx-font-size: 50;
+}
+
+.button {
+    -fx-background-color: "black";
+    -fx-background-radius: 30 30 30 30;
+}
+.button:hover {
+    -fx-background-color: "gray";
+
+}
+.radio-button:selected .radio .dot {
+    -fx-background-color: #550808;
+    -fx-background-insets: 0;
+}
+
+.menu .label {
+    -fx-font-size: 12;
+    -fx-font-weight: normal;
+    -fx-text-fill: "black";
+}
+
+
