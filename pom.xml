@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>main.dungeonadventure/main.dungeonadventure.controller.HelloApplication</mainClass>
+                            <mainClass>main.dungeonadventure/main.dungeonadventure.controller.DungeonAdventureGame</mainClass>
                         </configuration>
                     </execution>
                 </executions>
