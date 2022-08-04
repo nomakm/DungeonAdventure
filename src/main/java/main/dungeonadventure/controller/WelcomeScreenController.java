@@ -25,10 +25,11 @@ public class WelcomeScreenController {
     private void switchToStartScreen(ActionEvent event) {
 
         try {
-            root = FXMLLoader.load(getClass().getResource("start_game.fxml")); //File path error here
+            //root = FXMLLoader.load(getClass().getResource("./start_game.fxml")); //File path error here
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("start_game.fxml"));
             System.out.println("start_game.fxml was loaded.");
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();scene = new Scene(root);
-            String css = this.getClass().getResource("stylesheet.css").toExternalForm();
+            String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
             scene.getStylesheets().add(css);
             stage.setScene(scene);
             stage.show();

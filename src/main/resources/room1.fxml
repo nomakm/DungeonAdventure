@@ -23,7 +23,7 @@
          </image>
       </ImageView>
       <ImageView fitHeight="71.0" fitWidth="96.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-         <image>![](assets/floor_2.png)
+         <image>
             <Image url="@assets/floor_3.png" />
          </image>
       </ImageView>

@@ -14,19 +14,19 @@
          <children>
             <ImageView fitHeight="106.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/elf_m_idle_anim_f0.png" />
+                  <Image url="@../../../assets/elf_m_idle_anim_f0.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="71.0" fitWidth="30.0" layoutX="64.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="48.0">
                <image>
-                  <Image url="@assets/weapon_red_gem_sword.png" />
+                  <Image url="@../../../assets/weapon_red_gem_sword.png" />
                </image>
             </ImageView>
          </children>
       </Group>
       <ImageView fitHeight="132.0" fitWidth="151.0" layoutX="403.0" layoutY="121.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/ogre_idle_anim_f0.png" />
+            <Image url="@../../../assets/ogre_idle_anim_f0.png" />
          </image>
       </ImageView>
       <ProgressBar layoutX="48.0" layoutY="327.0" prefWidth="200.0" progress="0.0" />

@@ -76,10 +76,10 @@ public class StartGameController {
     @FXML
     private void switchStageBuilder(ActionEvent event, String fxmlName) {
         try {
-            root = FXMLLoader.load(getClass().getResource(fxmlName));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource(fxmlName));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
-            String css = this.getClass().getResource("stylesheet.css").toExternalForm();
+            String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
             scene.getStylesheets().add(css);
             stage.setScene(scene);
             stage.show();
