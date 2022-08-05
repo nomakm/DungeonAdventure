@@ -15,7 +15,7 @@ public class Dungeon {
     /** Length of Dungeon rooms */
     private static final int DUNGEON_HEIGHT = 7;
     /** Width of Dungeon rooms */
-    private static final int DUNGEON_WIDTH = 15;
+    private static final int DUNGEON_WIDTH = 5;
     /** Total pillars on map*/
     private static final int PILLAR_COUNT = 4;
 
@@ -32,16 +32,6 @@ public class Dungeon {
             buildDungeon();
         } while (!DungeonSolver.isDungeonSolvable(this));
 
-    }
-
-    /**
-     * Verifies input dungeon is solvable. Dungeon can be navigated
-     * from start to finish with all pillars collected.
-     * @return if Dungeon can be solved.
-     */
-    private boolean dungeonIsSolvable() {
-
-        return DungeonSolver.isDungeonSolvable(this);
     }
 
     /**
