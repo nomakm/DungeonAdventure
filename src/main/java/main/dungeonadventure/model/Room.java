@@ -8,8 +8,10 @@ import java.util.Scanner;
 public class Room {
 
     final private HashSet<String> myRoomItems;
+    final private HashMap<Direction, Boolean> myDoors;
     private boolean myContainsPillar;
-    private HashMap<String, Boolean> myDoors;
+    private boolean myIsExit;
+    private boolean myIsEntrance;
 
     /** Value used for chance to spawn pit */
     private static final int CHANCE_FOR_PIT = 15;
@@ -21,9 +23,12 @@ public class Room {
     private static final int CHANCE_FOR_VISION_POTION = 15;
 
     public Room() {
-        myDoors = new HashMap<>();
-        myContainsPillar = false;
         myRoomItems = new HashSet<>();
+        myDoors = new HashMap<>();
+        myIsExit = false;
+        myContainsPillar = false;
+        myIsEntrance = false;
+
         generateRoomItems();
         generateDoors();
     }
@@ -49,48 +54,47 @@ public class Room {
     }
 
     public void generateDoors() {
-        myDoors.put("NORTH", false);
-        myDoors.put("SOUTH", false);
-        myDoors.put("WEST", false);
-        myDoors.put("EAST", false);
+        myDoors.put(Direction.NORTH, false);
+        myDoors.put(Direction.SOUTH, false);
+        myDoors.put(Direction.WEST, false);
+        myDoors.put(Direction.EAST, false);
     }
 
-    public void openDoor(final String theDoorDirection) {
-        if (theDoorDirection.toUpperCase().equals("NORTH")) {
-            myDoors.replace("NORTH",true);
+    public void openDoor(final Direction theDoorDirection) {
+        if (theDoorDirection == Direction.NORTH) {
+            myDoors.replace(Direction.NORTH, true);
         }
-        else if (theDoorDirection.toUpperCase().equals("SOUTH")) {
-            myDoors.replace("SOUTH",true);
+        else if (theDoorDirection == Direction.SOUTH) {
+            myDoors.replace(Direction.SOUTH, true);
         }
-        else if (theDoorDirection.toUpperCase().equals("WEST")) {
-            myDoors.replace("WEST",true);
+        else if (theDoorDirection == Direction.WEST) {
+            myDoors.replace(Direction.WEST, true);
         }
-        else if (theDoorDirection.toUpperCase().equals("EAST")) {
-            myDoors.replace("EAST",true);
+        else if (theDoorDirection ==  Direction.EAST) {
+            myDoors.replace(Direction.EAST, true);
         }
         else {
             throw new IllegalArgumentException("Invalid door direction");
         }
     }
 
-    public void closeDoor(final String theDoorDirection) {
-        if (theDoorDirection.toUpperCase().equals("NORTH")) {
-            myDoors.replace("NORTH", false);
+    public void closeDoor(final Direction theDoorDirection) {
+        if (theDoorDirection == Direction.NORTH) {
+            myDoors.replace(Direction.NORTH, false);
         }
-        else if (theDoorDirection.toUpperCase().equals("SOUTH")) {
-            myDoors.replace("SOUTH", false);
+        else if (theDoorDirection == Direction.SOUTH) {
+            myDoors.replace(Direction.SOUTH, false);
         }
-        else if (theDoorDirection.toUpperCase().equals("WEST")) {
-            myDoors.replace("WEST", false);
+        else if (theDoorDirection == Direction.WEST) {
+            myDoors.replace(Direction.WEST, false);
         }
-        else if (theDoorDirection.toUpperCase().equals("EAST")) {
-            myDoors.replace("EAST", false);
+        else if (theDoorDirection == Direction.EAST) {
+            myDoors.replace(Direction.EAST, false);
         }
         else {
             throw new IllegalArgumentException("Invalid door direction");
         }
     }
-
 
 
     public void setContainsPillar(final boolean theValue) {
@@ -102,8 +106,8 @@ public class Room {
     }
 
     /**
-     * USED FOR TESTING TO DELETE
-     * @return
+     * Used for visualizing the entire maze/rooms.
+     * @return String concatenation of maze
      */
     @Override
     public String toString() {
@@ -111,7 +115,7 @@ public class Room {
 
         //North Door
         roomVisual.append("#");
-        if (myDoors.get("NORTH")) {
+        if (myDoors.get(Direction.NORTH)) {
             roomVisual.append("-");
         } else {
             roomVisual.append("*");
@@ -121,15 +125,21 @@ public class Room {
         roomVisual.append("\n");
 
         //West and East Door
-        if (myDoors.get("WEST")) {
+        if (myDoors.get(Direction.WEST)) {
             roomVisual.append("|");
         } else {
             roomVisual.append("*");
         }
 
-        roomVisual.append("O");
+        //Place a P if there is a pillar
+        if (getContainsPillar()) {
+            roomVisual.append("P");
+        } else {
+            roomVisual.append("O");
+        }
 
-        if (myDoors.get("EAST")) {
+
+        if (myDoors.get(Direction.EAST)) {
             roomVisual.append("|");
         } else {
             roomVisual.append("*");
@@ -139,7 +149,7 @@ public class Room {
 
         //South door
         roomVisual.append("#");
-        if (myDoors.get("SOUTH")) {
+        if (myDoors.get(Direction.SOUTH)) {
             roomVisual.append("-");
         } else {
             roomVisual.append("*");
@@ -151,8 +161,8 @@ public class Room {
         return roomVisual.toString();
     }
 
-    /** USED FOR TESTING
-     *
+    /**
+     * Used with toString to get row representation of each room.
      */
     public String getRow(final int theRowNum) {
         if (theRowNum < 0 || theRowNum > 2)
@@ -168,5 +178,25 @@ public class Room {
         return row[theRowNum];
 
 
+    }
+
+    public void setEntrance(final boolean theValue) {
+        myIsEntrance = theValue;
+    }
+
+    public boolean isEntrance() {
+        return myIsEntrance;
+    }
+
+    public void setExit(final boolean theValue) {
+        myIsExit = theValue;
+    }
+
+    public boolean isExit() {
+        return myIsExit;
+    }
+
+    public boolean isDoorOpen(final Direction theDirection) {
+        return myDoors.get(theDirection);
     }
 }
