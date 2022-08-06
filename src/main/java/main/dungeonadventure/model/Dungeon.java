@@ -1,15 +1,27 @@
 package main.dungeonadventure.model;
 
+import java.awt.*;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
+/**
+ * Dungeon class used to hold maze of game
+ *
+ * @author Luke Smith
+ * @version 8-6-22
+ */
 public class Dungeon {
 
     /** 2D array for storing rooms. */
     private Room[][] myRooms;
+    /** */
+    Point myHeroPosition;
+    /** Position of entrance*/
+    Point myEntranceLocation;
 
 
     /** Random object for random number generation in code.*/
-    private static final Random RAND_GEN = new Random();
+    public static final Random RAND_GEN = new Random();
     /** This integer is used for creating a random number from 0 - 100*/
     private static final int RAND_UPPERBOUND = 100;
     /** Length of Dungeon rooms */
@@ -42,7 +54,7 @@ public class Dungeon {
         generateEntrancesAndExits();
         generateDoorsInRooms();
         spawnPillars();
-
+        findEntrance();
     }
 
     private void spawnPillars() {
@@ -51,7 +63,7 @@ public class Dungeon {
             int x = RAND_GEN.nextInt(DUNGEON_HEIGHT);
             int y = RAND_GEN.nextInt(DUNGEON_WIDTH);
 
-            if (!myRooms[x + 1][y + 1].getContainsPillar()) {
+            if (!myRooms[x + 1][y + 1].containsPillar()) {
                 myRooms[x + 1][y + 1].setContainsPillar(true);
                 spawnedPillars++;
             }
@@ -108,8 +120,6 @@ public class Dungeon {
 
     }
 
-
-
     public static int getRandomRoll() {
         return RAND_GEN.nextInt(RAND_UPPERBOUND);
     }
@@ -134,6 +144,47 @@ public class Dungeon {
         return dungeonMap.toString();
     }
 
+    private void setEntrance(Point theLocation) {
+        //Check for out of bounds
+        if (theLocation.x < 1 || theLocation.x > DUNGEON_WIDTH
+            && theLocation.y < 1 || theLocation.y > DUNGEON_HEIGHT) {
+            throw new IllegalArgumentException("Position of entrance is out of bounds");
+        }
+        myEntranceLocation = theLocation;
+
+    }
+
+    private void findEntrance() {
+        Point entrance = null;
+        for (int row = 1; row < myRooms.length - 1; row++) {
+            for (int col = 1; col < myRooms[0].length - 1; col++) {
+                if (myRooms[row][col].isEntrance()) {
+                    entrance = new Point(row, col);
+                    setEntrance(entrance);
+                    break;
+                }
+            }
+        }
+        if (entrance == null) {
+            throw new NoSuchElementException("Entrance could not be found");
+        }
+    }
+
+    public Point getHeroPosition(){
+        return myHeroPosition;
+    }
+
+    public void setHeroPosition(final int theX, final int theY) {
+        Point location = new Point(theX, theY);
+        //Check for out of bounds
+        if (location.x < 1 || location.x > DUNGEON_WIDTH
+                && location.y < 1 || location.y > DUNGEON_HEIGHT) {
+            throw new IllegalArgumentException("Position of entrance is out of bounds");
+        }
+        myHeroPosition = location;
+    }
+
+
     /**
      * Return 2d array of rooms
      * @return
@@ -144,5 +195,9 @@ public class Dungeon {
 
     public int getPillarCount() {
         return PILLAR_COUNT;
+    }
+
+    public Room getCurrentRoom() {
+        return myRooms[myHeroPosition.x][myHeroPosition.y];
     }
 }

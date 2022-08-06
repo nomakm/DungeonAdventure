@@ -1,6 +1,6 @@
 package main.dungeonadventure.model;
 
-enum Direction {
+public enum Direction {
     NORTH,
     SOUTH,
     WEST,

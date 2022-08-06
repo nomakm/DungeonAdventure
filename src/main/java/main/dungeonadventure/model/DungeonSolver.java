@@ -9,6 +9,9 @@ import java.util.Stack;
  * Class is used to transverse through an input dungeon to find out if
  * it is solvable. This means it can reach the exit and collect all
  * items required to successfully end the game.
+ *
+ * @author Luke Smith
+ * @version 8-4-22
  */
 public class DungeonSolver {
 
@@ -53,7 +56,7 @@ public class DungeonSolver {
             }
 
             //Check if room contains a pillar
-            if (currentRoom.getContainsPillar()
+            if (currentRoom.containsPillar()
                 && !visited.contains(curPos)) {
 
                 pillarCounter++;

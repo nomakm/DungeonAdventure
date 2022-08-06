@@ -1,6 +1,11 @@
 package main.dungeonadventure.model;
 
-enum MonsterType {
+/**
+ * Simple enum for monster types
+ *
+ * @author Luke Smith
+ */
+public enum MonsterType {
     GOBLIN,
     SKELETON,
     OGRE

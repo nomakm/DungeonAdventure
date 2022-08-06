@@ -1,9 +1,8 @@
 package main.dungeonadventure.controller;
 
+import main.dungeonadventure.model.Direction;
 import main.dungeonadventure.model.Dungeon;
-import main.dungeonadventure.model.Room;
-
-import java.net.MalformedURLException;
+import main.dungeonadventure.model.MonsterType;
 
 
 /**
@@ -12,10 +11,13 @@ import java.net.MalformedURLException;
 public class TESTER {
 
 
-    public static void main(String[] args) throws MalformedURLException {
-        Dungeon main = new Dungeon();
-        System.out.println(main);
+    public static void main(String[] args) {
+        //Dungeon main = new Dungeon();
+        //System.out.println(main);
 
+
+
+        System.out.println(Direction.values()[4]);
 //        Room test = new Room();
 //        System.out.println(test.getRow(1));
 //        System.out.println("TEST");

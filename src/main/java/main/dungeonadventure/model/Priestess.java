@@ -1,4 +1,6 @@
 package main.dungeonadventure.model;
 
-public class Priestess {
+public class Priestess extends Hero {
+    public Priestess(String theHeroName) {
+    }
 }

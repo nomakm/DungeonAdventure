@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Each room of a dungeon maze. Contains items, traps, monsters.
+ * @author Luke Smith
+ * @version 8-6-22
+ */
 public class Room {
 
     final private HashSet<String> myRoomItems;
@@ -12,6 +17,7 @@ public class Room {
     private boolean myContainsPillar;
     private boolean myIsExit;
     private boolean myIsEntrance;
+    private Monster myMonster;
 
     /** Value used for chance to spawn pit */
     private static final int CHANCE_FOR_PIT = 15;
@@ -41,6 +47,7 @@ public class Room {
 
         if (CHANCE_FOR_MONSTER < Dungeon.getRandomRoll()) {
             myRoomItems.add("MONSTER");
+            generateMonster();
         }
 
         if (CHANCE_FOR_HP_POTION < Dungeon.getRandomRoll()) {
@@ -51,6 +58,18 @@ public class Room {
             myRoomItems.add("VISION_POTION");
         }
 
+
+    }
+
+    private void generateMonster() {
+        //Rolls a random value of total monster types
+        int roll = Dungeon.RAND_GEN.nextInt(MonsterType.values().length - 1) + 1;
+        MonsterType type = MonsterType.values()[roll];
+        myMonster = monsterFactory.buildMonster(type);
+    }
+
+    public Monster getMonster() {
+        return myMonster;
     }
 
     public void generateDoors() {
@@ -101,7 +120,7 @@ public class Room {
         myContainsPillar = theValue;
     }
 
-    public boolean getContainsPillar() {
+    public boolean containsPillar() {
         return myContainsPillar;
     }
 
@@ -132,7 +151,7 @@ public class Room {
         }
 
         //Place a P if there is a pillar
-        if (getContainsPillar()) {
+        if (containsPillar()) {
             roomVisual.append("P");
         } else {
             roomVisual.append("O");
