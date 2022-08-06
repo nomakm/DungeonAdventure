@@ -29,8 +29,8 @@ public class WelcomeScreenController {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("start_game.fxml"));
             System.out.println("start_game.fxml was loaded.");
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();scene = new Scene(root);
-            String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
-            scene.getStylesheets().add(css);
+            //String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
+            //scene.getStylesheets().add(css);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

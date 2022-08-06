@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap');
 
-.root {
+.anchor-pane {
     -fx-background-color: radial-gradient(center 50% 50% , radius 100% , #ee1d1d, #550808);
     -fx-font-family: Cinzel;
 }
@@ -17,11 +17,11 @@
     -fx-font-size: 50;
 }
 
-.button {
+.buttonControl {
     -fx-background-color: "black";
     -fx-background-radius: 30 30 30 30;
 }
-.button:hover {
+.buttonControl:hover {
     -fx-background-color: "gray";
 
 }
@@ -34,6 +34,19 @@
     -fx-font-size: 12;
     -fx-font-weight: normal;
     -fx-text-fill: "black";
+}
+.roomItems {
+    -fx-background-color: transparent;
+}
+.roomItems:hover {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-scale-z: 1.2;
+}
+
+.arrow {
+    -fx-fill: #550808;
+    -fx-stroke: #550808;
 }
 
 

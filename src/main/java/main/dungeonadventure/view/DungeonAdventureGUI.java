@@ -18,8 +18,8 @@ public class DungeonAdventureGUI extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("welcome_screen.fxml"));
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("welcome_screen.fxml"));
         Scene scene = new Scene(root);
-        String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        //String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
+        //scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

@@ -9,8 +9,10 @@
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
    <children>
       <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -342,7 +344,7 @@
             <Image url="@assets/wall_corner_top_left.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="284.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="myNorthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@assets/wall_corner_top_left.png" />
          </image>
@@ -367,16 +369,20 @@
             <Image url="@assets/wall_corner_top_left.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@assets/wall_side_mid_right.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@assets/wall_side_mid_right.png" />
-         </image>
-      </ImageView>
+      <Group fx:id="myWestDoors" layoutY="142.0">
+         <children>
+            <ImageView fitHeight="102.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/wall_side_mid_right.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/wall_side_mid_right.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
       <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="568.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/wall_corner_bottom_right.png" />
@@ -397,40 +403,56 @@
             <Image url="@assets/wall_corner_top_right.png" />
          </image>
       </ImageView>
-      <Group fx:id="myColumn" layoutX="426.0" layoutY="72.0">
-         <children>
-            <ImageView fx:id="myMidColumn" fitHeight="71.0" fitWidth="71.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="397.0" layoutY="44.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <Group fx:id="myColumn">
+               <children>
+                  <ImageView fx:id="myMidColumn" fitHeight="71.0" fitWidth="71.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/column_mid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="myTopColumn" fitHeight="71.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/column_top.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="myBottomColumn" fitHeight="71.0" fitWidth="71.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/coulmn_base.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </graphic>
+      </Button>
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="134.0" layoutY="59.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <ImageView fx:id="myHero" fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/column_mid.png" />
+                  <Image url="@assets/elf_m_idle_anim_f0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="myTopColumn" fitHeight="71.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+         </graphic>
+      </Button>
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="57.0" layoutY="59.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <ImageView fx:id="myPotion" fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/column_top.png" />
+                  <Image url="@assets/flask_big_blue.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="myBottomColumn" fitHeight="71.0" fitWidth="71.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         </graphic>
+      </Button>
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="426.0" layoutY="221.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <ImageView fx:id="myMonster" fitHeight="142.0" fitWidth="126.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/coulmn_base.png" />
+                  <Image url="@assets/ogre_idle_anim_f0.png" />
                </image>
             </ImageView>
-         </children>
-      </Group>
-      <ImageView fx:id="myHero" fitHeight="71.0" fitWidth="96.0" layoutX="170.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@assets/elf_m_idle_anim_f0.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="myPotion" fitHeight="41.0" fitWidth="48.0" layoutX="86.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@assets/flask_big_blue.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="myMonster" fitHeight="142.0" fitWidth="126.0" layoutX="434.0" layoutY="221.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@assets/ogre_idle_anim_f0.png" />
-         </image>
-      </ImageView>
+         </graphic>
+      </Button>
       <Circle fx:id="mySinkHole" layoutX="305.0" layoutY="234.0" radius="92.0" stroke="#483b3a" strokeType="INSIDE">
          <fill>
             <RadialGradient centerX="0.47222222222222227" centerY="0.5" radius="0.5">
@@ -449,7 +471,64 @@
             </RadialGradient>
          </fill>
       </Circle>
-      <Button layoutX="26.0" layoutY="378.0" mnemonicParsing="false" text="Save and Exit" />
-      <Button layoutX="568.0" layoutY="378.0" mnemonicParsing="false" text="Map" />
+      <Button layoutX="26.0" layoutY="378.0" mnemonicParsing="false" styleClass="buttonControl" text="Save and Exit" />
+      <Button layoutX="568.0" layoutY="378.0" mnemonicParsing="false" styleClass="buttonControl" text="Map" />
+      <ImageView fx:id="mySouthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/wall_corner_top_left.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="myEastDoors" layoutX="497.0" layoutY="71.0">
+         <children>
+            <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="71.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@assets/wall_side_mid_right.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="71.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+               <image>
+                  <Image url="@assets/wall_side_mid_right.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Button fx:id="myEastArrow" contentDisplay="GRAPHIC_ONLY" layoutX="550.0" layoutY="183.0" mnemonicParsing="false" rotate="90.0" styleClass="roomItems" text="Button">
+         <graphic>
+            <Group styleClass="roomItems">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" width="18.0" />
+                  <Polygon fill="DODGERBLUE" layoutX="9.0" layoutY="-28.0" points="-20.0, 40.0, 20.0, 40.0, 0.0, 17.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" />
+               </children>
+            </Group>
+         </graphic>
+      </Button>
+      <Button fx:id="mySouthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" onAction="#testDoorAndArrow" rotate="180.0" styleClass="roomItems" text="Button">
+         <graphic>
+            <Group styleClass="roomItems">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" width="18.0" />
+                  <Polygon fill="DODGERBLUE" layoutX="9.0" layoutY="-28.0" points="-20.0, 40.0, 20.0, 40.0, 0.0, 17.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" />
+               </children>
+            </Group>
+         </graphic>
+      </Button>
+      <Button fx:id="myNorthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="23.0" mnemonicParsing="false" onAction="#testButtonDisable" styleClass="roomItems" text="Button">
+         <graphic>
+            <Group styleClass="roomItems">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" width="18.0" />
+                  <Polygon fill="DODGERBLUE" layoutX="9.0" layoutY="-28.0" points="-20.0, 40.0, 20.0, 40.0, 0.0, 17.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" />
+               </children>
+            </Group>
+         </graphic></Button>
+      <Button fx:id="myWestArrow" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="183.0" mnemonicParsing="false" rotate="-90.0" styleClass="roomItems" text="Button">
+         <graphic>
+            <Group styleClass="roomItems">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="42.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" width="18.0" />
+                  <Polygon fill="DODGERBLUE" layoutX="9.0" layoutY="-28.0" points="-20.0, 40.0, 20.0, 40.0, 0.0, 17.0" stroke="DODGERBLUE" strokeType="INSIDE" styleClass="arrow" />
+               </children>
+            </Group>
+         </graphic></Button>
    </children>
 </AnchorPane>
