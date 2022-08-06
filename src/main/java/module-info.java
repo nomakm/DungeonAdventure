@@ -1,7 +1,7 @@
 module main.dungeonadventure {
     requires javafx.controls;
     requires javafx.fxml;
-
+    requires java.desktop;
 
 
     exports main.dungeonadventure.controller;

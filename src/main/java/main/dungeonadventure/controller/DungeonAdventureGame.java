@@ -3,6 +3,13 @@ package main.dungeonadventure.controller;
 import main.dungeonadventure.model.Dungeon;
 import main.dungeonadventure.view.DungeonAdventureGUI;
 
+/**
+ * @author Luke Smith
+ *
+ * Main class used for launching game GUI and handling communication between GUI
+ * and Model.
+ *
+ */
 public class DungeonAdventureGame {
 
 
@@ -21,6 +28,8 @@ public class DungeonAdventureGame {
 
 
     }
+
+
 
 
 
