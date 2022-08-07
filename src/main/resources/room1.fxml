@@ -472,7 +472,6 @@
          </fill>
       </Circle>
       <Button layoutX="26.0" layoutY="378.0" mnemonicParsing="false" styleClass="buttonControl" text="Save and Exit" />
-      <Button layoutX="568.0" layoutY="378.0" mnemonicParsing="false" styleClass="buttonControl" text="Map" />
       <ImageView fx:id="mySouthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/wall_corner_top_left.png" />

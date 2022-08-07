@@ -11,27 +11,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.WelcomeScreenController">
+<AnchorPane fx:id="someRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.WelcomeScreenController">
    <children>
       <Label fx:id="myWelcomeLabel" layoutX="1.0" layoutY="106.0" prefHeight="17.0" prefWidth="600.0" text="Dungeon Adventure" />
-      <MenuBar fx:id="menu" layoutY="1.0" prefHeight="27.0" prefWidth="600.0">
+      <MenuBar fx:id="menu" layoutX="-6.0" prefHeight="27.0" prefWidth="612.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem fx:id="myMenuNewGame" mnemonicParsing="false" onAction="#switchToStartScreen" onMenuValidation="#switchToStartScreen" text="New Game" />
-                  <MenuItem mnemonicParsing="false" text="Load Game" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="About">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
+               <items>
+                  <MenuItem fx:id="myNewGame" mnemonicParsing="false" onAction="#switchToStartScreen" text="New Game" />
+                  <MenuItem fx:id="myLoadGame" mnemonicParsing="false" onAction="#loadGame" text="LoadGame" />
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tutorial">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="myTutorial" mnemonicParsing="false" onAction="#startTutorial" text="Start Tutorial" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="About">
+               <items>
+                  <MenuItem fx:id="myAbout" mnemonicParsing="false" onAction="#about" text="About the Game" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="14.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
@@ -47,6 +47,6 @@
       <VBox layoutX="95.0" layoutY="135.0" prefHeight="17.0" prefWidth="287.0" />
       <HBox layoutX="180.0" layoutY="106.0" prefHeight="100.0" prefWidth="200.0" />
       <Button fx:id="myNewGameButton" layoutX="180.0" layoutY="230.0" mnemonicParsing="false" onAction="#switchToStartScreen" styleClass="buttonControl" text="New Game" />
-      <Button fx:id="mySaveGameButton" layoutX="292.0" layoutY="230.0" mnemonicParsing="false" styleClass="buttonControl" text="Load Game" />
+      <Button fx:id="myLoadGameButton" layoutX="292.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadGame" styleClass="buttonControl" text="Load Game" />
    </children>
 </AnchorPane>

@@ -12,10 +12,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.dungeonadventure.model.*;
 
 import java.util.Objects;
 
-public class StartGameController {
+public class ChooseHeroController {
     @FXML
     private Button myBackButton, mySubmitButton;
     @FXML
@@ -28,7 +29,9 @@ public class StartGameController {
     private Scene scene;
     private Parent root;
 
-    private int submitButtonClick = 0;
+    private Hero myHero;
+    private String myHeroName;
+    HeroType myHeroType;
 
     @FXML
     private void backToWelcomeScreen(ActionEvent event) {
@@ -42,34 +45,46 @@ public class StartGameController {
             myHeroText.setText(heroName);
             System.out.println(heroName);
             myNameLabel.setTextFill(Color.WHITE);
-            submitButtonClick++;
-            //send heroName to game? for saving purposes?
+            myHeroName = heroName;
         }
     }
 
     @FXML
     private void chooseHero(ActionEvent event) {
         if (myThiefButton.isSelected()) {
-            //send info to model that thief is the hero
+            myHeroType = HeroType.THIEF;
             System.out.println("Thief is chosen");
         } else if (myPriestessButton.isSelected()) {
-            //send info to model that thief is the hero
+            myHeroType = HeroType.PRIESTESS;
             System.out.println("Priestess is chosen");
         } else if (myWarriorButton.isSelected()) {
-            //send info to model that the warrior is the hero
+            myHeroType = HeroType.WARRIOR;
             System.out.println("Warrior is chosen");
         }
     }
 
     @FXML
     private void switchToRoom1(ActionEvent event) {
-        if (submitButtonClick <= 0 || myHeroText.getText().length() == 0) {
+        if (myHeroText.getText().length() == 0) {
             myNameLabel.setTextFill(Color.RED);
         } else if (!myThiefButton.isSelected() && !myPriestessButton.isSelected() && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
-            submitButtonClick = 0;
+            createHero(myHeroType, myHeroName);
             switchStageBuilder(event, "room1.fxml");
+        }
+    }
+
+    public void createHero(final HeroType theHeroType,
+                           final String theHeroName) {
+        if (theHeroType == HeroType.WARRIOR) {
+            myHero = new Warrior(theHeroName);
+        } else if (theHeroType == HeroType.THIEF) {
+            myHero = new Thief(theHeroName);
+        } else if (theHeroType == HeroType.PRIESTESS) {
+            myHero = new Priestess(theHeroName);
+        } else {
+            throw new IllegalArgumentException("Invalid HeroType");
         }
     }
 
@@ -79,8 +94,6 @@ public class StartGameController {
             root = FXMLLoader.load(getClass().getClassLoader().getResource(fxmlName));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
-            //String css = this.getClass().getClassLoader().getResource("stylesheet.css").toExternalForm();
-            //scene.getStylesheets().add(css);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

@@ -31,6 +31,7 @@ public class DungeonAdventureGame {
 
     }
 
+    //moved to ChooseHeroController
     public void moveHero(final Direction theDirection) {
         Point currentPos = myDungeon.getHeroPosition();
         if (theDirection == Direction.NORTH) {
@@ -48,6 +49,7 @@ public class DungeonAdventureGame {
         return myDungeon.getCurrentRoom();
     }
 
+    //moved to ChooseHeroController
     public void createHero(final HeroType theHeroType,
                              final String theHeroName) {
         if (theHeroType == HeroType.WARRIOR) {
