@@ -32,7 +32,7 @@ public class Dungeon {
     /** Total pillars on map*/
     private static final int PILLAR_COUNT = 4;
 
-    //singleton model?
+    /** Creates single instance of Dungeon*/
     private static Dungeon uniqueInstance = new Dungeon();
 
     /**
@@ -50,7 +50,7 @@ public class Dungeon {
 
     }
 
-    //singleton model
+
     public static Dungeon getInstance() {
         return uniqueInstance;
     }
