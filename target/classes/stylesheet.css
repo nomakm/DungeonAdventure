@@ -13,7 +13,7 @@
     -fx-font-weight: bold;
 }
 
-#myWelcomeLabel {
+.largeLabel {
     -fx-font-size: 50;
 }
 

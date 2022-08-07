@@ -31,7 +31,7 @@ public class ChooseHeroController {
 
     private Hero myHero;
     private String myHeroName;
-    HeroType myHeroType;
+    private HeroType myHeroType;
 
     @FXML
     private void backToWelcomeScreen(ActionEvent event) {

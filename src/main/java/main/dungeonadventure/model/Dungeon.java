@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class Dungeon {
 
+
     /** 2D array for storing rooms. */
     private Room[][] myRooms;
     /** */
@@ -31,6 +32,9 @@ public class Dungeon {
     /** Total pillars on map*/
     private static final int PILLAR_COUNT = 4;
 
+    //singleton model?
+    private static Dungeon uniqueInstance = new Dungeon();
+
     /**
      * Constructs a solvable Dungeon map.
      */
@@ -44,6 +48,11 @@ public class Dungeon {
             buildDungeon();
         } while (!DungeonSolver.isDungeonSolvable(this));
 
+    }
+
+    //singleton model
+    public static Dungeon getInstance() {
+        return uniqueInstance;
     }
 
     /**

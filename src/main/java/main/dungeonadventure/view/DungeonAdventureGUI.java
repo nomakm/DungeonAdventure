@@ -14,12 +14,16 @@ public class DungeonAdventureGUI extends Application {
     private Dungeon myDungeon;
 
     @Override
-    public void start(final Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("welcome_screen.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+    public void start(final Stage stage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("welcome_screen.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
