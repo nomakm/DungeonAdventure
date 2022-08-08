@@ -64,6 +64,7 @@ public class Dungeon {
         generateDoorsInRooms();
         spawnPillars();
         findEntrance();
+        setHeroPosition(myEntranceLocation.x, myEntranceLocation.y);
     }
 
     private void spawnPillars() {
