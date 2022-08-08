@@ -371,6 +371,15 @@
             <Image url="@assets/wall_corner_top_left.png" />
          </image>
       </ImageView>
+      <Button fx:id="myHPPot" contentDisplay="GRAPHIC_ONLY" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/flask_big_red.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
       <Group fx:id="myWestDoors" layoutY="142.0">
          <children>
             <ImageView fitHeight="102.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
@@ -430,16 +439,16 @@
       </Button>
       <Button fx:id="myHeroButton" contentDisplay="GRAPHIC_ONLY" layoutX="134.0" layoutY="59.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
-            <ImageView fx:id="myHero" fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="myHeroImg" fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/elf_m_idle_anim_f0.png" />
+                  <Image url="@assets/THIEF.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button contentDisplay="GRAPHIC_ONLY" layoutX="57.0" layoutY="59.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+      <Button fx:id="myVisPot" contentDisplay="GRAPHIC_ONLY" layoutX="57.0" layoutY="59.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
-            <ImageView fx:id="myPotion" fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/flask_big_blue.png" />
                </image>
@@ -450,12 +459,12 @@
          <graphic>
             <ImageView fx:id="myMonster" fitHeight="142.0" fitWidth="126.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/ogre_idle_anim_f0.png" />
+                  <Image url="@assets/OGRE.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Circle fx:id="mySinkHole" layoutX="305.0" layoutY="234.0" radius="92.0" stroke="#483b3a" strokeType="INSIDE">
+      <Circle fx:id="myPit" layoutX="305.0" layoutY="234.0" radius="92.0" stroke="#483b3a" strokeType="INSIDE">
          <fill>
             <RadialGradient centerX="0.47222222222222227" centerY="0.5" radius="0.5">
                <stops>
@@ -503,7 +512,7 @@
             </Group>
          </graphic>
       </Button>
-      <Button fx:id="mySouthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" onAction="#testDoorAndArrow" rotate="180.0" styleClass="roomItems" text="SOUTH">
+      <Button fx:id="mySouthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" rotate="180.0" styleClass="roomItems" text="SOUTH">
          <graphic>
             <Group styleClass="roomItems">
                <children>
@@ -542,7 +551,7 @@
                <children>
                   <ImageView fitHeight="106.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@assets/elf_m_idle_anim_f0.png" />
+                        <Image url="@assets/THIEF.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="71.0" fitWidth="30.0" layoutX="64.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="48.0">
@@ -554,7 +563,7 @@
             </Group>
             <ImageView fitHeight="132.0" fitWidth="151.0" layoutX="403.0" layoutY="121.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/ogre_idle_anim_f0.png" />
+                  <Image url="@assets/OGRE.png" />
                </image>
             </ImageView>
             <ProgressBar layoutX="41.0" layoutY="308.0" prefWidth="200.0" progress="0.0" />

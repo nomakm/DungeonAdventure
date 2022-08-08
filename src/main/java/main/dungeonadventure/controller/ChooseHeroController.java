@@ -12,12 +12,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import javafx.stage.Stage;
 
 import main.dungeonadventure.model.*;
 
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -26,7 +28,7 @@ import java.util.Objects;
  * @Author Luke Smith
  * @version 8-2022
  */
-public class ChooseHeroController {
+public class ChooseHeroController extends CheckRoom{
     @FXML
     private Button myBackButton, mySubmitButton;
     @FXML
@@ -40,9 +42,12 @@ public class ChooseHeroController {
     private Scene myScene;
     private Parent myRoot;
 
+    private Dungeon myDungeon;
     private Hero myHero;
     private String myHeroName;
     private HeroType myHeroType;
+
+
 
     /**
      * When back button is hit, switches to welcome screen
@@ -99,6 +104,7 @@ public class ChooseHeroController {
                     && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
+            addDungeon(new Dungeon());
             createHero(myHeroType, myHeroName);
             switchStageBuilder(theEvent, "room1.fxml");
         }
@@ -116,6 +122,16 @@ public class ChooseHeroController {
             myStage = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
             myScene = new Scene(myRoot);
             myStage.setScene(myScene);
+            if (theFxmlName.equals("room1.fxml")) {
+                //not working below
+//                Point position = myDungeon.getHeroPosition();
+//                myDungeon.setHeroPosition(position.x, position.y);
+//                Room room = myDungeon.getCurrentRoom();
+//                setDoors(room);
+//                setItems(room);
+//                changeHero(myHeroType.toString());
+            }
+
             myStage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,5 +154,15 @@ public class ChooseHeroController {
         } else {
             throw new IllegalArgumentException("Invalid HeroType");
         }
+    }
+
+    /**
+     * Adds a dungeon object and assigns to myDungeon.
+     * Can't create a constructor to handle this due to class
+     * extending Application.
+     * @param theDungeon Input Dungeon
+     */
+    public void addDungeon(final Dungeon theDungeon) {
+        myDungeon = theDungeon;
     }
 }

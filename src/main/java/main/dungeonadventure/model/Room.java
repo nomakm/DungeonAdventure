@@ -218,4 +218,9 @@ public class Room {
     public boolean isDoorOpen(final Direction theDirection) {
         return myDoors.get(theDirection);
     }
+
+    //added by MN
+    public HashSet<String> getItems() {
+        return myRoomItems;
+    }
 }

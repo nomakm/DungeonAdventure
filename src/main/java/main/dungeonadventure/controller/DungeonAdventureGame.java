@@ -21,11 +21,12 @@ public class DungeonAdventureGame {
     public static void main(final String[] theArgs) {
 
         //Generate a Dungeon
-        myDungeon = new Dungeon();
+        //myDungeon = new Dungeon();
 
         //Generate a Dungeon GUI object for commanding the GUI
         myGui = new DungeonAdventureGUI();
-        myGui.addDungeon(myDungeon);
+        //switch to chooseHeroControler
+        //myGui.addDungeon(myDungeon);
         myGui.launchGUI();
 
 

@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="92.0" fitWidth="126.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/elf_f_hit_anim_f0.png" />
+                  <Image url="@assets/PRIESTESS.png" />
                </image>
             </ImageView>
             <RadioButton fx:id="myPriestessButton" contentDisplay="CENTER" layoutY="112.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#chooseHero" text="Priestess">
@@ -30,7 +30,7 @@
          <children>
             <ImageView fitHeight="92.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/elf_m_idle_anim_f0.png" />
+                  <Image url="@assets/THIEF.png" />
                </image>
             </ImageView>
             <RadioButton fx:id="myThiefButton" contentDisplay="TEXT_ONLY" layoutY="122.0" mnemonicParsing="false" onAction="#chooseHero" text="Thief" toggleGroup="$hero" />
@@ -40,7 +40,7 @@
          <children>
             <ImageView fitHeight="92.0" fitWidth="119.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@assets/knight_f_idle_anim_f1.png" />
+                  <Image url="@assets/WARRIOR.png" />
                </image>
             </ImageView>
             <RadioButton fx:id="myWarriorButton" contentDisplay="BOTTOM" layoutY="122.0" mnemonicParsing="false" onAction="#chooseHero" text="Warrior" toggleGroup="$hero" />

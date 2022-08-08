@@ -34,12 +34,12 @@
       </MenuBar>
       <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="14.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/elf_m_idle_anim_f0.png" />
+            <Image url="@assets/THIEF.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="511.0" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/ogre_idle_anim_f0.png" />
+            <Image url="@assets/OGRE.png" />
          </image>
       </ImageView>
       <Button fx:id="myNewGameButton" layoutX="180.0" layoutY="230.0" mnemonicParsing="false" onAction="#switchToStartScreen" styleClass="buttonControl" text="New Game" />
