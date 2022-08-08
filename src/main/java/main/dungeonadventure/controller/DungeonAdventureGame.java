@@ -51,19 +51,19 @@ public class DungeonAdventureGame {
     }
 
     //moved to ChooseHeroController
-    public void createHero(final HeroType theHeroType,
-                             final String theHeroName) {
-        if (theHeroType == HeroType.WARRIOR) {
-            myHero = new Warrior(theHeroName);
-        } else if (theHeroType == HeroType.THIEF) {
-            myHero = new Thief(theHeroName);
-        } else if (theHeroType == HeroType.PRIESTESS) {
-            myHero = new Priestess(theHeroName);
-        } else {
-            throw new IllegalArgumentException("Invalid HeroType");
-        }
-
-    }
+//    public void createHero(final HeroType theHeroType,
+//                             final String theHeroName) {
+//        if (theHeroType == HeroType.WARRIOR) {
+//            myHero = new Warrior(theHeroName);
+//        } else if (theHeroType == HeroType.THIEF) {
+//            myHero = new Thief(theHeroName);
+//        } else if (theHeroType == HeroType.PRIESTESS) {
+//            myHero = new Priestess(theHeroName);
+//        } else {
+//            throw new IllegalArgumentException("Invalid HeroType");
+//        }
+//
+//    }
 
 //    public void monsterBattle() {
 //        Monster monster = getHeroRoom().getMonster();

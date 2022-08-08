@@ -2,27 +2,27 @@ package main.dungeonadventure.model;
 
 public class DungeonCharacter {
 
-    private final String myCharName;
+
     private int myHP;
     private final int myDmgMin;
     private final int myDmgMax;
     private final int myAtkSpd;
     private final int myHitRate;
 
-    public DungeonCharacter(String myCharName, int myHP, int myDmgMin, int myDmgMax, int myAtkSpd, int myHitRate) {
+    public DungeonCharacter(final int theHP, final int theDmgMin,
+                            final int theDmgMax, final int theAtkSpd,
+                            final int theHitRate) {
 
-        this.myCharName = myCharName;
-        this.myHP = myHP;
-        this.myDmgMin = myDmgMin;
-        this.myDmgMax = myDmgMax;
-        this.myAtkSpd = myAtkSpd;
-        this.myHitRate = myHitRate;
+
+        this.myHP = theHP;
+        this.myDmgMin = theDmgMin;
+        this.myDmgMax = theDmgMax;
+        this.myAtkSpd = theAtkSpd;
+        this.myHitRate = theHitRate;
 
     }
 
-    public String getMyCharName() {
-        return myCharName;
-    }
+
 
     public int getHP() {
         return myHP;

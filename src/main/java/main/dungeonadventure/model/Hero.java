@@ -2,17 +2,24 @@ package main.dungeonadventure.model;
 
 public class Hero extends DungeonCharacter {
 
-    //    private final DungeonCharacters myHero;
+    private final String myCharName;
     private final int myChancetoBlock;
 
-    public Hero (String myCharName, int myHP, int myDmgMin, int myDmgMax, int myAtkSpd, int myHitRate, int myChancetoBlock) {
+    public Hero (final String theCharacterName, final int theHP,
+                 final int theDmgMin, final int theDmgMax,
+                 final int theAtkSpd, final int theHitRate,
+                 int theChancetoBlock) {
 
-        super(myCharName, myHP, myDmgMin, myDmgMax, myAtkSpd, myHitRate);
-//        this.myHero = new DungeonCharacters(myCharName, myHP, myDmgMin, myDmgMax, myAtkSpd, myHitRate);
-        this.myChancetoBlock = myChancetoBlock;
+        super(theHP, theDmgMin, theDmgMax, theAtkSpd, theHitRate);
+        this.myCharName = theCharacterName;
+        this.myChancetoBlock = theChancetoBlock;
     }
 
-    public int getMyChancetoBlock() {
+    public String getMyCharacterName() {
+        return myCharName;
+    }
+
+    public int getMyChanceToBlock() {
         return myChancetoBlock;
     }
 

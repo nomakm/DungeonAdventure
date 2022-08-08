@@ -6,20 +6,25 @@ package main.dungeonadventure.model;
 
 public class monsterFactory {
 
-    //TODO: For each monster type, add it's specific parameters
+    //TODO: For each monster type, add it's specific parameters, will pull this info from database
 
     public static Monster buildMonster(final MonsterType theMonsterType) {
-        Monster theMonster;
+
+        //Default for testing, delete later
+        Monster generatedMonster = new Monster(200,10,20,
+                30,12,15,10,10);
+
+        //Monster theMonster;
         if (theMonsterType == MonsterType.GOBLIN) {
-            theMonster = new Monster();
+            //generatedMonster = new Monster();
         } else if (theMonsterType == MonsterType.SKELETON) {
-            theMonster = new Monster();
+            //generatedMonster = new Monster();
         } else if (theMonsterType == MonsterType.OGRE) {
-            theMonster = new Monster();
+            //generatedMonster = new Monster();
         } else {
             throw new IllegalArgumentException("Invalid Monster");
         }
-        return theMonster;
+        return generatedMonster;
     }
 
 }

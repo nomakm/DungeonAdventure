@@ -4,10 +4,12 @@ public class Priestess extends Hero {
     private final int myHealMax;
     private final int myHealMin;
 
-    public Priestess(int myHealMax, int myHealMin) {
-        super("Priestess", 75, 25, 45, 5, 7, 3);
-        this.myHealMax = myHealMax;
-        this.myHealMin = myHealMin;
+    public Priestess(final String theCharacterName) {
+        super(theCharacterName, 75, 25, 45, 5, 7, 3);
+
+        //TODO Will need to get these values from the database
+        this.myHealMax = 0;
+        this.myHealMin = 0;
     }
 
     public int getMyHealMax() {
