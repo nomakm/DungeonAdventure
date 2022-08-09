@@ -42,7 +42,7 @@ public class ChooseHeroController {
     private Scene myScene;
     private Parent myRoot;
 
-    private Dungeon myDungeon;
+    private Dungeon myDungeon = Dungeon.getInstance();
     private Hero myHero;
     private String myHeroName;
     private HeroType myHeroType;
@@ -104,7 +104,7 @@ public class ChooseHeroController {
                     && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
-            addDungeon(new Dungeon());
+            addDungeon(myDungeon);
             createHero(myHeroType, myHeroName);
             switchStageBuilder(theEvent, "room1.fxml");
         }
@@ -144,6 +144,7 @@ public class ChooseHeroController {
         } else {
             throw new IllegalArgumentException("Invalid HeroType");
         }
+        myDungeon.setHero(myHero);
     }
 
     /**

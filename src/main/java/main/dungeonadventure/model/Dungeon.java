@@ -35,6 +35,7 @@ public class Dungeon implements Serializable {
 
     /** Creates single instance of Dungeon*/
     private static Dungeon uniqueInstance = new Dungeon();
+    private Hero myHero;
 
     /**
      * Constructs a solvable Dungeon map.
@@ -44,7 +45,7 @@ public class Dungeon implements Serializable {
         //Create dungeon with interconnecting rooms
         //(2 added for buffer space)
         myRooms = new Room[DUNGEON_HEIGHT + 2][DUNGEON_WIDTH + 2];
-
+        myHero = null;
         do {
             buildDungeon();
         } while (!DungeonSolver.isDungeonSolvable(this));
@@ -195,6 +196,17 @@ public class Dungeon implements Serializable {
         myHeroPosition = location;
     }
 
+    public void setHero(Hero theHero) {
+        if (theHero == null) {
+            throw new IllegalArgumentException("Hero is null");
+        } else {
+            myHero = theHero;
+        }
+    }
+
+    public Hero getHero() {
+        return myHero;
+    }
 
     /**
      * Return 2d array of rooms
@@ -211,4 +223,5 @@ public class Dungeon implements Serializable {
     public Room getCurrentRoom() {
         return myRooms[myHeroPosition.x][myHeroPosition.y];
     }
+
 }

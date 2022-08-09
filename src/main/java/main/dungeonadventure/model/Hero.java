@@ -5,7 +5,7 @@ public class Hero extends DungeonCharacter {
     private final String myCharName;
     private final int myBlockChance;
 
-    private final HeroType heroType;
+    private final HeroType myHeroType;
 
     public Hero (final HeroType theHeroType, final String theCharacterName, final int theHP,
                  final int theDmgMin, final int theDmgMax,
@@ -15,11 +15,11 @@ public class Hero extends DungeonCharacter {
         super(theHP, theDmgMin, theDmgMax, theAtkSpd, theHitRate);
         this.myCharName = theCharacterName;
         this.myBlockChance = theBlockChance;
-        this.heroType = theHeroType;
+        this.myHeroType = theHeroType;
     }
 
-    public String getHeroType() {
-        return "" + heroType.toString();
+    public HeroType getHeroType() {
+        return myHeroType;
     }
 
     public String getMyCharacterName() {

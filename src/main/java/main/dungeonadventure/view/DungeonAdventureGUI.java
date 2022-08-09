@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class DungeonAdventureGUI extends Application {
 
-    private Dungeon myDungeon;
+    //private Dungeon myDungeon;
 
     @Override
     public void start(final Stage stage) {
@@ -40,6 +40,6 @@ public class DungeonAdventureGUI extends Application {
      * @param theDungeon Input Dungeon
      */
     public void addDungeon(final Dungeon theDungeon) {
-        myDungeon = theDungeon;
+        //myDungeon = theDungeon;
     }
 }

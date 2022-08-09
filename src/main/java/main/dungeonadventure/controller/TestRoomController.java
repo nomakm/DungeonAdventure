@@ -41,8 +41,9 @@ public class TestRoomController {
     Image image;
 
 
-    private static Dungeon myDungeon = Dungeon.getInstance();
 
+    private static Dungeon myDungeon = Dungeon.getInstance();
+    private Hero myHero;
     /**
      * Switches between rooms in the dungeon based on room items.
      * @param theEvent - button click
@@ -73,11 +74,11 @@ public class TestRoomController {
         Room room = getHeroRoom();
         setDoors(room);
         setItems(room);
-        //TODO get heroType from hero to set hero image
-//        myHero = somehow get the hero
-//        String imageURL = "assets/" + myHero.getHeroType() + ".png";
-//        image = new Image(getClass().getClassLoader().getResourceAsStream(imageURL));
-//        myHeroImg.setImage(image);
+        myHero = myDungeon.getHero();
+        HeroType currentHeroType = myHero.getHeroType();
+        String imageURL = "/assets/" + currentHeroType.toString() + ".png";
+        Image image = new Image(getClass().getResourceAsStream(imageURL));
+        myHeroImg.setImage(image);
         myEnterPane.setVisible(false);
     }
 
