@@ -13,7 +13,6 @@ import java.awt.*;
  */
 public class DungeonAdventureGame {
 
-
     private static Dungeon myDungeon;
     private static DungeonAdventureGUI myGui;
     private Hero myHero;
@@ -74,13 +73,6 @@ public class DungeonAdventureGame {
 //        }
 //
 //    }
-
-
-
-
-
-
-
 
 
 
