@@ -27,7 +27,7 @@ public class TestRoomController {
     @FXML
     private Group myEastDoors, myWestDoors;
     @FXML
-    private ImageView myNorthDoor, mySouthDoor, myHeroImg;
+    private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster;
     @FXML
     private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
     @FXML
@@ -163,6 +163,22 @@ public class TestRoomController {
         } else {
             myMonsterButton.setVisible(true);
             //TODO get the monster type and set the image to the monster
+            MonsterType currentMonster = theRoom.getMonster().getMonsterType();
+            String imageURL = "/assets/" + currentMonster.toString() + ".png";
+            Image image = new Image(getClass().getResourceAsStream(imageURL));
+            myMonster.setImage(image);
+            //TODO Should we have separate assets for each monster? MonsterType can be used for this.
+//            MonsterType currentMonster = theRoom.getMonster().getMonsterType();
+//
+//            //PSEUDO
+////            if (currentMonster == MonsterType.GOBLIN) {
+////                myMonsterGoblin.setVisible(1);
+////                myMonsterOgre.setVisible(0);
+////                myMonsterSkeleton.setVisible(10;
+////            } else if (currentMonster == MonsterType.OGRE) {
+//            //ETC
+//            //Alternatively if we had one monster asset that can be updated to a different picture depending on MonsterType,
+//            //this would be better than have 3 separate assets for each monster.
         }
         if(!items.contains("PIT")) {
             myPit.setVisible(false);

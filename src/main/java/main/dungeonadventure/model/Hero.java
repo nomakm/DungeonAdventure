@@ -5,7 +5,7 @@ public class Hero extends DungeonCharacter {
     private final String myCharName;
     private final int myBlockChance;
 
-    private HeroType heroType;
+    private final HeroType heroType;
 
     public Hero (final HeroType theHeroType, final String theCharacterName, final int theHP,
                  final int theDmgMin, final int theDmgMax,
