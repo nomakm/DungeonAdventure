@@ -17,6 +17,9 @@ public class Room {
     private boolean myContainsPillar;
     private boolean myIsExit;
     private boolean myIsEntrance;
+
+
+
     private Monster myMonster;
 
     /** Value used for chance to spawn pit */
@@ -222,5 +225,9 @@ public class Room {
     //added by MN
     public HashSet<String> getItems() {
         return myRoomItems;
+    }
+
+    public Monster getMyMonster() {
+        return myMonster;
     }
 }

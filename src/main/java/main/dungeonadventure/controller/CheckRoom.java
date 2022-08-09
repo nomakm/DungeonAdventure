@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import main.dungeonadventure.model.Direction;
 import main.dungeonadventure.model.Dungeon;
+import main.dungeonadventure.model.MonsterType;
 import main.dungeonadventure.model.Room;
 
 import java.awt.*;
@@ -109,7 +110,21 @@ public class CheckRoom {
         if(!items.contains("MONSTER")) {
             myMonsterButton.setVisible(false);
         } else {
-            //getMonsterType
+            //Returns type of monster
+            //TODO Should we have separate assets for each monster? MonsterType can be used for this.
+            MonsterType currentMonster = theRoom.getMonster().getMonsterType();
+
+            //PSEUDO
+//            if (currentMonster == MonsterType.GOBLIN) {
+//                myMonsterGoblin.setVisible(1);
+//                myMonsterOgre.setVisible(0);
+//                myMonsterSkeleton.setVisible(10;
+//            } else if (currentMonster == MonsterType.OGRE) {
+            //ETC
+            //Alternatively if we had one monster asset that can be updated to a different picture depending on MonsterType,
+            //this would be better than have 3 separate assets for each monster.
+
+
             //myMonster.setImage();
         }
         if(!items.contains("PIT")) {
