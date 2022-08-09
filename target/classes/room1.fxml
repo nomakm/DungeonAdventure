@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
+<AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
    <children>
       <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -502,7 +502,7 @@
             </ImageView>
          </children>
       </Group>
-      <Button fx:id="myEastArrow" contentDisplay="GRAPHIC_ONLY" layoutX="550.0" layoutY="183.0" mnemonicParsing="false" rotate="90.0" styleClass="roomItems" text="EAST">
+      <Button fx:id="myEastArrow" contentDisplay="GRAPHIC_ONLY" layoutX="550.0" layoutY="183.0" mnemonicParsing="false" onAction="#switchRoom" rotate="90.0" styleClass="roomItems" text="EAST">
          <graphic>
             <Group styleClass="roomItems">
                <children>
@@ -512,7 +512,7 @@
             </Group>
          </graphic>
       </Button>
-      <Button fx:id="mySouthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" rotate="180.0" styleClass="roomItems" text="SOUTH">
+      <Button fx:id="mySouthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="342.0" mnemonicParsing="false" onAction="#switchRoom" rotate="180.0" styleClass="roomItems" text="SOUTH">
          <graphic>
             <Group styleClass="roomItems">
                <children>
@@ -522,7 +522,7 @@
             </Group>
          </graphic>
       </Button>
-      <Button fx:id="myNorthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="23.0" mnemonicParsing="false" styleClass="roomItems" text="NORTH">
+      <Button fx:id="myNorthArrow" contentDisplay="GRAPHIC_ONLY" layoutX="288.0" layoutY="23.0" mnemonicParsing="false" onAction="#switchRoom" styleClass="roomItems" text="NORTH">
          <graphic>
             <Group styleClass="roomItems">
                <children>
@@ -531,7 +531,7 @@
                </children>
             </Group>
          </graphic></Button>
-      <Button fx:id="myWestArrow" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="183.0" mnemonicParsing="false" rotate="-90.0" styleClass="roomItems" text="WEST">
+      <Button fx:id="myWestArrow" contentDisplay="GRAPHIC_ONLY" layoutX="30.0" layoutY="183.0" mnemonicParsing="false" onAction="#switchRoom" rotate="-90.0" styleClass="roomItems" text="WEST">
          <graphic>
             <Group styleClass="roomItems">
                <children>
@@ -573,6 +573,11 @@
             <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
             <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />
             <Label layoutY="38.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="FIGHT!" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="myEnterPane" layoutX="-1.0" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane">
+         <children>
+            <Button fx:id="myEnterDungeonBut" contentDisplay="CENTER" layoutX="270.0" layoutY="201.0" mnemonicParsing="false" onAction="#enterDungeon" styleClass="buttonControl" text="Enter Dungeon" />
          </children>
       </AnchorPane>
    </children>

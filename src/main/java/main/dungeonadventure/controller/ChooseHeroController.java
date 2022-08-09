@@ -28,7 +28,7 @@ import java.util.Objects;
  * @Author Luke Smith
  * @version 8-2022
  */
-public class ChooseHeroController extends CheckRoom{
+public class ChooseHeroController {
     @FXML
     private Button myBackButton, mySubmitButton;
     @FXML
@@ -122,16 +122,6 @@ public class ChooseHeroController extends CheckRoom{
             myStage = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
             myScene = new Scene(myRoot);
             myStage.setScene(myScene);
-            if (theFxmlName.equals("room1.fxml")) {
-                //not working below
-//                Point position = myDungeon.getHeroPosition();
-//                myDungeon.setHeroPosition(position.x, position.y);
-//                Room room = myDungeon.getCurrentRoom();
-//                setDoors(room);
-//                setItems(room);
-//                changeHero(myHeroType.toString());
-            }
-
             myStage.show();
         } catch (Exception e) {
             e.printStackTrace();
