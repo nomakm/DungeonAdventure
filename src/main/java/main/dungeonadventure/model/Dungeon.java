@@ -1,6 +1,7 @@
 package main.dungeonadventure.model;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ import java.util.Random;
  * @author Luke Smith
  * @version 8-6-22
  */
-public class Dungeon {
+public class Dungeon implements Serializable {
 
 
     /** 2D array for storing rooms. */
