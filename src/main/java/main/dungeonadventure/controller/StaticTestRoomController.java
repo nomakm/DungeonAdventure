@@ -46,7 +46,7 @@ public class StaticTestRoomController {
 
     private static Room myRoom;
     private static Monster myRoomMonster;
-    private static Dungeon myDungeon = Dungeon.getInstance();
+    private static Dungeon myDungeon;
     private static Hero myHero;
 
 

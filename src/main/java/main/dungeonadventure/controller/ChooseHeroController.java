@@ -43,7 +43,7 @@ public class ChooseHeroController {
     private Scene myScene;
     private Parent myRoot;
 
-    private Dungeon myDungeon = new Dungeon();
+    private static Dungeon myDungeon;
     private Hero myHero;
     private String myHeroName;
     private HeroType myHeroType;
@@ -105,6 +105,7 @@ public class ChooseHeroController {
                     && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
+            myDungeon = new Dungeon();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("room1.fxml"));
             Parent root = loader.load();
             TestRoomController roomController = loader.getController();

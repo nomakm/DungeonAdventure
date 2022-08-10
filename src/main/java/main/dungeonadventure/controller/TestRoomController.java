@@ -4,7 +4,10 @@ import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -13,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import main.dungeonadventure.model.*;
 import main.dungeonadventure.view.DungeonAdventureGUI;
 
@@ -53,7 +57,7 @@ public class TestRoomController {
 
 
 
-    private Dungeon myDungeon;
+    private static Dungeon myDungeon;
     private Hero myHero;
 
 
@@ -100,7 +104,6 @@ public class TestRoomController {
 
     /**
      * Gives the hero the potion when a potion is clicked
-     * @param theEvent - button click
      */
     @FXML
     private void pickUpHealingPotion() {
@@ -111,7 +114,6 @@ public class TestRoomController {
 
     /**
      * Gives the hero a vision potion when picked up
-     * @param theEvent - button click
      */
     @FXML
     private void pickUpVisionPotion() {
