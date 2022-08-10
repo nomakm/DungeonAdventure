@@ -105,7 +105,6 @@ public class ChooseHeroController {
                     && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
-            addDungeon(myDungeon);
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("room1.fxml"));
             Parent root = loader.load();
             TestRoomController roomController = loader.getController();
@@ -152,13 +151,4 @@ public class ChooseHeroController {
         myDungeon.setHero(myHero);
     }
 
-    /**
-     * Adds a dungeon object and assigns to myDungeon.
-     * Can't create a constructor to handle this due to class
-     * extending Application.
-     * @param theDungeon Input Dungeon
-     */
-    public void addDungeon(final Dungeon theDungeon) {
-        myDungeon = theDungeon;
-    }
 }

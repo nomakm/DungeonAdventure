@@ -20,9 +20,9 @@ public class Dungeon implements Serializable {
     /** This integer is used for creating a random number from 0 - 100*/
     private static final int RAND_UPPERBOUND = 100;
     /** Length of Dungeon rooms */
-    private static final int DUNGEON_HEIGHT = 7;
+    private static final int DUNGEON_HEIGHT = 4;
     /** Width of Dungeon rooms */
-    private static final int DUNGEON_WIDTH = 5;
+    private static final int DUNGEON_WIDTH = 4;
     /** Total pillars on map*/
     private static final int PILLAR_COUNT = 4;
 
@@ -69,7 +69,7 @@ public class Dungeon implements Serializable {
             int y = RAND_GEN.nextInt(DUNGEON_WIDTH);
 
             if (!myRooms[x + 1][y + 1].containsPillar()) {
-                myRooms[x + 1][y + 1].setContainsPillar(true);
+                myRooms[x + 1][y + 1].addPillar();
                 spawnedPillars++;
             }
 

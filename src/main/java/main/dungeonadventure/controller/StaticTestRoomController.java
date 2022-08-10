@@ -12,9 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import main.dungeonadventure.model.*;
-import main.dungeonadventure.view.DungeonAdventureGUI;
 
 import java.awt.*;
 import java.util.HashSet;
@@ -26,137 +24,43 @@ import java.util.Random;
  * @Author Luke Smith
  * @version 8-2022
  */
-public class TestRoomController {
+public class StaticTestRoomController {
     @FXML
-    private Group myEastDoors, myWestDoors;
+    private static Group myEastDoors, myWestDoors;
     @FXML
-    private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster;
+    private static ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster;
     @FXML
-    private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
+    private static Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
     @FXML
-    private Button  myColumn, myHeroButton, myMonsterButton, myVisPot, myHPPot,
-            myUseVisionPotionButton, myUseHealthPotionButton;
+    private static Button  myColumn, myHeroButton, myMonsterButton, myVisPot, myHPPot,
+            myUseVisionPotionButton;
     @FXML
-    private Button myEnterDungeonBut, myAttackButton, myDrinkHPButton, myDrinkHPButton2;
+    private static Button myEnterDungeonBut, myAttackButton, myDrinkHPButton, myDrinkHPButton2;
     @FXML
-    private Circle myPit;
+    private static Circle myPit;
     @FXML
-    private AnchorPane fightPane, myEnterPane, myInventoryPane;
+    private static AnchorPane fightPane, myEnterPane, myInventoryPane;
     @FXML
-    private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
-    @FXML
-    private Parent someRoot;
-
-    private Room myRoom;
-    private Monster myRoomMonster;
-    private HashSet<RoomItem> myItems;
+    private static Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
 
 
+    private static Room myRoom;
+    private static Monster myRoomMonster;
+    private static Dungeon myDungeon = Dungeon.getInstance();
+    private static Hero myHero;
 
-    private Dungeon myDungeon;
-    private Hero myHero;
-
-
-    /**
-     * Switches between rooms in the dungeon based on room items.
-     * @param theEvent - button click
-     */
-    @FXML
-    private void switchRoom(final ActionEvent theEvent) {
-        if(!myItems.contains(RoomItem.MONSTER) || myRoom.getMonsterStatus()) {
-            Button button = (Button) theEvent.getSource();
-            String directionName = button.getText();
-            moveHero(Direction.valueOf(directionName));
-            myRoom = getHeroRoom();
-            myHero = myDungeon.getHero();
-            if (myRoom.isExit() && myHero.getPillarCount() == 4) {
-                finishGame("won");
-            }
-            myItems = myRoom.getItems();
-            setDoors(myRoom);
-            setItems(myRoom);
-        }
-    }
-
-    private void finishGame(String finishGame) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("finish_screen.fxml"));
-            Parent root = loader.load();
-            FinishGameController finishGameController = loader.getController();
-            finishGameController.setGameLabel(finishGame);
-            System.out.println("fxml was loaded.");
-            Stage stage = (Stage) someRoot.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setDungeon(Dungeon dungeon) {
-        myDungeon = dungeon;
-    }
-
-    /**
-     * Gives the hero the potion when a potion is clicked
-     * @param theEvent - button click
-     */
-    @FXML
-    private void pickUpHealingPotion() {
-        myHero.setHealPotionCount(1);
-        myHPPot.setVisible(false);
-        myRoom.removeItem(RoomItem.HEALTH_POTION);
-    }
-
-    /**
-     * Gives the hero a vision potion when picked up
-     * @param theEvent - button click
-     */
-    @FXML
-    private void pickUpVisionPotion() {
-        myHero.setVisionPotionCount(1);
-        myVisPot.setVisible(false);
-        myUseVisionPotionButton.setVisible(true);
-        myRoom.removeItem(RoomItem.VISION_POTION);
-    }
 
     @FXML
-    private void useHealthPotion() {
-        if (myHero.getHealthPotionCount() > 0) {
-            int healingPoints = myHero.getHP() + 10;
-            myHero.setHP(healingPoints);
-            myHero.setHealPotionCount(-1);
-            openInventory();
-            System.out.println("Health Potion used");
-        } else {
-            System.out.println("No health potions available");
-        }
-    }
-
-    @FXML
-    private void useVisionPotion(final ActionEvent theEvent) {
-        if (myHero.getVisionPotionCount() > 0) {
-            myHero.setVisionPotionCount(-1);
-            System.out.println("Vision Potion used");
-            if (myHero.getVisionPotionCount() == 0) {
-                myUseVisionPotionButton.setVisible(false);
-            }
-        } else {
-            System.out.println("No vision potions available");
-        }
-    }
-
-    @FXML
-    private void enterDungeon(final ActionEvent theEvent) {
+    public static void loadRoom() {
         myRoom = getHeroRoom();
         myHero = myDungeon.getHero();
-        myItems = myRoom.getItems();
+System.out.println("TIME 1");
         setDoors(myRoom);
+System.out.println("TIME 2");
         setItems(myRoom);
         HeroType currentHeroType = myHero.getHeroType();
         String imageURL = "/assets/" + currentHeroType.toString() + ".png";
-        Image image = new Image(getClass().getResourceAsStream(imageURL));
+        Image image = new Image(StaticTestRoomController.class.getResourceAsStream(imageURL));
         myHeroImg.setImage(image);
         myEnterPane.setVisible(false);
         myInventoryPane.setVisible(false);
@@ -168,48 +72,109 @@ public class TestRoomController {
     }
 
     /**
-     * Starts battle with the monster when monster is clicked
+     * Switches between rooms in the dungeon based on room items.
+     * @param theEvent - button click
      */
     @FXML
-    private void monsterClicked() {
+    private static void switchRoom(final ActionEvent theEvent) {
+        if(myRoom.getMonsterStatus()) {
+            Button button = (Button) theEvent.getSource();
+            String directionName = button.getText();
+            moveHero(Direction.valueOf(directionName));
+            myRoom = getHeroRoom();
+            setDoors(myRoom);
+            setItems(myRoom);
+        }
+    }
+
+    /**
+     * Gives the hero the potion when a potion is clicked
+     * @param theEvent - button click
+     */
+    @FXML
+    private static void pickUpHealingPotion(final ActionEvent theEvent) {
+        myHero.setHealPotionCount(1);
+        myHPPot.setVisible(false);
+    }
+
+    /**
+     * Gives the hero a vision potion when picked up
+     * @param theEvent - button click
+     */
+    @FXML
+    private static void pickUpVisionPotion(final ActionEvent theEvent) {
+        myHero.setVisionPotionCount(1);
+        myVisPot.setVisible(false);
+        myUseVisionPotionButton.setVisible(true);
+    }
+
+    @FXML
+    private static void useHealingPotion(final ActionEvent theEvent) {
+        if (myHero.getHealthPotionCount() > 0) {
+            int healingPoints = myHero.getHP() + 10;
+            myHero.setHP(healingPoints);
+            myHero.setHealPotionCount(-1);
+            System.out.println("Health Potion used");
+        } else {
+            System.out.println("No health potions available");
+        }
+    }
+
+    @FXML
+    private static void useVisionPotion(final ActionEvent theEvent) {
+        if (myHero.getVisionPotionCount() > 0) {
+
+            System.out.println("Vision Potion used");
+        } else {
+            System.out.println("No vision potions available");
+        }
+    }
+
+
+
+    /**
+     * Starts battle with the monster when monster is clicked
+     * @param theEvent - button click
+     */
+    @FXML
+    protected static void monsterClicked(final ActionEvent theEvent) {
         fightPane.setVisible(true);
     }
 
     @FXML
-    private void attackClicked() {
-            int monsterSpd = myRoomMonster.getMyAtkSpd();
-            int heroSpd = myHero.getMyAtkSpd();
-            int timesAtk = heroSpd / monsterSpd;
-            for (int i = 0; i < timesAtk; i++) {
-                if (myRoomMonster.getHP() <= 0) {
-                    //heroWins();
-                    System.out.println("Monster was defeated");
-                    myRoom.setMonsterDftd(true);
-                    myRoom.removeItem(RoomItem.MONSTER);
-                    myMonsterButton.setVisible(false);
-                    fightPane.setVisible(false);
-                } else {
-                    System.out.println("Hero attacking monster");
-                    myHero.attack(myRoomMonster);
-                }
+    private static void attackClicked(final ActionEvent theEvent) {
+        int monsterSpd = myRoomMonster.getMyAtkSpd();
+        int heroSpd = myHero.getMyAtkSpd();
+        int timesAtk = heroSpd / monsterSpd;
+        for (int i = 0; i < timesAtk; i++) {
+            if (myRoomMonster.getHP() <= 0) {
+                //heroWins();
+                System.out.println("you defeated the monster");
+                myRoom.setMonsterDftd(true);
+                myMonsterButton.setVisible(false);
+                fightPane.setVisible(false);
+            } else {
+                System.out.println("Hero attacking monster");
+                myHero.attack(myRoomMonster);
             }
-            if (!myRoom.getMonsterStatus()) {
-                System.out.println("Monster attacking hero");
-                myRoomMonster.attack(myHero);
-                if (myHero.getHP() <= 0) {
-                    finishGame("lost");
-                    System.out.println("Hero died, game lost");
-                }
+        }
+        if (!myRoom.getMonsterStatus()) {
+            System.out.println("Monster attacking hero");
+            myRoomMonster.attack(myHero);
+            if (myHero.getHP() <= 0) {
+                //loseGame();
+                System.out.println("you lost the game");
             }
+        }
     }
 
     @FXML
-    public void closeInventory() {
+    public static void closeInventory() {
         myInventoryPane.setVisible(false);
     }
 
     @FXML
-    public void openInventory() {
+    public static void openInventory() {
         myHPPotionCountLabel.setText("x " + myHero.getHealthPotionCount()+ " HP Potions");
         myVisionPotionCountLabel.setText("x " + myHero.getVisionPotionCount()+ " Vision Potions");
         myPillarCountLabel.setText("x " + myHero.getPillarCount() + " Pillars");
@@ -217,7 +182,7 @@ public class TestRoomController {
     }
 
     @FXML
-    public void pickupPillar() {
+    public static void pickupPillar() {
         myHero.addPillarToInventory();
         myColumn.setVisible(false);
     }
@@ -227,7 +192,7 @@ public class TestRoomController {
      * moves the hero position in the dungeon based on which room the user is in
      * @param theDirection - direction in which the user goes
      */
-    private void moveHero(final Direction theDirection) {
+    protected static void moveHero(final Direction theDirection) {
         Point currentPos = myDungeon.getHeroPosition();
         if (theDirection == Direction.NORTH) {
             myDungeon.setHeroPosition(currentPos.x - 1, currentPos.y);
@@ -245,7 +210,7 @@ public class TestRoomController {
      * Checks the closed doors in a room to set room details
      * @param theRoom - the Room to check
      */
-    private void setDoors(final Room theRoom) {
+    protected static void setDoors(final Room theRoom) {
         if(!theRoom.isDoorOpen(Direction.NORTH)) {
             myNorthDoor.setVisible(true);
             myNorthArrow.setVisible(false);
@@ -280,54 +245,52 @@ public class TestRoomController {
      * Checks the items in a room to set the room details
      * @param theRoom - the room to check
      */
-    private void setItems(final Room theRoom) {
+    private static void setItems(final Room theRoom) {
         if(!theRoom.containsPillar()) {
             myColumn.setVisible(false);
         } else {
             myColumn.setVisible(true);
         }
-
         HashSet<RoomItem> items = theRoom.getItems();
-
         if(!items.contains(RoomItem.MONSTER)) {
             myMonsterButton.setVisible(false);
             myRoom.setMonsterDftd(true);
         } else {
             myMonsterButton.setVisible(true);
+            if (myRoom.getMonsterStatus()) {
+                myMonsterButton.setVisible(false);
+            }
             myRoomMonster = myRoom.getMonster();
-            MonsterType currentMonster = myRoomMonster.getMonsterType();
+            MonsterType currentMonster = theRoom.getMonster().getMonsterType();
             String imageURL = "/assets/" + currentMonster.toString() + ".png";
-            Image image = new Image(getClass().getResourceAsStream(imageURL));
+            //Image image = new Image(getClass().getResourceAsStream(imageURL));
+            Image image = new Image(StaticTestRoomController.class.getResourceAsStream(imageURL));
             myMonster.setImage(image);
         }
-
         if(!items.contains(RoomItem.PIT)) {
             myPit.setVisible(false);
         } else {
             myPit.setVisible(true);
             fallInPit();
         }
-
         if(!items.contains(RoomItem.HEALTH_POTION)) {
-            myHPPot.setVisible(false);
-        } else {
-            myHPPot.setVisible(true);
-        }
-
-        if(!items.contains(RoomItem.VISION_POTION)) {
             myVisPot.setVisible(false);
         } else {
             myVisPot.setVisible(true);
         }
+        if(!items.contains(RoomItem.VISION_POTION)) {
+            myHPPot.setVisible(false);
+        } else {
+            myHPPot.setVisible(true);
+        }
     }
 
-    private void fallInPit() {
+    private static void fallInPit() {
         Random rand = new Random();
         int damagePit = myHero.getHP() - (rand.nextInt(20) + 1);
         System.out.println("you now have " + damagePit + " HP");
         myHero.setHP(damagePit);
         if(myHero.getHP() <= 0) {
-            finishGame("lost");
             System.out.println("you lost the game");
         }
     }
@@ -336,7 +299,7 @@ public class TestRoomController {
      * Gets the current room the hero is in
      * @return Room - the current room the hero is in
      */
-    public Room getHeroRoom() {
+    public static Room getHeroRoom() {
         return myDungeon.getCurrentRoom();
     }
 
