@@ -1,5 +1,7 @@
 package main.dungeonadventure.model;
 
+import java.util.Random;
+
 public class DungeonCharacter {
 
 
@@ -8,6 +10,7 @@ public class DungeonCharacter {
     private final int myDmgMax;
     private final int myAtkSpd;
     private final int myHitRate;
+    private final Random rand;
 
     public DungeonCharacter(final int theHP, final int theDmgMin,
                             final int theDmgMax, final int theAtkSpd,
@@ -20,6 +23,7 @@ public class DungeonCharacter {
         this.myAtkSpd = theAtkSpd;
         this.myHitRate = theHitRate;
 
+        rand = new Random();
     }
 
 
@@ -49,14 +53,11 @@ public class DungeonCharacter {
         return myHitRate;
     }
 
-    public int attack(DungeonCharacter opponent) {
-        int opponentHP = opponent.getHP();
-        int opponentDmgMin = opponent.getMyDmgMin();
-        int opponentDmgMax = opponent.getMyDmgMax();
-        int opponentAtkSped = opponent.getMyAtkSpd();
-        int opponentHitRate = opponent.getMyHitRate();
-
-
-        return opponentHP;
+    public void attack(DungeonCharacter opponent) {
+        if ((myHitRate * 10) > rand.nextInt(100)) {
+            int damage = rand.nextInt((myDmgMax + 1)) +  myDmgMin;
+            opponent.setHP(opponent.getHP() - damage);
+            System.out.println(opponent.getClass().descriptorString() + " loses " + damage + " points");
+        }
     }
 }

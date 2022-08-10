@@ -16,6 +16,7 @@ import main.dungeonadventure.view.DungeonAdventureGUI;
 
 import java.awt.*;
 import java.util.HashSet;
+import java.util.Random;
 
 /**
  * Controller class for the Rooms
@@ -33,12 +34,13 @@ public class TestRoomController {
     @FXML
     private Button  myColumn, myHeroButton, myMonsterButton, myVisPot, myHPPot;
     @FXML
-    private Button myEnterDungeonBut;
+    private Button myEnterDungeonBut, myAttackButton, myDrinkHPButton, myDrinkHPButton2;
     @FXML
     private Circle myPit;
     @FXML
     private AnchorPane fightPane, myEnterPane;
-    Image image;
+    private Room myRoom;
+    private Monster myRoomMonster;
 
 
 
@@ -50,31 +52,41 @@ public class TestRoomController {
      */
     @FXML
     private void switchRoom(final ActionEvent theEvent) {
-        //TODO: wont switch rooms if monster is still in the room. easy way would be to check if monster is visible in the room but
-        // probably better way is to add a isMonster fought boolean in the room class
-        Button button = (Button) theEvent.getSource();
-        String directionName  = button.getText();
-        moveHero(Direction.valueOf(directionName));
-        Room room = getHeroRoom();
-        setDoors(room);
-        setItems(room);
+        if(myRoom.getMonsterStatus()) {
+            Button button = (Button) theEvent.getSource();
+            String directionName = button.getText();
+            moveHero(Direction.valueOf(directionName));
+            myRoom = getHeroRoom();
+            setDoors(myRoom);
+            setItems(myRoom);
+        }
     }
+
     /**
      * Gives the hero the potion when a potion is clicked
      * @param theEvent - button click
      */
     @FXML
-    protected void potionPickedUp(final ActionEvent theEvent) {
-        //method when potion is clicked. Gives hero the potion (doesnt drink it)
+    private void healPotionPickedUp(final ActionEvent theEvent) {
+        myHero.setHealPotionCount(1);
+        myHPPot.setVisible(false);
+    }
 
+    @FXML
+    private void healPotionUsed(final ActionEvent theEvent) {
+        if (myHero.getPotionCount() > 0) {
+            int healingPoints = myHero.getHP() + 10;
+            myHero.setHP(healingPoints);
+            myHero.setHealPotionCount(-1);
+        }
     }
 
     @FXML
     private void enterDungeon(final ActionEvent theEvent) {
-        Room room = getHeroRoom();
-        setDoors(room);
-        setItems(room);
+        myRoom = getHeroRoom();
         myHero = myDungeon.getHero();
+        setDoors(myRoom);
+        setItems(myRoom);
         HeroType currentHeroType = myHero.getHeroType();
         String imageURL = "/assets/" + currentHeroType.toString() + ".png";
         Image image = new Image(getClass().getResourceAsStream(imageURL));
@@ -88,12 +100,36 @@ public class TestRoomController {
      */
     @FXML
     protected void monsterClicked(final ActionEvent theEvent) {
-        //TODO battle method
-        // calls battle method
-        // goes to battle screen
-        // sets opacity of monster to 0 when monster battle is done
         fightPane.setVisible(true);
     }
+
+    @FXML
+    private void attackClicked(final ActionEvent theEvent) {
+            int monsterSpd = myRoomMonster.getMyAtkSpd();
+            int heroSpd = myHero.getMyAtkSpd();
+            int timesAtk = heroSpd / monsterSpd;
+            for (int i = 0; i < timesAtk; i++) {
+                if (myRoomMonster.getHP() <= 0) {
+                    //heroWins();
+                    System.out.println("you defeated the monster");
+                    myRoom.setMonsterDftd(true);
+                    myMonsterButton.setVisible(false);
+                    fightPane.setVisible(false);
+                } else {
+                    System.out.println("Hero attacking monster");
+                    myHero.attack(myRoomMonster);
+                }
+            }
+            if (!myRoom.getMonsterStatus()) {
+                System.out.println("Monster attacking hero");
+                myRoomMonster.attack(myHero);
+                if (myHero.getHP() <= 0) {
+                    //loseGame();
+                    System.out.println("you lost the game");
+                }
+            }
+    }
+
 
     /**
      * moves the hero position in the dungeon based on which room the user is in
@@ -161,30 +197,23 @@ public class TestRoomController {
         HashSet<String> items = theRoom.getItems();
         if(!items.contains("MONSTER")) {
             myMonsterButton.setVisible(false);
+            myRoom.setMonsterDftd(true);
         } else {
             myMonsterButton.setVisible(true);
-            //TODO get the monster type and set the image to the monster
+            if (myRoom.getMonsterStatus()) {
+                myMonsterButton.setVisible(false);
+            }
+            myRoomMonster = myRoom.getMonster();
             MonsterType currentMonster = theRoom.getMonster().getMonsterType();
             String imageURL = "/assets/" + currentMonster.toString() + ".png";
             Image image = new Image(getClass().getResourceAsStream(imageURL));
             myMonster.setImage(image);
-            //TODO Should we have separate assets for each monster? MonsterType can be used for this.
-//            MonsterType currentMonster = theRoom.getMonster().getMonsterType();
-//
-//            //PSEUDO
-////            if (currentMonster == MonsterType.GOBLIN) {
-////                myMonsterGoblin.setVisible(1);
-////                myMonsterOgre.setVisible(0);
-////                myMonsterSkeleton.setVisible(10;
-////            } else if (currentMonster == MonsterType.OGRE) {
-//            //ETC
-//            //Alternatively if we had one monster asset that can be updated to a different picture depending on MonsterType,
-//            //this would be better than have 3 separate assets for each monster.
         }
         if(!items.contains("PIT")) {
             myPit.setVisible(false);
         } else {
             myPit.setVisible(true);
+            fallInPit();
         }
         if(!items.contains("HP_POTION")) {
             myVisPot.setVisible(false);
@@ -195,6 +224,16 @@ public class TestRoomController {
             myHPPot.setVisible(false);
         } else {
             myHPPot.setVisible(true);
+        }
+    }
+
+    private void fallInPit() {
+        Random rand = new Random();
+        int damagePit = myHero.getHP() - (rand.nextInt(20) + 1);
+        System.out.println("you now have " + damagePit + " HP");
+        myHero.setHP(damagePit);
+        if(myHero.getHP() <= 0) {
+            System.out.println("you lost the game");
         }
     }
 

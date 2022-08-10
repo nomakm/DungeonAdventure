@@ -11,8 +11,7 @@ public class monsterFactory {
     public static Monster buildMonster(final MonsterType theMonsterType) {
 
         //Default for testing, delete later
-        Monster generatedMonster = new Monster(MonsterType.GOBLIN, 200,10,20,
-                30,12,15,10,10);
+        Monster generatedMonster = new Monster(MonsterType.GOBLIN, 70,15,30, 5,8,4,20,40);
 
         //Monster theMonster;
         if (theMonsterType == MonsterType.GOBLIN) {

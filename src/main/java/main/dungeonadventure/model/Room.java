@@ -21,6 +21,7 @@ public class Room {
 
 
     private Monster myMonster;
+    private Boolean myMonsterDftd;
 
     /** Value used for chance to spawn pit */
     private static final int CHANCE_FOR_PIT = 15;
@@ -37,6 +38,7 @@ public class Room {
         myIsExit = false;
         myContainsPillar = false;
         myIsEntrance = false;
+        myMonsterDftd = false;
 
         generateRoomItems();
         generateDoors();
@@ -73,6 +75,18 @@ public class Room {
 
     public Monster getMonster() {
         return myMonster;
+    }
+
+    public boolean getMonsterStatus() {
+        return myMonsterDftd;
+    }
+
+    public void setMonsterDftd(Boolean theDftStatus) {
+        if(theDftStatus == null) {
+            throw new IllegalArgumentException("Monster defeat status must be true or false");
+        } else {
+            myMonsterDftd = theDftStatus;
+        }
     }
 
     public void generateDoors() {

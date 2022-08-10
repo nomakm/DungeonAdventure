@@ -371,7 +371,7 @@
             <Image url="@assets/wall_corner_top_left.png" />
          </image>
       </ImageView>
-      <Button fx:id="myHPPot" contentDisplay="GRAPHIC_ONLY" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+      <Button fx:id="myHPPot" contentDisplay="GRAPHIC_ONLY" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" onAction="#healPotionPickedUp" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -545,6 +545,7 @@
             <Group />
          </graphic>
       </Button>
+      <Button fx:id="myDrinkHPButton2" layoutX="504.0" layoutY="378.0" mnemonicParsing="false" onAction="#healPotionUsed" styleClass="buttonControl" text="Drink Portion" />
       <AnchorPane fx:id="fightPane" layoutX="20.0" layoutY="15.0" prefHeight="397.0" prefWidth="600.0" styleClass="anchor-pane" visible="false">
          <children>
             <Group fx:id="myHeroFight" layoutX="92.0" layoutY="148.0">
@@ -568,8 +569,8 @@
             </ImageView>
             <ProgressBar layoutX="41.0" layoutY="308.0" prefWidth="200.0" progress="0.0" />
             <ProgressBar layoutX="369.0" layoutY="308.0" prefWidth="200.0" progress="0.0" />
-            <Button layoutX="177.0" layoutY="123.0" mnemonicParsing="false" styleClass="buttonControl" text="Attack" />
-            <Button layoutX="29.0" layoutY="123.0" mnemonicParsing="false" styleClass="buttonControl" text="Drink Portion" />
+            <Button fx:id="myAttackButton" layoutX="177.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
+            <Button fx:id="myDrinkHPButton" layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#healPotionUsed" styleClass="buttonControl" text="Drink Portion" />
             <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
             <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />
             <Label layoutY="38.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="FIGHT!" />

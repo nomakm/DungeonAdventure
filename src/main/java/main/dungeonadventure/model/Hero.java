@@ -6,6 +6,7 @@ public class Hero extends DungeonCharacter {
     private final int myBlockChance;
 
     private final HeroType myHeroType;
+    private int myHealPotionCount;
 
     public Hero (final HeroType theHeroType, final String theCharacterName, final int theHP,
                  final int theDmgMin, final int theDmgMax,
@@ -16,6 +17,19 @@ public class Hero extends DungeonCharacter {
         this.myCharName = theCharacterName;
         this.myBlockChance = theBlockChance;
         this.myHeroType = theHeroType;
+        this.myHealPotionCount = 0;
+    }
+
+    public int getPotionCount() {
+        return myHealPotionCount;
+    }
+
+    public void setHealPotionCount(int setAmount) {
+        if (setAmount == 1 || setAmount == -1)  {
+            myHealPotionCount += setAmount;
+        } else {
+            throw new IllegalArgumentException("Potion is either added or used");
+        }
     }
 
     public HeroType getHeroType() {
