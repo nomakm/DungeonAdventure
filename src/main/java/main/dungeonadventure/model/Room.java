@@ -12,15 +12,15 @@ import java.util.Scanner;
  */
 public class Room {
 
-    final private HashSet<String> myRoomItems;
+    final private HashSet<RoomItem> myRoomItems;
     final private HashMap<Direction, Boolean> myDoors;
-    private boolean myContainsPillar;
     private boolean myIsExit;
     private boolean myIsEntrance;
 
 
 
     private Monster myMonster;
+    /** Tracks if monster in room has been defeated*/
     private Boolean myMonsterDftd;
 
     /** Value used for chance to spawn pit */
@@ -36,7 +36,6 @@ public class Room {
         myRoomItems = new HashSet<>();
         myDoors = new HashMap<>();
         myIsExit = false;
-        myContainsPillar = false;
         myIsEntrance = false;
         myMonsterDftd = false;
 
@@ -47,20 +46,20 @@ public class Room {
     private void generateRoomItems() {
         //Spawn items/entities in room.
         if (CHANCE_FOR_PIT < Dungeon.getRandomRoll()) {
-            myRoomItems.add("PIT");
+            myRoomItems.add(RoomItem.PIT);
         }
 
         if (CHANCE_FOR_MONSTER < Dungeon.getRandomRoll()) {
-            myRoomItems.add("MONSTER");
+            myRoomItems.add(RoomItem.MONSTER);
             generateMonster();
         }
 
         if (CHANCE_FOR_HP_POTION < Dungeon.getRandomRoll()) {
-            myRoomItems.add("HP_POTION");
+            myRoomItems.add(RoomItem.HEALTH_POTION);
         }
 
         if (CHANCE_FOR_VISION_POTION < Dungeon.getRandomRoll()) {
-            myRoomItems.add("VISION_POTION");
+            myRoomItems.add(RoomItem.VISION_POTION);
         }
 
 
@@ -132,13 +131,12 @@ public class Room {
         }
     }
 
-
-    public void setContainsPillar(final boolean theValue) {
-        myContainsPillar = theValue;
+    public void addPillar() {
+        myRoomItems.add(RoomItem.PILLAR);
     }
 
     public boolean containsPillar() {
-        return myContainsPillar;
+        return myRoomItems.contains(RoomItem.PILLAR);
     }
 
     /**
@@ -237,11 +235,22 @@ public class Room {
     }
 
     //added by MN
-    public HashSet<String> getItems() {
+    public HashSet<RoomItem> getItems() {
+System.out.println("DEBUG - ROOM CONTAINS: " + myRoomItems.toString());
         return myRoomItems;
+    }
+
+    public void removeItem(final RoomItem theItem) {
+System.out.println("DEBUG - ATTEMPTING TO REMOVE " + theItem.toString());
+        if (!myRoomItems.contains(theItem)) {
+            throw new IllegalArgumentException("Item isn't in room.");
+        }
+        myRoomItems.remove(theItem);
     }
 
     public Monster getMyMonster() {
         return myMonster;
     }
+
+
 }

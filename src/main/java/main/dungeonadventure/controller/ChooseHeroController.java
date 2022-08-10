@@ -104,7 +104,6 @@ public class ChooseHeroController {
                     && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
-            addDungeon(myDungeon);
             createHero(myHeroType, myHeroName);
             switchStageBuilder(theEvent, "room1.fxml");
         }
@@ -147,13 +146,4 @@ public class ChooseHeroController {
         myDungeon.setHero(myHero);
     }
 
-    /**
-     * Adds a dungeon object and assigns to myDungeon.
-     * Can't create a constructor to handle this due to class
-     * extending Application.
-     * @param theDungeon Input Dungeon
-     */
-    public void addDungeon(final Dungeon theDungeon) {
-        myDungeon = theDungeon;
-    }
 }

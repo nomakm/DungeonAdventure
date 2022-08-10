@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
+<AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.StaticTestRoomController">
    <children>
       <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -577,7 +577,7 @@
                   <Insets top="1000.0" />
                </opaqueInsets></ProgressBar>
             <Button layoutX="177.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
-            <Button fx:id="myUseHealthPotionButton" layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Drink Health Potion" />
+            <Button layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#healPotionUsed" styleClass="buttonControl" text="Drink Portion" />
             <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
             <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />
             <Label layoutY="38.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="FIGHT!" />
@@ -657,11 +657,6 @@
                   </Label>
                </children>
             </Group>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="myEnterPane" layoutX="-1.0" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane">
-         <children>
-            <Button fx:id="myEnterDungeonBut" contentDisplay="CENTER" layoutX="270.0" layoutY="201.0" mnemonicParsing="false" onAction="#enterDungeon" styleClass="buttonControl" text="Enter Dungeon" />
          </children>
       </AnchorPane>
    </children>
