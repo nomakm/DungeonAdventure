@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
+<AnchorPane fx:id="someRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
    <children>
       <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -417,7 +417,7 @@
             <Image url="@assets/wall_corner_top_right.png" />
          </image>
       </ImageView>
-      <Button fx:id="myColumn" contentDisplay="GRAPHIC_ONLY" layoutX="397.0" layoutY="44.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+      <Button fx:id="myColumn" contentDisplay="GRAPHIC_ONLY" layoutX="397.0" layoutY="44.0" mnemonicParsing="false" onAction="#pickUpPillar" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <Group>
                <children>
@@ -600,6 +600,7 @@
                         <Font name="Goudy Old Style Bold" size="22.0" />
                      </font>
                   </Label>
+                  <Button fx:id="MyUseHPButton" layoutX="241.0" layoutY="17.0" mnemonicParsing="false" onAction="#healPotionUsed" styleClass="buttonControl" text="Use HP Potion" />
                </children>
             </Group>
             <Group layoutX="37.0" layoutY="112.0">
@@ -617,6 +618,7 @@
                         <Font name="Arial Bold" size="22.0" />
                      </font>
                   </Label>
+                  <Button fx:id="myUseVisPotButton" layoutX="242.0" layoutY="17.0" mnemonicParsing="false" onAction="#visionPotionUsed" styleClass="buttonControl" text="Use Vision Potion" />
                </children>
             </Group>
             <Group layoutX="37.0" layoutY="198.0">

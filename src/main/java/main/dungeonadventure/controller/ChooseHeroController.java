@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import main.dungeonadventure.model.*;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -42,7 +43,7 @@ public class ChooseHeroController {
     private Scene myScene;
     private Parent myRoot;
 
-    private Dungeon myDungeon = Dungeon.getInstance();
+    private Dungeon myDungeon = new Dungeon();
     private Hero myHero;
     private String myHeroName;
     private HeroType myHeroType;
@@ -97,7 +98,7 @@ public class ChooseHeroController {
      * @param theEvent - button click
      */
     @FXML
-    private void switchToRoom1(final ActionEvent theEvent) {
+    private void switchToRoom1(final ActionEvent theEvent) throws IOException {
         if (myHeroText.getText().length() == 0) {
             myNameLabel.setTextFill(Color.RED);
         } else if (!myThiefButton.isSelected() && !myPriestessButton.isSelected()
@@ -105,6 +106,10 @@ public class ChooseHeroController {
             myHeroLabel.setTextFill(Color.RED);
         } else {
             addDungeon(myDungeon);
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("room1.fxml"));
+            Parent root = loader.load();
+            TestRoomController roomController = loader.getController();
+            roomController.setDungeon(myDungeon);
             createHero(myHeroType, myHeroName);
             switchStageBuilder(theEvent, "room1.fxml");
         }

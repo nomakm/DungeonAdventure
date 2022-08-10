@@ -2,6 +2,8 @@ package main.dungeonadventure.model;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -30,8 +32,7 @@ public class Dungeon implements Serializable {
     Point myHeroPosition;
     /** Position of entrance*/
     Point myEntranceLocation;
-    /** Creates single instance of Dungeon*/
-    private static Dungeon uniqueInstance = new Dungeon();
+
     private Hero myHero;
 
     /**
@@ -47,11 +48,6 @@ public class Dungeon implements Serializable {
             buildDungeon();
         } while (!DungeonSolver.isDungeonSolvable(this));
 
-    }
-
-
-    public static Dungeon getInstance() {
-        return uniqueInstance;
     }
 
     /**
@@ -221,6 +217,15 @@ public class Dungeon implements Serializable {
 
     public Room getCurrentRoom() {
         return myRooms[myHeroPosition.x][myHeroPosition.y];
+    }
+
+    public Map<Direction, Room> getNeighbors() {
+        Map<Direction, Room> neighbors = new HashMap<>();
+        neighbors.put(Direction.NORTH, myRooms[myHeroPosition.x][myHeroPosition.y + 1]);
+        neighbors.put(Direction.EAST, myRooms[myHeroPosition.x + 1][myHeroPosition.y]);
+        neighbors.put(Direction.SOUTH, myRooms[myHeroPosition.x][myHeroPosition.y - 1]);
+        neighbors.put(Direction.WEST, myRooms[myHeroPosition.x - 1][myHeroPosition.y]);
+        return neighbors;
     }
 
 }

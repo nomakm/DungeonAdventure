@@ -69,5 +69,15 @@ public class Hero extends DungeonCharacter {
         return myBlockChance;
     }
 
+    public void setPillarCount(int thePillar) {
+        if (thePillar == 1)  {
+            myPillarCount += thePillar;
+        } else if (myPillarCount > 4) {
+            throw new IndexOutOfBoundsException("Too Many Pillars");
+        } else {
+            throw new IllegalArgumentException("Potion is only added");
+        }
+    }
+
 
 }
