@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,6 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TestRoomController">
    <children>
@@ -371,7 +374,7 @@
             <Image url="@assets/wall_corner_top_left.png" />
          </image>
       </ImageView>
-      <Button fx:id="myHPPot" contentDisplay="GRAPHIC_ONLY" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+      <Button fx:id="myHPPot" contentDisplay="GRAPHIC_ONLY" layoutX="79.0" layoutY="306.0" mnemonicParsing="false" onAction="#healPotionPickedUp" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -446,7 +449,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="myVisPot" contentDisplay="GRAPHIC_ONLY" layoutX="57.0" layoutY="59.0" mnemonicParsing="false" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+      <Button fx:id="myVisPot" contentDisplay="GRAPHIC_ONLY" layoutX="57.0" layoutY="59.0" mnemonicParsing="false" onAction="#visionPotionPickedUp" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -482,6 +485,7 @@
             </RadialGradient>
          </fill>
       </Circle>
+      <Button layoutX="507.0" layoutY="378.0" mnemonicParsing="false" onAction="#openInventory" styleClass="buttonControl" text="View Inventory" />
       <Button layoutX="26.0" layoutY="378.0" mnemonicParsing="false" styleClass="buttonControl" text="Save and Exit" />
       <ImageView fx:id="mySouthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -567,12 +571,91 @@
                </image>
             </ImageView>
             <ProgressBar layoutX="41.0" layoutY="308.0" prefWidth="200.0" progress="0.0" />
-            <ProgressBar layoutX="369.0" layoutY="308.0" prefWidth="200.0" progress="0.0" />
-            <Button layoutX="177.0" layoutY="123.0" mnemonicParsing="false" styleClass="buttonControl" text="Attack" />
-            <Button layoutX="29.0" layoutY="123.0" mnemonicParsing="false" styleClass="buttonControl" text="Drink Portion" />
+            <ProgressBar layoutX="369.0" layoutY="308.0" prefWidth="200.0" progress="0.0">
+               <opaqueInsets>
+                  <Insets top="1000.0" />
+               </opaqueInsets></ProgressBar>
+            <Button layoutX="177.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
+            <Button layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#healPotionUsed" styleClass="buttonControl" text="Drink Portion" />
             <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
             <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />
             <Label layoutY="38.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="FIGHT!" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="myInventoryPane" layoutX="-7.0" layoutY="-8.0" prefHeight="442.0" prefWidth="655.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 50% , rgba(0,0,0,.5), rgba(0,0,0,0.9));" visible="false">
+         <children>
+            <Button layoutX="512.0" layoutY="386.0" mnemonicParsing="false" onAction="#closeInventory" styleClass="buttonControl" text="Close Inventory" />
+            <Group layoutX="37.0" layoutY="28.0">
+               <children>
+                  <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/flask_big_red.png" />
+                     </image>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="myHPPotionCountLabel" layoutX="41.0" layoutY="11.0" prefHeight="32.0" prefWidth="281.0" style="-fx-alignment: center-left;" text="POTION_COUNT" textFill="WHITE">
+                     <font>
+                        <Font name="Goudy Old Style Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="37.0" layoutY="112.0">
+               <children>
+                  <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/flask_big_blue.png" />
+                     </image>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="myVisionPotionCountLabel" layoutX="41.0" layoutY="13.0" prefHeight="32.0" prefWidth="299.0" style="-fx-alignment: center-left;" text="POTION_COUNT" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="37.0" layoutY="198.0">
+               <children>
+                  <Group layoutY="-1.0">
+                     <children>
+                        <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/column_top.png" />
+                           </image>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </ImageView>
+                        <ImageView fitHeight="41.0" fitWidth="48.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/column_mid.png" />
+                           </image>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </ImageView>
+                        <ImageView fitHeight="41.0" fitWidth="48.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/coulmn_base.png" />
+                           </image>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </ImageView>
+                     </children>
+                  </Group>
+                  <Label fx:id="myPillarCountLabel" layoutX="47.0" layoutY="33.0" prefHeight="35.0" prefWidth="270.0" style="-fx-alignment: center-left;" text="PILLAR_COUNT">
+                     <font>
+                        <Font name="Goudy Old Style Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="myEnterPane" layoutX="-1.0" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane">

@@ -16,7 +16,6 @@ public class DungeonAdventureGame {
 
     private static Dungeon myDungeon;
     private static DungeonAdventureGUI myGui;
-    private Hero myHero;
 
     public static void main(final String[] theArgs) {
 

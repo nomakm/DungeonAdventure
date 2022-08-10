@@ -24,7 +24,7 @@ public class Room {
     private Boolean myMonsterDftd;
 
     /** Value used for chance to spawn pit */
-    private static final int CHANCE_FOR_PIT = 15;
+    private static final int CHANCE_FOR_PIT = 10;
     /** Value used for chance to spawn monster */
     private static final int CHANCE_FOR_MONSTER = 40;
     /** Value used for chance to spawn HP potion */

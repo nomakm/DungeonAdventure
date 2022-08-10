@@ -13,15 +13,6 @@ import java.util.Random;
  */
 public class Dungeon implements Serializable {
 
-
-    /** 2D array for storing rooms. */
-    private Room[][] myRooms;
-    /** */
-    Point myHeroPosition;
-    /** Position of entrance*/
-    Point myEntranceLocation;
-
-
     /** Random object for random number generation in code.*/
     public static final Random RAND_GEN = new Random();
     /** This integer is used for creating a random number from 0 - 100*/
@@ -33,6 +24,12 @@ public class Dungeon implements Serializable {
     /** Total pillars on map*/
     private static final int PILLAR_COUNT = 4;
 
+    /** 2D array for storing rooms. */
+    private Room[][] myRooms;
+    /** */
+    Point myHeroPosition;
+    /** Position of entrance*/
+    Point myEntranceLocation;
     /** Creates single instance of Dungeon*/
     private static Dungeon uniqueInstance = new Dungeon();
     private Hero myHero;
@@ -132,9 +129,7 @@ public class Dungeon implements Serializable {
 
     }
 
-    public static int getRandomRoll() {
-        return RAND_GEN.nextInt(RAND_UPPERBOUND);
-    }
+
 
     /**
      * USED FOR TESTING TO DELETE
@@ -184,6 +179,10 @@ public class Dungeon implements Serializable {
 
     public Point getHeroPosition(){
         return myHeroPosition;
+    }
+
+    public static int getRandomRoll() {
+        return RAND_GEN.nextInt(RAND_UPPERBOUND);
     }
 
     public void setHeroPosition(final int theX, final int theY) {

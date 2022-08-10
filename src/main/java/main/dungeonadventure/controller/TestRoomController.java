@@ -6,11 +6,13 @@ import javafx.fxml.FXML;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import main.dungeonadventure.model.*;
 import main.dungeonadventure.view.DungeonAdventureGUI;
 
@@ -38,7 +40,11 @@ public class TestRoomController {
     @FXML
     private Circle myPit;
     @FXML
-    private AnchorPane fightPane, myEnterPane;
+    private AnchorPane fightPane, myEnterPane, myInventoryPane;
+    @FXML
+    private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
+
+
     private Room myRoom;
     private Monster myRoomMonster;
 
@@ -72,12 +78,35 @@ public class TestRoomController {
         myHPPot.setVisible(false);
     }
 
+    /**
+     * Gives the hero a vision potion when picked up
+     * @param theEvent - button click
+     */
+    @FXML
+    private void visionPotionPickedUp(final ActionEvent theEvent) {
+        myHero.setVisionPotionCount(1);
+        myVisPot.setVisible(false);
+    }
+
     @FXML
     private void healPotionUsed(final ActionEvent theEvent) {
-        if (myHero.getPotionCount() > 0) {
+        if (myHero.getHealthPotionCount() > 0) {
             int healingPoints = myHero.getHP() + 10;
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
+            System.out.println("Health Potion used");
+        } else {
+            System.out.println("No health potions available");
+        }
+    }
+
+    @FXML
+    private void visionPotionUsed(final ActionEvent theEvent) {
+        if (myHero.getVisionPotionCount() > 0) {
+
+            System.out.println("Vision Potion used");
+        } else {
+            System.out.println("No vision potions available");
         }
     }
 
@@ -92,6 +121,8 @@ public class TestRoomController {
         Image image = new Image(getClass().getResourceAsStream(imageURL));
         myHeroImg.setImage(image);
         myEnterPane.setVisible(false);
+        myInventoryPane.setVisible(false);
+
     }
 
     /**
@@ -128,6 +159,19 @@ public class TestRoomController {
                     System.out.println("you lost the game");
                 }
             }
+    }
+
+    @FXML
+    public void closeInventory() {
+        myInventoryPane.setVisible(false);
+    }
+
+    @FXML
+    public void openInventory() {
+        myHPPotionCountLabel.setText("x " + myHero.getHealthPotionCount()+ " HP Potions");
+        myVisionPotionCountLabel.setText("x " + myHero.getVisionPotionCount()+ " Vision Potions");
+        myPillarCountLabel.setText("x " + myHero.getPillarCount() + " Pillars");
+        myInventoryPane.setVisible(true);
     }
 
 
@@ -244,5 +288,7 @@ public class TestRoomController {
     public Room getHeroRoom() {
         return myDungeon.getCurrentRoom();
     }
+
+
 
 }
