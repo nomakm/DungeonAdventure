@@ -62,6 +62,7 @@ public class TestRoomController {
 
     private static Dungeon myDungeon;
     private Hero myHero;
+    private Random myRand = new Random();
 
 
     /**
@@ -192,6 +193,9 @@ public class TestRoomController {
             int monsterSpd = myRoomMonster.getMyAtkSpd();
             int heroSpd = myHero.getMyAtkSpd();
             int timesAtk = heroSpd / monsterSpd;
+            if (timesAtk == 0) {
+                timesAtk = 1;
+            }
             for (int i = 0; i < timesAtk; i++) {
                     System.out.println("Hero attacking monster");
                     myHero.attack(myRoomMonster);
@@ -208,12 +212,15 @@ public class TestRoomController {
                 }
             }
             if (myItems.contains(RoomItem.MONSTER)) {
-                System.out.println("Monster attacking hero");
-                myRoomMonster.attack(myHero);
-                myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
-                if (myHero.getHP() <= 0) {
-                    finishGame("lost");
-                    System.out.println("Hero died, game lost");
+                int chanceToBlock = myHero.getMyChanceToBlock();
+                if (chanceToBlock <= (myRand.nextInt(10) + 1)) {
+                    System.out.println("Monster attacking hero");
+                    myRoomMonster.attack(myHero);
+                    myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
+                    if (myHero.getHP() <= 0) {
+                        finishGame("lost");
+                        System.out.println("Hero died, game lost");
+                    }
                 }
             }
     }
@@ -337,8 +344,7 @@ public class TestRoomController {
     }
 
     private void fallInPit() {
-        Random rand = new Random();
-        int damagePit = myHero.getHP() - (rand.nextInt(20) + 1);
+        int damagePit = myHero.getHP() - (myRand.nextInt(20) + 1);
         System.out.println("you now have " + damagePit + " HP");
         myHero.setHP(damagePit);
         if(myHero.getHP() <= 0) {
