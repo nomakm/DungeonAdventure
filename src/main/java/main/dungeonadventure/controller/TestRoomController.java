@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -34,12 +35,12 @@ public class TestRoomController {
     @FXML
     private Group myEastDoors, myWestDoors;
     @FXML
-    private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster;
+    private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster, myBattleHero, myBattleMonster;
     @FXML
     private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
     @FXML
     private Button  myColumn, myHeroButton, myMonsterButton, myVisPot, myHPPot,
-            myUseVisionPotionButton, myUseHealthPotionButton;
+            myUseVisionPotionButton, myUseHealthPotionButton, myUseHealthPotionButton2;
     @FXML
     private Button myEnterDungeonBut, myAttackButton, myDrinkHPButton, myDrinkHPButton2;
     @FXML
@@ -48,6 +49,8 @@ public class TestRoomController {
     private AnchorPane fightPane, myEnterPane, myInventoryPane;
     @FXML
     private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
+    @FXML
+    private ProgressBar myHeroHPBar, myMonsterHPBar;
     @FXML
     private Parent someRoot;
 
@@ -67,7 +70,7 @@ public class TestRoomController {
      */
     @FXML
     private void switchRoom(final ActionEvent theEvent) {
-        if(!myItems.contains(RoomItem.MONSTER) || myRoom.getMonsterStatus()) {
+        if(!myItems.contains(RoomItem.MONSTER)) {
             Button button = (Button) theEvent.getSource();
             String directionName = button.getText();
             moveHero(Direction.valueOf(directionName));
@@ -109,6 +112,7 @@ public class TestRoomController {
     private void pickUpHealingPotion() {
         myHero.setHealPotionCount(1);
         myHPPot.setVisible(false);
+        myUseHealthPotionButton2.setVisible(true);
         myRoom.removeItem(RoomItem.HEALTH_POTION);
     }
 
@@ -124,13 +128,19 @@ public class TestRoomController {
     }
 
     @FXML
-    private void useHealthPotion() {
+    private void useHealthPotion(ActionEvent event) {
         if (myHero.getHealthPotionCount() > 0) {
             int healingPoints = myHero.getHP() + 10;
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
-            openInventory();
+            Button button = (Button)event.getSource();
+            if (button.getId().equals("" + myUseHealthPotionButton2.getId())) {
+                openInventory();
+            }
             System.out.println("Health Potion used");
+            if (myHero.getHealthPotionCount() == 0) {
+                myUseHealthPotionButton2.setVisible(false);
+            }
         } else {
             System.out.println("No health potions available");
         }
@@ -140,6 +150,7 @@ public class TestRoomController {
     private void useVisionPotion(final ActionEvent theEvent) {
         if (myHero.getVisionPotionCount() > 0) {
             myHero.setVisionPotionCount(-1);
+            openInventory();
             System.out.println("Vision Potion used");
             if (myHero.getVisionPotionCount() == 0) {
                 myUseVisionPotionButton.setVisible(false);
@@ -159,14 +170,10 @@ public class TestRoomController {
         HeroType currentHeroType = myHero.getHeroType();
         String imageURL = "/assets/" + currentHeroType.toString() + ".png";
         Image image = new Image(getClass().getResourceAsStream(imageURL));
+        myBattleHero.setImage(image);
         myHeroImg.setImage(image);
         myEnterPane.setVisible(false);
         myInventoryPane.setVisible(false);
-
-        if (myHero.getVisionPotionCount() > 1) {
-            myUseVisionPotionButton.setVisible(true);
-        }
-
     }
 
     /**
@@ -175,6 +182,9 @@ public class TestRoomController {
     @FXML
     private void monsterClicked() {
         fightPane.setVisible(true);
+        Double hp = myHero.getHP() * 1.0;
+        myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
+        myMonsterHPBar.setProgress((myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP());
     }
 
     @FXML
@@ -183,21 +193,24 @@ public class TestRoomController {
             int heroSpd = myHero.getMyAtkSpd();
             int timesAtk = heroSpd / monsterSpd;
             for (int i = 0; i < timesAtk; i++) {
+                    System.out.println("Hero attacking monster");
+                    myHero.attack(myRoomMonster);
                 if (myRoomMonster.getHP() <= 0) {
-                    //heroWins();
+                    myMonsterHPBar.setProgress(0.0);
                     System.out.println("Monster was defeated");
-                    myRoom.setMonsterDftd(true);
                     myRoom.removeItem(RoomItem.MONSTER);
+                    myItems.remove(RoomItem.MONSTER);
                     myMonsterButton.setVisible(false);
                     fightPane.setVisible(false);
                 } else {
-                    System.out.println("Hero attacking monster");
-                    myHero.attack(myRoomMonster);
+                    Double monsterHP = (myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP();
+                    myMonsterHPBar.setProgress((myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP());
                 }
             }
-            if (!myRoom.getMonsterStatus()) {
+            if (myItems.contains(RoomItem.MONSTER)) {
                 System.out.println("Monster attacking hero");
                 myRoomMonster.attack(myHero);
+                myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
                 if (myHero.getHP() <= 0) {
                     finishGame("lost");
                     System.out.println("Hero died, game lost");
@@ -221,6 +234,7 @@ public class TestRoomController {
     @FXML
     public void pickupPillar() {
         myHero.addPillarToInventory();
+        myItems.remove(RoomItem.PILLAR);
         myColumn.setVisible(false);
     }
 
@@ -283,40 +297,39 @@ public class TestRoomController {
      * @param theRoom - the room to check
      */
     private void setItems(final Room theRoom) {
-        if(!theRoom.containsPillar()) {
+        myItems = theRoom.getItems();
+
+        if(!myItems.contains(RoomItem.PILLAR)) {
             myColumn.setVisible(false);
         } else {
             myColumn.setVisible(true);
         }
-
-        HashSet<RoomItem> items = theRoom.getItems();
-
-        if(!items.contains(RoomItem.MONSTER)) {
+        if(!myItems.contains(RoomItem.MONSTER)) {
             myMonsterButton.setVisible(false);
-            myRoom.setMonsterDftd(true);
         } else {
             myMonsterButton.setVisible(true);
             myRoomMonster = myRoom.getMonster();
             MonsterType currentMonster = myRoomMonster.getMonsterType();
             String imageURL = "/assets/" + currentMonster.toString() + ".png";
             Image image = new Image(getClass().getResourceAsStream(imageURL));
+            myBattleMonster.setImage(image);
             myMonster.setImage(image);
         }
 
-        if(!items.contains(RoomItem.PIT)) {
+        if(!myItems.contains(RoomItem.PIT)) {
             myPit.setVisible(false);
         } else {
             myPit.setVisible(true);
             fallInPit();
         }
 
-        if(!items.contains(RoomItem.HEALTH_POTION)) {
+        if(!myItems.contains(RoomItem.HEALTH_POTION)) {
             myHPPot.setVisible(false);
         } else {
             myHPPot.setVisible(true);
         }
 
-        if(!items.contains(RoomItem.VISION_POTION)) {
+        if(!myItems.contains(RoomItem.VISION_POTION)) {
             myVisPot.setVisible(false);
         } else {
             myVisPot.setVisible(true);

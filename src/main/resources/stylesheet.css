@@ -49,4 +49,8 @@
     -fx-stroke: #550808;
 }
 
+.progressBar {
+    -fx-accent: #550808;
+}
+
 

@@ -20,8 +20,6 @@ public class Room {
 
 
     private Monster myMonster;
-    /** Tracks if monster in room has been defeated*/
-    private Boolean myMonsterDftd;
 
     /** Value used for chance to spawn pit */
     private static final int CHANCE_FOR_PIT = 10;
@@ -37,7 +35,6 @@ public class Room {
         myDoors = new HashMap<>();
         myIsExit = false;
         myIsEntrance = false;
-        myMonsterDftd = false;
 
         generateRoomItems();
         generateDoors();
@@ -45,20 +42,20 @@ public class Room {
 
     private void generateRoomItems() {
         //Spawn items/entities in room.
-        if (CHANCE_FOR_PIT < Dungeon.getRandomRoll()) {
+        if (CHANCE_FOR_PIT > Dungeon.getRandomRoll()) {
             myRoomItems.add(RoomItem.PIT);
         }
 
-        if (CHANCE_FOR_MONSTER < Dungeon.getRandomRoll()) {
+        if (CHANCE_FOR_MONSTER > Dungeon.getRandomRoll()) {
             myRoomItems.add(RoomItem.MONSTER);
             generateMonster();
         }
 
-        if (CHANCE_FOR_HP_POTION < Dungeon.getRandomRoll()) {
+        if (CHANCE_FOR_HP_POTION > Dungeon.getRandomRoll()) {
             myRoomItems.add(RoomItem.HEALTH_POTION);
         }
 
-        if (CHANCE_FOR_VISION_POTION < Dungeon.getRandomRoll()) {
+        if (CHANCE_FOR_VISION_POTION > Dungeon.getRandomRoll()) {
             myRoomItems.add(RoomItem.VISION_POTION);
         }
 
@@ -74,18 +71,6 @@ public class Room {
 
     public Monster getMonster() {
         return myMonster;
-    }
-
-    public boolean getMonsterStatus() {
-        return myMonsterDftd;
-    }
-
-    public void setMonsterDftd(Boolean theDftStatus) {
-        if(theDftStatus == null) {
-            throw new IllegalArgumentException("Monster defeat status must be true or false");
-        } else {
-            myMonsterDftd = theDftStatus;
-        }
     }
 
     public void generateDoors() {

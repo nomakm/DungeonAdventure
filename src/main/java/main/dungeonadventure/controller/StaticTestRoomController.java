@@ -48,6 +48,7 @@ public class StaticTestRoomController {
     private static Monster myRoomMonster;
     private static Dungeon myDungeon;
     private static Hero myHero;
+    private static HashSet<RoomItem> myItems;
 
 
     @FXML
@@ -77,7 +78,7 @@ System.out.println("TIME 2");
      */
     @FXML
     private static void switchRoom(final ActionEvent theEvent) {
-        if(myRoom.getMonsterStatus()) {
+        if(!myItems.contains(RoomItem.MONSTER)) {
             Button button = (Button) theEvent.getSource();
             String directionName = button.getText();
             moveHero(Direction.valueOf(directionName));
@@ -150,7 +151,6 @@ System.out.println("TIME 2");
             if (myRoomMonster.getHP() <= 0) {
                 //heroWins();
                 System.out.println("you defeated the monster");
-                myRoom.setMonsterDftd(true);
                 myMonsterButton.setVisible(false);
                 fightPane.setVisible(false);
             } else {
@@ -158,7 +158,7 @@ System.out.println("TIME 2");
                 myHero.attack(myRoomMonster);
             }
         }
-        if (!myRoom.getMonsterStatus()) {
+        if (myItems.contains(RoomItem.MONSTER)) {
             System.out.println("Monster attacking hero");
             myRoomMonster.attack(myHero);
             if (myHero.getHP() <= 0) {
@@ -251,15 +251,16 @@ System.out.println("TIME 2");
         } else {
             myColumn.setVisible(true);
         }
-        HashSet<RoomItem> items = theRoom.getItems();
-        if(!items.contains(RoomItem.MONSTER)) {
+        myItems = theRoom.getItems();
+        if(!myItems.contains(RoomItem.PILLAR)) {
+            myColumn.setVisible(false);
+        } else {
+            myColumn.setVisible(true);
+        }
+        if(!myItems.contains(RoomItem.MONSTER)) {
             myMonsterButton.setVisible(false);
-            myRoom.setMonsterDftd(true);
         } else {
             myMonsterButton.setVisible(true);
-            if (myRoom.getMonsterStatus()) {
-                myMonsterButton.setVisible(false);
-            }
             myRoomMonster = myRoom.getMonster();
             MonsterType currentMonster = theRoom.getMonster().getMonsterType();
             String imageURL = "/assets/" + currentMonster.toString() + ".png";
@@ -267,18 +268,18 @@ System.out.println("TIME 2");
             Image image = new Image(StaticTestRoomController.class.getResourceAsStream(imageURL));
             myMonster.setImage(image);
         }
-        if(!items.contains(RoomItem.PIT)) {
+        if(!myItems.contains(RoomItem.PIT)) {
             myPit.setVisible(false);
         } else {
             myPit.setVisible(true);
             fallInPit();
         }
-        if(!items.contains(RoomItem.HEALTH_POTION)) {
+        if(!myItems.contains(RoomItem.HEALTH_POTION)) {
             myVisPot.setVisible(false);
         } else {
             myVisPot.setVisible(true);
         }
-        if(!items.contains(RoomItem.VISION_POTION)) {
+        if(!myItems.contains(RoomItem.VISION_POTION)) {
             myHPPot.setVisible(false);
         } else {
             myHPPot.setVisible(true);

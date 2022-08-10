@@ -458,7 +458,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="myMonsterButton" contentDisplay="GRAPHIC_ONLY" layoutX="426.0" layoutY="221.0" mnemonicParsing="false" onAction="#monsterClicked" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+      <Button fx:id="myMonsterButton" contentDisplay="GRAPHIC_ONLY" layoutX="420.0" layoutY="197.0" mnemonicParsing="false" onAction="#monsterClicked" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <ImageView fx:id="myMonster" fitHeight="142.0" fitWidth="126.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -485,8 +485,7 @@
             </RadialGradient>
          </fill>
       </Circle>
-      <Button layoutX="507.0" layoutY="378.0" mnemonicParsing="false" onAction="#openInventory" styleClass="buttonControl" text="View Inventory" visible="false" />
-      <Button fx:id="myUseVisionPotionButton" layoutX="388.0" layoutY="378.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
+      <Button layoutX="507.0" layoutY="378.0" mnemonicParsing="false" onAction="#openInventory" styleClass="buttonControl" text="View Inventory" />
       <Button layoutX="26.0" layoutY="378.0" mnemonicParsing="false" styleClass="buttonControl" text="Save and Exit" />
       <ImageView fx:id="mySouthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -554,7 +553,7 @@
          <children>
             <Group fx:id="myHeroFight" layoutX="92.0" layoutY="148.0">
                <children>
-                  <ImageView fitHeight="106.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="myBattleHero" fitHeight="106.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/THIEF.png" />
                      </image>
@@ -566,18 +565,18 @@
                   </ImageView>
                </children>
             </Group>
-            <ImageView fitHeight="132.0" fitWidth="151.0" layoutX="403.0" layoutY="121.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="myBattleMonster" fitHeight="132.0" fitWidth="151.0" layoutX="403.0" layoutY="121.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/OGRE.png" />
                </image>
             </ImageView>
-            <ProgressBar layoutX="41.0" layoutY="308.0" prefWidth="200.0" progress="0.0" />
-            <ProgressBar layoutX="369.0" layoutY="308.0" prefWidth="200.0" progress="0.0">
+            <ProgressBar fx:id="myHeroHPBar" layoutX="41.0" layoutY="308.0" prefWidth="200.0" progress="0.0" styleClass="progressBar" />
+            <ProgressBar fx:id="myMonsterHPBar" layoutX="369.0" layoutY="308.0" prefWidth="200.0" progress="0.0" styleClass="progressBar">
                <opaqueInsets>
                   <Insets top="1000.0" />
                </opaqueInsets></ProgressBar>
-            <Button layoutX="177.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
-            <Button fx:id="myUseHealthPotionButton" layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Drink Health Potion" />
+            <Button layoutX="187.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
+            <Button fx:id="myUseHealthPotionButton" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Use Health Potion" />
             <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
             <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />
             <Label layoutY="38.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="FIGHT!" />
@@ -601,6 +600,7 @@
                         <Font name="Goudy Old Style Bold" size="22.0" />
                      </font>
                   </Label>
+                  <Button fx:id="myUseHealthPotionButton2" layoutX="237.0" layoutY="13.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Use Health Potion" visible="false" />
                </children>
             </Group>
             <Group layoutX="37.0" layoutY="112.0">
@@ -618,6 +618,7 @@
                         <Font name="Arial Bold" size="22.0" />
                      </font>
                   </Label>
+                  <Button fx:id="myUseVisionPotionButton" layoutX="236.0" layoutY="17.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
                </children>
             </Group>
             <Group layoutX="37.0" layoutY="198.0">

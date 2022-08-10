@@ -11,6 +11,7 @@ public class DungeonCharacter {
     private final int myAtkSpd;
     private final int myHitRate;
     private final Random rand;
+    private int myStartHP;
 
     public DungeonCharacter(final int theHP, final int theDmgMin,
                             final int theDmgMax, final int theAtkSpd,
@@ -23,6 +24,7 @@ public class DungeonCharacter {
         this.myAtkSpd = theAtkSpd;
         this.myHitRate = theHitRate;
 
+        myStartHP = theHP;
         rand = new Random();
     }
 
@@ -36,6 +38,9 @@ public class DungeonCharacter {
         this.myHP = HP;
     }
 
+    public int getStartHP() {
+        return myStartHP;
+    }
     public int getMyDmgMin() {
         return myDmgMin;
     }

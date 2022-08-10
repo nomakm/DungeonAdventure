@@ -5,7 +5,7 @@ public class Priestess extends Hero {
     private final int myHealMin;
 
     public Priestess(final String theCharacterName) {
-        super(HeroType.PRIESTESS, theCharacterName, 75, 25, 45, 5, 7, 3);
+        super(HeroType.PRIESTESS, theCharacterName, 1000000, 25, 45, 5, 7, 3);
 
         //TODO Will need to get these values from the database
         this.myHealMax = 0;
