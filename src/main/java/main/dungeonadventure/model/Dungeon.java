@@ -219,12 +219,20 @@ public class Dungeon implements Serializable {
         return myRooms[myHeroPosition.x][myHeroPosition.y];
     }
 
-    public Map<Direction, Room> getNeighbors() {
-        Map<Direction, Room> neighbors = new HashMap<>();
-        neighbors.put(Direction.NORTH, myRooms[myHeroPosition.x][myHeroPosition.y + 1]);
-        neighbors.put(Direction.EAST, myRooms[myHeroPosition.x + 1][myHeroPosition.y]);
-        neighbors.put(Direction.SOUTH, myRooms[myHeroPosition.x][myHeroPosition.y - 1]);
-        neighbors.put(Direction.WEST, myRooms[myHeroPosition.x - 1][myHeroPosition.y]);
+    public Room[] getNeighbors() {
+        Room[] neighbors = new Room[9];
+        neighbors[0] = myRooms[myHeroPosition.x - 1][myHeroPosition.y - 1]; //NW
+        neighbors[1] = myRooms[myHeroPosition.x][myHeroPosition.y - 1]; //N
+        neighbors[2] = myRooms[myHeroPosition.x + 1][myHeroPosition.y - 1]; //NE
+
+        neighbors[3] = myRooms[myHeroPosition.x - 1][myHeroPosition.y]; //W
+        neighbors[4] = myRooms[myHeroPosition.x][myHeroPosition.y]; //CURR
+        neighbors[5] = myRooms[myHeroPosition.x + 1][myHeroPosition.y]; //E
+
+        neighbors[6] = myRooms[myHeroPosition.x - 1][myHeroPosition.y + 1]; //SW
+        neighbors[7] = myRooms[myHeroPosition.x][myHeroPosition.y + 1]; //S
+        neighbors[8] = myRooms[myHeroPosition.x + 1][myHeroPosition.y + 1]; //SE
+
         return neighbors;
     }
 

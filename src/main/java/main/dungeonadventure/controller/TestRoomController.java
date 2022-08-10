@@ -46,13 +46,17 @@ public class TestRoomController {
     @FXML
     private Circle myPit;
     @FXML
-    private AnchorPane fightPane, myEnterPane, myInventoryPane;
+    private AnchorPane fightPane, myEnterPane, myInventoryPane, myVisionPane;
     @FXML
     private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
     @FXML
     private ProgressBar myHeroHPBar, myMonsterHPBar;
     @FXML
     private Parent someRoot;
+
+    @FXML Group myNorthEast, myNorth, myNorthWest, myWest, myCurr, myEast, mySouthWest, mySouth, mySouthEast;
+    @FXML Label myNWLabel, myNLabel, myNELabel, myWLabel, myCurrLabel, myELabel, mySWLabel, mySLabel, mySELabel;
+    @FXML Button myExitVision;
 
     private Room myRoom;
     private Monster myRoomMonster;
@@ -70,7 +74,7 @@ public class TestRoomController {
      * @param theEvent - button click
      */
     @FXML
-    private void switchRoom(final ActionEvent theEvent) {
+    protected void switchRoom(final ActionEvent theEvent) {
         if(!myItems.contains(RoomItem.MONSTER)) {
             Button button = (Button) theEvent.getSource();
             String directionName = button.getText();
@@ -150,6 +154,49 @@ public class TestRoomController {
     @FXML
     private void useVisionPotion(final ActionEvent theEvent) {
         if (myHero.getVisionPotionCount() > 0) {
+            Room[] neighbors = myDungeon.getNeighbors();
+            for (int i = 0; i < neighbors.length; i++) {
+                String label = "";
+                if (neighbors[i] != null) {
+                    HashSet<RoomItem> items = neighbors[i].getItems();
+                    if (items.contains(RoomItem.HEALTH_POTION)) {
+                        label += "HP ";
+                    }
+                    if (items.contains(RoomItem.VISION_POTION)) {
+                        label += "V ";
+                    }
+                    if (items.contains(RoomItem.MONSTER)) {
+                        label += "M ";
+                    }
+                    if (items.contains(RoomItem.PIT)) {
+                        label += "P ";
+                    }
+                    if (items.contains(RoomItem.PILLAR)) {
+                        label += "PI";
+                    }
+                    if (i == 0) {
+                        myNWLabel.setText(label);
+                    } else if (i == 1) {
+                        myNLabel.setText(label);
+                    } else if (i == 2) {
+                        myNELabel.setText(label);
+                    } else if (i == 3) {
+                        myWLabel.setText(label);
+                    } else if (i == 4) {
+                        myCurrLabel.setText(label);
+                    } else if (i == 5) {
+                        myELabel.setText(label);
+                    } else if (i == 6) {
+                        mySWLabel.setText(label);
+                    } else if (i == 7) {
+                        mySLabel.setText(label);
+                    } else if (i == 8) {
+                        mySELabel.setText(label);
+                    }
+                    myVisionPane.setVisible(true);
+                }
+            }
+
             myHero.setVisionPotionCount(-1);
             openInventory();
             System.out.println("Vision Potion used");
@@ -162,7 +209,12 @@ public class TestRoomController {
     }
 
     @FXML
-    private void enterDungeon(final ActionEvent theEvent) {
+    private void exitVision() {
+        myVisionPane.setVisible(false);
+    }
+
+    @FXML
+    protected void enterDungeon() {
         myRoom = getHeroRoom();
         myHero = myDungeon.getHero();
         myItems = myRoom.getItems();
@@ -171,8 +223,8 @@ public class TestRoomController {
         HeroType currentHeroType = myHero.getHeroType();
         String imageURL = "/assets/" + currentHeroType.toString() + ".png";
         Image image = new Image(getClass().getResourceAsStream(imageURL));
-        myBattleHero.setImage(image);
         myHeroImg.setImage(image);
+        myBattleHero.setImage(image);
         myEnterPane.setVisible(false);
         myInventoryPane.setVisible(false);
     }
@@ -250,7 +302,7 @@ public class TestRoomController {
      * moves the hero position in the dungeon based on which room the user is in
      * @param theDirection - direction in which the user goes
      */
-    private void moveHero(final Direction theDirection) {
+    protected void moveHero(final Direction theDirection) {
         Point currentPos = myDungeon.getHeroPosition();
         if (theDirection == Direction.NORTH) {
             myDungeon.setHeroPosition(currentPos.x - 1, currentPos.y);
@@ -268,7 +320,7 @@ public class TestRoomController {
      * Checks the closed doors in a room to set room details
      * @param theRoom - the Room to check
      */
-    private void setDoors(final Room theRoom) {
+    protected void setDoors(final Room theRoom) {
         if(!theRoom.isDoorOpen(Direction.NORTH)) {
             myNorthDoor.setVisible(true);
             myNorthArrow.setVisible(false);
@@ -303,7 +355,7 @@ public class TestRoomController {
      * Checks the items in a room to set the room details
      * @param theRoom - the room to check
      */
-    private void setItems(final Room theRoom) {
+    protected void setItems(final Room theRoom) {
         myItems = theRoom.getItems();
 
         if(!myItems.contains(RoomItem.PILLAR)) {

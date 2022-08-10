@@ -13,6 +13,7 @@
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -658,6 +659,115 @@
                   </Label>
                </children>
             </Group>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="myVisionPane" layoutX="-1.0" layoutY="-1.0" prefHeight="434.0" prefWidth="646.0" styleClass="anchor-pane" visible="false">
+         <children>
+            <Line endX="292.0" layoutX="253.0" layoutY="135.0" startX="-158.0" />
+            <Line endX="292.0" layoutX="253.0" layoutY="240.0" startX="-159.0" />
+            <Line endX="176.1856231689453" endY="-0.47487497329711914" layoutX="371.0" layoutY="188.0" rotate="-90.0" startX="-100.0" />
+            <Line endX="176.1856231689453" endY="-0.47487497329711914" layoutX="203.0" layoutY="188.0" rotate="-90.0" startX="-100.0" />
+            <Group fx:id="myNorthWest" layoutX="97.0" layoutY="49.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="myNWLabel" layoutX="22.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="myNorth" layoutX="267.0" layoutY="49.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="myNLabel" layoutX="21.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="myNorthEast" layoutX="434.0" layoutY="49.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="myNELabel" layoutX="22.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="myWest" layoutX="97.0" layoutY="152.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="myWLabel" layoutX="24.0" layoutY="28.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="myCurr" layoutX="267.0" layoutY="152.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="myCurrLabel" layoutX="22.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="myEast" layoutX="434.0" layoutY="152.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="myELabel" layoutX="22.0" layoutY="28.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="mySouthWest" layoutX="97.0" layoutY="256.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="mySWLabel" layoutX="20.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="mySouth" layoutX="267.0" layoutY="256.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="mySLabel" layoutX="22.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Group fx:id="mySouthEast" layoutX="434.0" layoutY="256.0">
+               <children>
+                  <ImageView fitHeight="79.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wholeDungeonFloor.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="mySELabel" layoutX="17.0" layoutY="27.0" text="No Room" />
+               </children>
+            </Group>
+            <Button fx:id="myExitVision" layoutX="490.0" layoutY="395.0" mnemonicParsing="false" onAction="#exitVision" styleClass="buttonControl" text="Exit Vision" />
+            <Label layoutX="69.0" layoutY="76.0" text="NW" />
+            <Label layoutX="315.0" layoutY="31.0" text="N" />
+            <Label layoutX="554.0" layoutY="76.0" text="NE" />
+            <Label layoutX="74.0" layoutY="179.0" text="W" />
+            <Label layoutX="70.0" layoutY="283.0" text="SW" />
+            <Label layoutX="284.0" layoutY="135.0" text="You are Here" />
+            <Label layoutX="558.0" layoutY="179.0" text="E" />
+            <Label layoutX="551.0" layoutY="283.0" text="SW" />
+            <Label layoutX="315.0" layoutY="335.0" text="S" />
+            <Label layoutX="29.0" layoutY="378.0" text="H = Health Potion  V= Vision Potion  M = Monster  P = Pit  PI = Pillar" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="myEnterPane" layoutX="-1.0" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane">

@@ -26,7 +26,7 @@ public class Priestess extends Hero {
     public void attack(DungeonCharacter opponent) {
         Random rand = new Random();
         System.out.println("Healed priestess special attack");
-        setHP((rand.nextInt(myHealMax) + myHealMin));
+        setHP(getHP() + (rand.nextInt(myHealMax) + myHealMin));
         super.attack(opponent);
     }
 }
