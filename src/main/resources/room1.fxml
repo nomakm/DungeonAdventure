@@ -576,7 +576,7 @@
                <opaqueInsets>
                   <Insets top="1000.0" />
                </opaqueInsets></ProgressBar>
-            <Button layoutX="187.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
+            <Button fx:id="myAttackButton" layoutX="187.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
             <Button fx:id="myUseHealthPotionButton" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Use Health Potion" />
             <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
             <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />

@@ -16,12 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.dungeonadventure.model.*;
-import main.dungeonadventure.view.DungeonAdventureGUI;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class TestRoomController {
     private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
     @FXML
     private Button  myColumn, myMonsterButton, myVisPot, myHPPot,
-            myUseVisionPotionButton,  myUseHealthPotionButton2;
+            myUseVisionPotionButton,  myUseHealthPotionButton2, myAttackButton;
     @FXML
     private Circle myPit;
     @FXML
@@ -65,6 +65,8 @@ public class TestRoomController {
     private HashSet<RoomItem> myItems;
     private HashMap<String, Label> myLabels;
     private Random myRand = new Random();
+    private Media myMedia;
+    private MediaPlayer myMediaPlayer;
 
 
     /**
@@ -208,6 +210,18 @@ public class TestRoomController {
         myEnterPane.setVisible(false);
         myInventoryPane.setVisible(false);
         myLabels = addLabels();
+        playMedia("/assets/dungeon.mp3");
+    }
+
+    private void playMedia(String theSongName) {
+        myMedia = new Media(getClass().getResource(theSongName).toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
+    }
+
+    private void stopMedia() {
+        myMediaPlayer.stop();
     }
 
     private HashMap<String, Label> addLabels() {
@@ -230,6 +244,8 @@ public class TestRoomController {
     @FXML
     private void monsterClicked() {
         fightPane.setVisible(true);
+        stopMedia();
+        playMedia("/assets/battle.mp3");
         Double hp = myHero.getHP() * 1.0;
         myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
         myMonsterHPBar.setProgress((myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP());
@@ -253,6 +269,8 @@ public class TestRoomController {
                     myRoom.removeItem(RoomItem.MONSTER);
                     myItems.remove(RoomItem.MONSTER);
                     myMonsterButton.setVisible(false);
+                    stopMedia();
+                    playMedia("/assets/dungeon.mp3");
                     fightPane.setVisible(false);
                 } else {
                     Double monsterHP = (myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP();
@@ -278,8 +296,12 @@ public class TestRoomController {
         translate.setNode(myHeroFight);
         translate.setDuration(Duration.millis(1000));
         translate.setCycleCount(2);
-        translate.setByX((myBattleMonster.getLayoutX() - myHeroFight.getLayoutX() - 20));
+        Double origPos = myHeroFight.getLayoutX();
+        translate.setByX((myBattleMonster.getLayoutX() - origPos - 20));
         translate.setAutoReverse(true);
+        if (myHeroFight.getLayoutX() != origPos) {
+            myHeroFight.setLayoutX(origPos);
+        }
         translate.play();
     }
 
