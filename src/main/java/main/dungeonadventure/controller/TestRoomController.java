@@ -36,25 +36,23 @@ import java.util.Random;
  */
 public class TestRoomController {
     @FXML
-    private Group myEastDoors, myWestDoors, myHeroFight;
+    private Group myEastDoors, myWestDoors;
     @FXML
-    private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster, myBattleHero, myBattleMonster;
+    private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster;
     @FXML
     private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
     @FXML
     private Button  myColumn, myMonsterButton, myVisPot, myHPPot,
-            myUseVisionPotionButton,  myUseHealthPotionButton2, myAttackButton;
+            myUseVisionPotionButton, myUseHealthPotionButton2;
     @FXML
     private Circle myPit;
     @FXML
-    private AnchorPane fightPane, myEnterPane, myInventoryPane, myVisionPane;
+    private AnchorPane myInventoryPane, myVisionPane;
     @FXML
     private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
     @FXML
     private Label myNWLabel, myNLabel, myNELabel, myWLabel, myCurrLabel, myELabel,
             mySWLabel, mySLabel, mySELabel;
-    @FXML
-    private ProgressBar myHeroHPBar, myMonsterHPBar;
     @FXML
     private Parent someRoot;
 
@@ -67,6 +65,8 @@ public class TestRoomController {
     private Random myRand = new Random();
     private Media myMedia;
     private MediaPlayer myMediaPlayer;
+    private Image myHeroImage;
+    private Image myMonsterImage;
 
 
     /**
@@ -95,7 +95,7 @@ public class TestRoomController {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("finish_screen.fxml"));
             Parent root = loader.load();
             FinishGameController finishGameController = loader.getController();
-            finishGameController.setGameLabel(finishGame);
+            finishGameController.setScreen(finishGame);
             System.out.println("fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -104,10 +104,6 @@ public class TestRoomController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void setDungeon(Dungeon dungeon) {
-        myDungeon = dungeon;
     }
 
     /**
@@ -197,23 +193,6 @@ public class TestRoomController {
         myVisionPane.setVisible(false);
     }
 
-    @FXML
-    protected void enterDungeon() {
-        myRoom = getHeroRoom();
-        myHero = myDungeon.getHero();
-        myItems = myRoom.getItems();
-        setDoors(myRoom);
-        setItems(myRoom);
-        HeroType currentHeroType = myHero.getHeroType();
-        String imageURL = "/assets/" + currentHeroType.toString() + ".png";
-        Image image = new Image(getClass().getResourceAsStream(imageURL));
-        myHeroImg.setImage(image);
-        myBattleHero.setImage(image);
-        myEnterPane.setVisible(false);
-        myInventoryPane.setVisible(false);
-        myLabels = addLabels();
-        playMedia("/assets/dungeon.mp3");
-    }
 
     private void playMedia(String theSongName) {
         myMedia = new Media(getClass().getResource(theSongName).toString());
@@ -245,64 +224,46 @@ public class TestRoomController {
      */
     @FXML
     private void monsterClicked() {
-        fightPane.setVisible(true);
+        try {
+            myMediaPlayer.stop();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("battle.fxml"));
+            Parent root = loader.load();
+            BattleController battleController = loader.getController();
+            battleController.setScreen(myDungeon, myMediaPlayer, myHeroImage, myMonsterImage);
+            System.out.println("fxml was loaded.");
+            Stage stage = (Stage) someRoot.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setStatsAfterBattle(Dungeon theDungeon, MediaPlayer theMediaPlayer, Image theHeroImage) {
+        setDungeon(theDungeon, theMediaPlayer, theHeroImage);
+        System.out.println("Monster was defeated");
+        myRoom.removeItem(RoomItem.MONSTER);
+        myItems.remove(RoomItem.MONSTER);
+        myMonsterButton.setVisible(false);
+        //fightPane.setVisible(false);
+    }
+
+    public void setDungeon(Dungeon theDungeon, MediaPlayer theMediaPlayer, Image theHeroImage) {
+        this.myDungeon = theDungeon;
+        this.myRoom = myDungeon.getCurrentRoom();
+        this.myHero = myDungeon.getHero();
+        this.myRoomMonster = myRoom.getMonster();
+        this.myItems = myRoom.getItems();
+        this.myMediaPlayer = theMediaPlayer;
+        this.myHeroImage = theHeroImage;
+        myHeroImg.setImage(myHeroImage);
+        setItems(myRoom);
+        setDoors(myRoom);
         stopMedia();
-        playMedia("/assets/battle.mp3");
-        Double hp = myHero.getHP() * 1.0;
-        myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
-        myMonsterHPBar.setProgress((myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP());
+        playMedia("/assets/dungeon.mp3");
     }
 
-    @FXML
-    private void attackClicked() {
-            int monsterSpd = myRoomMonster.getMyAtkSpd();
-            int heroSpd = myHero.getMyAtkSpd();
-            int timesAtk = heroSpd / monsterSpd;
-            if (timesAtk == 0) {
-                timesAtk = 1;
-            }
-            for (int i = 0; i < timesAtk; i++) {
-                    System.out.println("Hero attacking monster");
-                    animateAttack();
-                    myHero.attack(myRoomMonster);
-                if (myRoomMonster.getHP() <= 0) {
-                    myMonsterHPBar.setProgress(0.0);
-                    System.out.println("Monster was defeated");
-                    myRoom.removeItem(RoomItem.MONSTER);
-                    myItems.remove(RoomItem.MONSTER);
-                    myMonsterButton.setVisible(false);
-                    stopMedia();
-                    playMedia("/assets/dungeon.mp3");
-                    fightPane.setVisible(false);
-                } else {
-                    Double monsterHP = (myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP();
-                    myMonsterHPBar.setProgress((myRoomMonster.getHP() * 1.0) / myRoomMonster.getStartHP());
-                }
-            }
-            if (myItems.contains(RoomItem.MONSTER)) {
-                int chanceToBlock = myHero.getMyChanceToBlock();
-                if (chanceToBlock <= (myRand.nextInt(10) + 1)) {
-                    System.out.println("Monster attacking hero");
-                    myRoomMonster.attack(myHero);
-                    myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
-                    if (myHero.getHP() <= 0) {
-                        finishGame("lost");
-                        System.out.println("Hero died, game lost");
-                    }
-                }
-            }
-    }
-
-    private void animateAttack() {
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(myHeroFight);
-        translate.setDuration(Duration.millis(1000));
-        translate.setCycleCount(2);
-        Double origPos = myHeroFight.getLayoutX();
-        translate.setByX((myBattleMonster.getLayoutX() - origPos - 20));
-        translate.setAutoReverse(true);
-        translate.play();
-    }
 
     @FXML
     public void closeInventory() {
@@ -397,9 +358,8 @@ public class TestRoomController {
             myRoomMonster = myRoom.getMonster();
             MonsterType currentMonster = myRoomMonster.getMonsterType();
             String imageURL = "/assets/" + currentMonster.toString() + ".png";
-            Image image = new Image(getClass().getResourceAsStream(imageURL));
-            myBattleMonster.setImage(image);
-            myMonster.setImage(image);
+            myMonsterImage = new Image(getClass().getResourceAsStream(imageURL));
+            myMonster.setImage(myMonsterImage);
         }
 
         if(!myItems.contains(RoomItem.PIT)) {

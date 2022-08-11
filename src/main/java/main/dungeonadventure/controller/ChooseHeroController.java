@@ -12,7 +12,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 import javafx.stage.Stage;
@@ -36,6 +40,8 @@ public class ChooseHeroController {
     private RadioButton myThiefButton, myPriestessButton, myWarriorButton;
     @FXML
     private Label myHeroLabel, myNameLabel;
+    @FXML
+    private AnchorPane someRoot;
 
     private Stage myStage;
     private Scene myScene;
@@ -45,6 +51,9 @@ public class ChooseHeroController {
     private Hero myHero;
     private String myHeroName;
     private HeroType myHeroType;
+    private Media myMedia;
+    private MediaPlayer myMediaPlayer;
+    private Image myHeroImage;
 
 
 
@@ -54,7 +63,7 @@ public class ChooseHeroController {
      */
     @FXML
     private void backToWelcomeScreen(final ActionEvent theEvent) {
-        switchStageBuilder(theEvent, "welcome_screen.fxml");
+        switchStageBuilder("welcome_screen.fxml");
     }
 
     /**
@@ -104,28 +113,32 @@ public class ChooseHeroController {
             myHeroLabel.setTextFill(Color.RED);
         } else {
             myDungeon = new Dungeon();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("room1.fxml"));
-            Parent root = loader.load();
-            TestRoomController roomController = loader.getController();
-            roomController.setDungeon(myDungeon);
+            playMedia("/assets/choosecharacter.mp3");
             createHero(myHeroType, myHeroName);
-            switchStageBuilder(theEvent, "room1.fxml");
+            String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
+            myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
+            switchStageBuilder("room1.fxml");
         }
     }
 
     /**
      * Switches screens back to the welcome screen or the first room in the dungeon
-     * @param theEvent - button click
      * @param theFxmlName - fxml file name for the screen to switch to
      */
     @FXML
-    private void switchStageBuilder(final ActionEvent theEvent, final String theFxmlName) {
+    private void switchStageBuilder(final String theFxmlName) {
         try {
-            myRoot = FXMLLoader.load(getClass().getClassLoader().getResource(theFxmlName));
-            myStage = (Stage)((Node)theEvent.getSource()).getScene().getWindow();
-            myScene = new Scene(myRoot);
-            myStage.setScene(myScene);
-            myStage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(theFxmlName));
+            Parent root = loader.load();
+            if(theFxmlName.equals("room1.fxml")) {
+                TestRoomController roomController = loader.getController();
+                roomController.setDungeon(myDungeon, myMediaPlayer, myHeroImage);
+            }
+            System.out.println("fxml was loaded.");
+            Stage stage = (Stage) someRoot.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,6 +161,13 @@ public class ChooseHeroController {
             throw new IllegalArgumentException("Invalid HeroType");
         }
         myDungeon.setHero(myHero);
+    }
+
+    private void playMedia(String theSongName) {
+        myMedia = new Media(getClass().getResource(theSongName).toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
     }
 
 }

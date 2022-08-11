@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="someRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.BattleController">
+   <children>
+      <ImageView fx:id="myBattleMonster" fitHeight="132.0" fitWidth="151.0" layoutX="403.0" layoutY="121.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/OGRE.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="myHeroFight" layoutX="92.0" layoutY="148.0">
+         <children>
+            <ImageView fx:id="myBattleHero" fitHeight="106.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/THIEF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="71.0" fitWidth="30.0" layoutX="64.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="48.0">
+               <image>
+                  <Image url="@assets/weapon_red_gem_sword.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <ProgressBar fx:id="myHeroHPBar" layoutX="41.0" layoutY="308.0" prefWidth="200.0" progress="0.0" styleClass="progressBar" />
+      <ProgressBar fx:id="myMonsterHPBar" layoutX="369.0" layoutY="308.0" prefWidth="200.0" progress="0.0" styleClass="progressBar">
+         <opaqueInsets>
+            <Insets top="1000.0" />
+         </opaqueInsets>
+      </ProgressBar>
+      <Button fx:id="myAttackButton" layoutX="187.0" layoutY="123.0" mnemonicParsing="false" onAction="#attackClicked" styleClass="buttonControl" text="Attack" />
+      <Button fx:id="myUseHealthPotionButton" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Use Health Potion" />
+      <Label layoutX="43.0" layoutY="284.0" text="HeroName Health" />
+      <Label layoutX="369.0" layoutY="284.0" text="MonsterName Health" />
+      <Label layoutY="38.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="FIGHT!" />
+   </children>
+</AnchorPane>

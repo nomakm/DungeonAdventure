@@ -28,7 +28,7 @@ public class FinishGameController {
         }
     }
 
-    public void setGameLabel(String gameOutcome) {
+    public void setScreen(String gameOutcome) {
         myFinishLabel.setText("You " + gameOutcome + "!");
     }
 
