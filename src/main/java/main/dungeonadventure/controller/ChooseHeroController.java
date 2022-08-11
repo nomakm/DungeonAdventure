@@ -31,8 +31,6 @@ import java.util.Objects;
  */
 public class ChooseHeroController {
     @FXML
-    private Button myBackButton, mySubmitButton;
-    @FXML
     private TextField myHeroText;
     @FXML
     private RadioButton myThiefButton, myPriestessButton, myWarriorButton;

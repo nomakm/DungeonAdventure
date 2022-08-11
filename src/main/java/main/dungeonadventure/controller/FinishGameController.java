@@ -13,8 +13,6 @@ import main.dungeonadventure.model.Dungeon;
 
 public class FinishGameController {
     @FXML
-    private Button myPlayAgain, myQuitGame;
-    @FXML
     private Label myFinishLabel;
 
     @FXML

@@ -1,5 +1,6 @@
 package main.dungeonadventure.controller;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -18,10 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import main.dungeonadventure.model.*;
 import main.dungeonadventure.view.DungeonAdventureGUI;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -33,16 +36,14 @@ import java.util.Random;
  */
 public class TestRoomController {
     @FXML
-    private Group myEastDoors, myWestDoors;
+    private Group myEastDoors, myWestDoors, myHeroFight;
     @FXML
     private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster, myBattleHero, myBattleMonster;
     @FXML
     private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
     @FXML
-    private Button  myColumn, myHeroButton, myMonsterButton, myVisPot, myHPPot,
-            myUseVisionPotionButton, myUseHealthPotionButton, myUseHealthPotionButton2;
-    @FXML
-    private Button myEnterDungeonBut, myAttackButton, myDrinkHPButton, myDrinkHPButton2;
+    private Button  myColumn, myMonsterButton, myVisPot, myHPPot,
+            myUseVisionPotionButton,  myUseHealthPotionButton2;
     @FXML
     private Circle myPit;
     @FXML
@@ -50,22 +51,19 @@ public class TestRoomController {
     @FXML
     private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel;
     @FXML
+    private Label myNWLabel, myNLabel, myNELabel, myWLabel, myCurrLabel, myELabel,
+            mySWLabel, mySLabel, mySELabel;
+    @FXML
     private ProgressBar myHeroHPBar, myMonsterHPBar;
     @FXML
     private Parent someRoot;
 
-    @FXML Group myNorthEast, myNorth, myNorthWest, myWest, myCurr, myEast, mySouthWest, mySouth, mySouthEast;
-    @FXML Label myNWLabel, myNLabel, myNELabel, myWLabel, myCurrLabel, myELabel, mySWLabel, mySLabel, mySELabel;
-    @FXML Button myExitVision;
-
+    private static Dungeon myDungeon;
     private Room myRoom;
+    private Hero myHero;
     private Monster myRoomMonster;
     private HashSet<RoomItem> myItems;
-
-
-
-    private static Dungeon myDungeon;
-    private Hero myHero;
+    private HashMap<String, Label> myLabels;
     private Random myRand = new Random();
 
 
@@ -154,13 +152,14 @@ public class TestRoomController {
     @FXML
     private void useVisionPotion(final ActionEvent theEvent) {
         if (myHero.getVisionPotionCount() > 0) {
-            Room[] neighbors = myDungeon.getNeighbors();
-            for (int i = 0; i < neighbors.length; i++) {
+            HashMap<String, Room> neighbors = myDungeon.getNeighbors();
+            for (String direction : neighbors.keySet()) {
                 String label = "";
-                if (neighbors[i] != null) {
-                    HashSet<RoomItem> items = neighbors[i].getItems();
+                Room room = neighbors.get(direction);
+                if (neighbors.get(direction) != null) {
+                    HashSet<RoomItem> items = room.getItems();
                     if (items.contains(RoomItem.HEALTH_POTION)) {
-                        label += "HP ";
+                        label += "H ";
                     }
                     if (items.contains(RoomItem.VISION_POTION)) {
                         label += "V ";
@@ -172,31 +171,12 @@ public class TestRoomController {
                         label += "P ";
                     }
                     if (items.contains(RoomItem.PILLAR)) {
-                        label += "PI";
+                        label += "PI ";
                     }
-                    if (i == 0) {
-                        myNWLabel.setText(label);
-                    } else if (i == 1) {
-                        myNLabel.setText(label);
-                    } else if (i == 2) {
-                        myNELabel.setText(label);
-                    } else if (i == 3) {
-                        myWLabel.setText(label);
-                    } else if (i == 4) {
-                        myCurrLabel.setText(label);
-                    } else if (i == 5) {
-                        myELabel.setText(label);
-                    } else if (i == 6) {
-                        mySWLabel.setText(label);
-                    } else if (i == 7) {
-                        mySLabel.setText(label);
-                    } else if (i == 8) {
-                        mySELabel.setText(label);
-                    }
-                    myVisionPane.setVisible(true);
+                    myLabels.get(direction).setText(label);
                 }
             }
-
+            myVisionPane.setVisible(true);
             myHero.setVisionPotionCount(-1);
             openInventory();
             System.out.println("Vision Potion used");
@@ -227,6 +207,21 @@ public class TestRoomController {
         myBattleHero.setImage(image);
         myEnterPane.setVisible(false);
         myInventoryPane.setVisible(false);
+        myLabels = addLabels();
+    }
+
+    private HashMap<String, Label> addLabels() {
+        HashMap<String, Label> labels = new HashMap<>();
+        labels.put("NORTHWEST", myNWLabel);
+        labels.put("NORTH", myNLabel);
+        labels.put("NORTHEAST", myNELabel);
+        labels.put("WEST", myWLabel);
+        labels.put("CURR", myCurrLabel);
+        labels.put("EAST", myELabel);
+        labels.put("SOUTHWEST", mySWLabel);
+        labels.put("SOUTH", mySLabel);
+        labels.put("SOUTHEAST", mySELabel);
+        return labels;
     }
 
     /**
@@ -250,6 +245,7 @@ public class TestRoomController {
             }
             for (int i = 0; i < timesAtk; i++) {
                     System.out.println("Hero attacking monster");
+                    animateAttack();
                     myHero.attack(myRoomMonster);
                 if (myRoomMonster.getHP() <= 0) {
                     myMonsterHPBar.setProgress(0.0);
@@ -275,6 +271,16 @@ public class TestRoomController {
                     }
                 }
             }
+    }
+
+    private void animateAttack() {
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(myHeroFight);
+        translate.setDuration(Duration.millis(1000));
+        translate.setCycleCount(2);
+        translate.setByX((myBattleMonster.getLayoutX() - myHeroFight.getLayoutX() - 20));
+        translate.setAutoReverse(true);
+        translate.play();
     }
 
     @FXML

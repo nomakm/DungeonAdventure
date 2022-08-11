@@ -22,12 +22,6 @@ import javafx.stage.Stage;
  */
 public class WelcomeScreenController {
     @FXML
-    private Button myNewGameButton, myLoadGameButton;
-    @FXML
-    private MenuBar menu;
-    @FXML
-    private MenuItem myAbout, myTutorial, myLoadGame, myNewGame;
-    @FXML
     private Parent someRoot;
     private Stage stage;
     private Scene scene;
