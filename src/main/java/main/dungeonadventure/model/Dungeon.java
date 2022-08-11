@@ -219,36 +219,19 @@ public class Dungeon implements Serializable {
         return myRooms[myHeroPosition.x][myHeroPosition.y];
     }
 
-//    public Room[] getNeighbors() {
-//        Room[] neighbors = new Room[9];
-//        neighbors[0] = myRooms[myHeroPosition.x - 1][myHeroPosition.y - 1]; //NW
-//        neighbors[1] = myRooms[myHeroPosition.x][myHeroPosition.y - 1]; //N
-//        neighbors[2] = myRooms[myHeroPosition.x + 1][myHeroPosition.y - 1]; //NE
-//
-//        neighbors[3] = myRooms[myHeroPosition.x - 1][myHeroPosition.y]; //W
-//        neighbors[4] = myRooms[myHeroPosition.x][myHeroPosition.y]; //CURR
-//        neighbors[5] = myRooms[myHeroPosition.x + 1][myHeroPosition.y]; //E
-//
-//        neighbors[6] = myRooms[myHeroPosition.x - 1][myHeroPosition.y + 1]; //SW
-//        neighbors[7] = myRooms[myHeroPosition.x][myHeroPosition.y + 1]; //S
-//        neighbors[8] = myRooms[myHeroPosition.x + 1][myHeroPosition.y + 1]; //SE
-//
-//        return neighbors;
-//    }
-
     public HashMap<String, Room> getNeighbors() {
         HashMap<String, Room> neighbors = new HashMap<>();
-        neighbors.put("NORTHWEST",myRooms[myHeroPosition.x - 1][myHeroPosition.y - 1]); //NW
-        neighbors.put("NORTH",myRooms[myHeroPosition.x][myHeroPosition.y - 1]); //N
-        neighbors.put("NORTHEAST",myRooms[myHeroPosition.x + 1][myHeroPosition.y - 1]); //NE
+        neighbors.put("NORTHWEST",myRooms[myHeroPosition.x - 1][myHeroPosition.y - 1]);
+        neighbors.put("NORTH",myRooms[myHeroPosition.x - 1][myHeroPosition.y]);
+        neighbors.put("NORTHEAST",myRooms[myHeroPosition.x - 1][myHeroPosition.y + 1]);
 
-        neighbors.put("WEST",myRooms[myHeroPosition.x - 1][myHeroPosition.y]); //W
-        neighbors.put("CURR",myRooms[myHeroPosition.x][myHeroPosition.y]); //CURR
-        neighbors.put("EAST",myRooms[myHeroPosition.x + 1][myHeroPosition.y]); //E
+        neighbors.put("WEST",myRooms[myHeroPosition.x][myHeroPosition.y - 1]);
+        neighbors.put("CURR",myRooms[myHeroPosition.x][myHeroPosition.y]);
+        neighbors.put("EAST",myRooms[myHeroPosition.x][myHeroPosition.y + 1]);
 
-        neighbors.put("SOUTHWEST",myRooms[myHeroPosition.x - 1][myHeroPosition.y + 1]); //SW
-        neighbors.put("SOUTH",myRooms[myHeroPosition.x][myHeroPosition.y + 1]); //S
-        neighbors.put("SOUTHEAST", myRooms[myHeroPosition.x + 1][myHeroPosition.y + 1]); //SE
+        neighbors.put("SOUTHWEST",myRooms[myHeroPosition.x + 1][myHeroPosition.y - 1]);
+        neighbors.put("SOUTH",myRooms[myHeroPosition.x + 1][myHeroPosition.y]);
+        neighbors.put("SOUTHEAST", myRooms[myHeroPosition.x + 1][myHeroPosition.y + 1]);
 
         return neighbors;
     }

@@ -176,6 +176,8 @@ public class TestRoomController {
                         label += "PI ";
                     }
                     myLabels.get(direction).setText(label);
+                } else {
+                    myLabels.get(direction).setText("No Room");
                 }
             }
             myVisionPane.setVisible(true);
@@ -299,9 +301,6 @@ public class TestRoomController {
         Double origPos = myHeroFight.getLayoutX();
         translate.setByX((myBattleMonster.getLayoutX() - origPos - 20));
         translate.setAutoReverse(true);
-        if (myHeroFight.getLayoutX() != origPos) {
-            myHeroFight.setLayoutX(origPos);
-        }
         translate.play();
     }
 
