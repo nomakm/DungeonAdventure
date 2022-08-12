@@ -128,8 +128,8 @@ public class Dungeon implements Serializable {
 
 
     /**
-     * USED FOR TESTING TO DELETE
-     * @return
+     * Used to visualize door placements in Dungeon (Testing)
+     * @return String of dungeon
      */
     @Override
     public String toString() {

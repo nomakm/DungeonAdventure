@@ -176,7 +176,7 @@ public class BattleController {
                 gameOverController.setScreen("lost");
             } else {
                 RoomController roomController = loader.getController();
-                roomController.setStatsAfterBattle(myDungeon, myHeroImage);
+                roomController.endBattle();
                 myMediaPlayer.stop();
             }
             System.out.println("fxml was loaded.");

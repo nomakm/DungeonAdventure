@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -30,9 +31,11 @@ public class CharacterSelectionController {
     @FXML
     private RadioButton myThiefButton, myPriestessButton, myWarriorButton;
     @FXML
-    private Label myHeroLabel, myNameLabel;
+    private Label myHeroLabel, myNameLabel, myErrorMessage;
     @FXML
     private AnchorPane someRoot;
+    @FXML
+    private ImageView myThiefImage, myPriestessImage, myWarriorImage;
 
     private Stage myStage;
     private Scene myScene;
@@ -43,33 +46,36 @@ public class CharacterSelectionController {
     private HeroType myHeroType;
     private Media myMedia;
     private MediaPlayer myMediaPlayer;
-    private Image myHeroImage;
 
 
+    public void initialize() {
+        playMedia("/assets/choosecharacter.mp3");
+    }
 
     /**
      * When back button is hit, switches to welcome screen
      * @param theEvent - button click
      */
     @FXML
-    private void backToWelcomeScreen(final ActionEvent theEvent) {
+    private void switchToWelcomeScreen(final ActionEvent theEvent) {
         switchStageBuilder("welcome_screen.fxml");
     }
 
-    /**
-     * When submit button is clicked and name is filled out, saves the name
-     * @param theEvent - button click
-     */
-    @FXML
-    private void heroNameSet(final ActionEvent theEvent) {
-        if (!Objects.equals(myHeroText.getText(), null)) {
-            String heroName = myHeroText.getText();
-            myHeroText.setText(heroName);
-            System.out.println(heroName);
-            myNameLabel.setTextFill(Color.WHITE);
-            myHeroName = heroName;
-        }
-    }
+    //Deprecated by LS
+//    /**
+//     * When submit button is clicked and name is filled out, saves the name
+//     * @param theEvent - button click
+//     */
+//    @FXML
+//    private void heroNameSet(final ActionEvent theEvent) {
+//        if (!Objects.equals(myHeroText.getText(), null)) {
+//            String heroName = myHeroText.getText();
+//            myHeroText.setText(heroName);
+//            System.out.println(heroName);
+//            myNameLabel.setTextFill(Color.WHITE);
+//            myHeroName = heroName;
+//        }
+//    }
 
     /**
      * When a hero is selected from choices, saves the hero type
@@ -77,15 +83,36 @@ public class CharacterSelectionController {
      */
     @FXML
     private void chooseHero(final ActionEvent theEvent) {
+        String thiefSelected = "/assets/THIEF_HIGHLIGHTED.png";
+        String thiefUnselected = "/assets/THIEF.png";
+        String priestessSelected = "/assets/PRIESTESS_HIGHLIGHTED.png";
+        String priestessUnselected = "/assets/PRIESTESS.png";
+        String warriorSelected = "/assets/WARRIOR_HIGHLIGHTED.png";
+        String warriorUnselected = "/assets/WARRIOR.png";
+
         if (myThiefButton.isSelected()) {
+            System.out.println("DEBUG - Thief is chosen");
             myHeroType = HeroType.THIEF;
-System.out.println("DEBUG - Thief is chosen");
+            myPriestessImage.setImage(new Image(getClass().getResourceAsStream(priestessUnselected)));
+            myWarriorImage.setImage(new Image(getClass().getResourceAsStream(warriorUnselected)));
+            myThiefImage.setImage(new Image(getClass().getResourceAsStream(thiefSelected)));
+
         } else if (myPriestessButton.isSelected()) {
+            System.out.println("DEBUG - Priestess is chosen");
             myHeroType = HeroType.PRIESTESS;
-System.out.println("DEBUG - Priestess is chosen");
+            myPriestessImage.setImage(new Image(getClass().getResourceAsStream(priestessSelected)));
+            myWarriorImage.setImage(new Image(getClass().getResourceAsStream(warriorUnselected)));
+            myThiefImage.setImage(new Image(getClass().getResourceAsStream(thiefUnselected)));
+
+
         } else if (myWarriorButton.isSelected()) {
+            System.out.println("DEBUG - Warrior is chosen");
             myHeroType = HeroType.WARRIOR;
-System.out.println("DEBUG - Warrior is chosen");
+            myPriestessImage.setImage(new Image(getClass().getResourceAsStream(priestessUnselected)));
+            myWarriorImage.setImage(new Image(getClass().getResourceAsStream(warriorSelected)));
+            myThiefImage.setImage(new Image(getClass().getResourceAsStream(thiefUnselected)));
+
+
         }
     }
 
@@ -97,14 +124,15 @@ System.out.println("DEBUG - Warrior is chosen");
     @FXML
     private void switchToDungeon(final ActionEvent theEvent) throws IOException {
         if (myHeroText.getText().length() == 0) {
-            myNameLabel.setTextFill(Color.RED);
+            myErrorMessage.setText("Please give your character a name.");
+            //myNameLabel.setTextFill(Color.RED);
         } else if (!myThiefButton.isSelected() && !myPriestessButton.isSelected()
                     && !myWarriorButton.isSelected()) {
-            myHeroLabel.setTextFill(Color.RED);
+            myErrorMessage.setText("Please select a character.");
+            //myHeroLabel.setTextFill(Color.RED);
         } else {
             DungeonAdventureGame.buildNewDungeon();
-            createHero(myHeroType, myHeroName);
-
+            createHero(myHeroType, myHeroText.getText());
             switchStageBuilder("dungeon.fxml");
         }
     }
@@ -156,8 +184,6 @@ System.out.println("DEBUG - dungeon.fxml was loaded.");
         myMediaPlayer.play();
     }
 
-    public void initialize() {
-        playMedia("/assets/choosecharacter.mp3");
-    }
+
 
 }

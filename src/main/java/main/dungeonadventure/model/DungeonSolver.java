@@ -99,10 +99,10 @@ public class DungeonSolver {
         //Is the dungeon solvable?
         if (enteranceLocated && exitLocated
             && pillarCounter == theDungeon.getPillarCount()) {
-System.out.println("DEBUG - DUNGEON IS SOLVABLE");
+//System.out.println("DEBUG - DUNGEON IS SOLVABLE");
             return true;
         }
-System.out.println("DEBUG - DUNGEON NOT SOLVABLE");
+//System.out.println("DEBUG - DUNGEON NOT SOLVABLE");
 //System.out.println("_______________________________");
         return false;
     }

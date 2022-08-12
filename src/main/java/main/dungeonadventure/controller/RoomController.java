@@ -66,6 +66,49 @@ public class RoomController {
     private Image myHeroImage;
     private Image myMonsterImage;
 
+
+    /**
+     * This method will run everytime dungeon.fxml is loaded.
+     * Retrieve's the game's dungeon instance, grabs data from hero's
+     * room to preload assets before launching view.
+     */
+    public void initialize() {
+        playMedia("/assets/dungeon.mp3");
+        myLabels = addLabels();
+        myDungeon = DungeonAdventureGame.getDungeon();
+        loadRoom();
+        setHeroImage();
+
+    }
+
+    public void loadRoom() {
+        this.myRoom = myDungeon.getCurrentRoom();
+        this.myHero = myDungeon.getHero();
+        this.myRoomMonster = myRoom.getMonster();
+        this.myItems = myRoom.getItems();
+        setItems(myRoom);
+        setDoors();
+    }
+
+    public void setHeroImage() {
+        String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
+        myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
+        myHeroImg.setImage(myHeroImage);
+    }
+
+    //Deprecated by LS
+//    public void setDungeon(Image theHeroImage) {
+//        this.myDungeon = DungeonAdventureGame.getDungeon();
+//        this.myRoom = myDungeon.getCurrentRoom();
+//        this.myHero = myDungeon.getHero();
+//        this.myRoomMonster = myRoom.getMonster();
+//        this.myItems = myRoom.getItems();
+//        this.myHeroImage = theHeroImage;
+//        myHeroImg.setImage(myHeroImage);
+//        setItems(myRoom);
+//        setDoors(myRoom);
+//    }
+
     /**
      * Switches between rooms in the dungeon based on room items.
      * @param theEvent - button click
@@ -82,7 +125,7 @@ public class RoomController {
                 finishGame("won");
             }
             myItems = myRoom.getItems();
-            setDoors(myRoom);
+            setDoors();
             setItems(myRoom);
         }
     }
@@ -112,6 +155,22 @@ public class RoomController {
 
         System.exit(0);
 
+    }
+
+    private void finishGame(String finishGame) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("game_over_screen.fxml"));
+            Parent root = loader.load();
+            GameOverController gameOverController = loader.getController();
+            gameOverController.setScreen(finishGame);
+System.out.println("DEBUG - game_over_screen.fxml was loaded.");
+            Stage stage = (Stage) someRoot.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -209,6 +268,32 @@ public class RoomController {
         myVisionPane.setVisible(false);
     }
 
+
+    private void playMedia(String theSongName) {
+        myMedia = new Media(getClass().getResource(theSongName).toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
+    }
+
+    private void stopMedia() {
+        myMediaPlayer.stop();
+    }
+
+    private HashMap<String, Label> addLabels() {
+        HashMap<String, Label> labels = new HashMap<>();
+        labels.put("NORTHWEST", myNWLabel);
+        labels.put("NORTH", myNLabel);
+        labels.put("NORTHEAST", myNELabel);
+        labels.put("WEST", myWLabel);
+        labels.put("CURR", myCurrLabel);
+        labels.put("EAST", myELabel);
+        labels.put("SOUTHWEST", mySWLabel);
+        labels.put("SOUTH", mySLabel);
+        labels.put("SOUTHEAST", mySELabel);
+        return labels;
+    }
+
     /**
      * Starts battle with the monster when monster is clicked
      */
@@ -220,7 +305,7 @@ public class RoomController {
             Parent root = loader.load();
             BattleController battleController = loader.getController();
             battleController.setScreen(myDungeon, myHeroImage, myMonsterImage);
-            System.out.println("fxml was loaded.");
+System.out.println("DEBUG - battle.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -228,7 +313,17 @@ public class RoomController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
+    public void endBattle() {
+System.out.println("DEBUG - Monster was defeated");
+        myRoom.removeItem(RoomItem.MONSTER);
+        myItems.remove(RoomItem.MONSTER);
+        myMonsterButton.setVisible(false);
+        setDoors();
+    }
+
 
     @FXML
     public void closeInventory() {
@@ -257,85 +352,6 @@ public class RoomController {
         myColumn.setVisible(false);
     }
 
-    public void initialize() {
-        playMedia("/assets/dungeon.mp3");
-        myLabels = addLabels();
-        myDungeon = DungeonAdventureGame.getDungeon();
-        loadRoom();
-        setHeroImage();
-    }
-
-    public void loadRoom() {
-        this.myRoom = myDungeon.getCurrentRoom();
-        this.myHero = myDungeon.getHero();
-        this.myRoomMonster = myRoom.getMonster();
-        this.myItems = myRoom.getItems();
-        setItems(myRoom);
-        setDoors(myRoom);
-    }
-
-    protected void setHeroImage() {
-        String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
-        myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
-        myHeroImg.setImage(myHeroImage);
-    }
-
-    protected void setDungeon(Image theHeroImage) {
-        this.myDungeon = DungeonAdventureGame.getDungeon();
-        this.myRoom = myDungeon.getCurrentRoom();
-        this.myHero = myDungeon.getHero();
-        this.myRoomMonster = myRoom.getMonster();
-        this.myItems = myRoom.getItems();
-        setHeroImage();
-        setItems(myRoom);
-        setDoors(myRoom);
-    }
-
-    private void finishGame(String finishGame) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("game_over_screen.fxml"));
-            Parent root = loader.load();
-            GameOverController gameOverController = loader.getController();
-            gameOverController.setScreen(finishGame);
-            System.out.println("fxml was loaded.");
-            Stage stage = (Stage) someRoot.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void playMedia(String theSongName) {
-        myMedia = new Media(getClass().getResource(theSongName).toString());
-        myMediaPlayer = new MediaPlayer(myMedia);
-        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        myMediaPlayer.play();
-    }
-
-    private HashMap<String, Label> addLabels() {
-        HashMap<String, Label> labels = new HashMap<>();
-        labels.put("NORTHWEST", myNWLabel);
-        labels.put("NORTH", myNLabel);
-        labels.put("NORTHEAST", myNELabel);
-        labels.put("WEST", myWLabel);
-        labels.put("CURR", myCurrLabel);
-        labels.put("EAST", myELabel);
-        labels.put("SOUTHWEST", mySWLabel);
-        labels.put("SOUTH", mySLabel);
-        labels.put("SOUTHEAST", mySELabel);
-        return labels;
-    }
-
-    protected void setStatsAfterBattle(Dungeon theDungeon, Image theHeroImage) {
-        setDungeon(theHeroImage);
-        System.out.println("Monster was defeated");
-        myRoom.removeItem(RoomItem.MONSTER);
-        myItems.remove(RoomItem.MONSTER);
-        myMonsterButton.setVisible(false);
-    }
-
     /**
      * moves the hero position in the dungeon based on which room the user is in
      * @param theDirection - direction in which the user goes
@@ -356,36 +372,48 @@ public class RoomController {
 
     /**
      * Checks the closed doors in a room to set room details
-     * @param theRoom - the Room to check
      */
-    private void setDoors(final Room theRoom) {
-        if(!theRoom.isDoorOpen(Direction.NORTH)) {
+    private void setDoors() {
+
+        //Trap player in room if monster is in room
+        if (myRoom.getItems().contains(RoomItem.MONSTER)) {
             myNorthDoor.setVisible(true);
             myNorthArrow.setVisible(false);
-        } else {
-            myNorthDoor.setVisible(false);
-            myNorthArrow.setVisible(true);
-        }
-        if(!theRoom.isDoorOpen(Direction.EAST)) {
             myEastDoors.setVisible(true);
             myEastArrow.setVisible(false);
-        } else {
-            myEastDoors.setVisible(false);
-            myEastArrow.setVisible(true);
-        }
-        if(!theRoom.isDoorOpen(Direction.SOUTH)) {
             mySouthDoor.setVisible(true);
             mySouthArrow.setVisible(false);
-        } else {
-            mySouthDoor.setVisible(false);
-            mySouthArrow.setVisible(true);
-        }
-        if(!theRoom.isDoorOpen(Direction.WEST)) {
             myWestDoors.setVisible(true);
             myWestArrow.setVisible(false);
         } else {
-            myWestDoors.setVisible(false);
-            myWestArrow.setVisible(true);
+            if (!myRoom.isDoorOpen(Direction.NORTH)) {
+                myNorthDoor.setVisible(true);
+                myNorthArrow.setVisible(false);
+            } else {
+                myNorthDoor.setVisible(false);
+                myNorthArrow.setVisible(true);
+            }
+            if (!myRoom.isDoorOpen(Direction.EAST)) {
+                myEastDoors.setVisible(true);
+                myEastArrow.setVisible(false);
+            } else {
+                myEastDoors.setVisible(false);
+                myEastArrow.setVisible(true);
+            }
+            if (!myRoom.isDoorOpen(Direction.SOUTH)) {
+                mySouthDoor.setVisible(true);
+                mySouthArrow.setVisible(false);
+            } else {
+                mySouthDoor.setVisible(false);
+                mySouthArrow.setVisible(true);
+            }
+            if (!myRoom.isDoorOpen(Direction.WEST)) {
+                myWestDoors.setVisible(true);
+                myWestArrow.setVisible(false);
+            } else {
+                myWestDoors.setVisible(false);
+                myWestArrow.setVisible(true);
+            }
         }
     }
 
