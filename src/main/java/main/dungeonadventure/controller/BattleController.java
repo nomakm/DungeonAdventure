@@ -1,5 +1,8 @@
 package main.dungeonadventure.controller;
 
+import javafx.animation.PauseTransition;
+import javafx.scene.control.Button;
+import main.dungeonadventure.model.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +18,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import main.dungeonadventure.model.*;
-
 import java.util.HashSet;
 import java.util.Random;
 
@@ -24,13 +25,15 @@ public class BattleController {
     @FXML
     private Group myHeroFight;
     @FXML
-    private Label myMonsterNameLabel, myHeroNameLabel, myHeroHPLabel, myMonsterHPLabel;
+    private Label myMonsterNameLabel, myHeroNameLabel, myHeroHPLabel, myMonsterHPLabel, noItemLabel;
     @FXML
     private ImageView myBattleHero, myBattleMonster;
     @FXML
     private ProgressBar myHeroHPBar, myMonsterHPBar;
     @FXML
     private Parent someRoot;
+    @FXML
+    private Button myAttackButton;
 
     private static Dungeon myDungeon;
     private Room myRoom;
@@ -64,6 +67,17 @@ public class BattleController {
 
     @FXML
     private void attackClicked() {
+            myAttackButton.setDisable(true);
+            animateAttack();
+            battle();
+            final PauseTransition pt = new PauseTransition(Duration.millis(2500));
+            pt.setOnFinished( ( ActionEvent event ) -> {
+                myAttackButton.setDisable(false);
+            });
+            pt.play();
+    }
+
+    private void battle() {
         int monsterSpd = myMonster.getMyAtkSpd();
         int heroSpd = myHero.getMyAtkSpd();
         int timesAtk = heroSpd / monsterSpd;
@@ -72,7 +86,6 @@ public class BattleController {
         }
         for (int i = 0; i < timesAtk; i++) {
             System.out.println("Hero attacking monster");
-            animateAttack();
             myHero.attack(myMonster);
             if (myMonster.getHP() <= 0) {
                 myMonsterHPBar.setProgress(0.0);
@@ -84,7 +97,7 @@ public class BattleController {
                 myMonsterHPLabel.setText("-" + attackPoints);
             }
         }
-        if (myItems.contains(RoomItem.MONSTER)) {
+        if (myMonster.getHP() > 0 && myItems.contains(RoomItem.MONSTER)) {
             int chanceToBlock = myHero.getMyChanceToBlock();
             if (chanceToBlock <= (myRand.nextInt(10) + 1)) {
                 System.out.println("Monster attacking hero");
@@ -97,6 +110,22 @@ public class BattleController {
                     System.out.println("Hero died, game lost");
                 }
             }
+        }
+    }
+
+    @FXML
+    private void useBomb() {
+        if (myHero.getBombCount() > 0) {
+            myHero.setBombCount(-1);
+            myMonster.setHP(myMonster.getHP() - 30);
+            myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
+            myMonsterHPLabel.setText("-" + 30);
+            if (myMonster.getHP() <= 0) {
+                myMonsterHPBar.setProgress(0.0);
+                switchScreen("room1.fxml");
+            }
+        } else {
+            noItemLabel.setText("No bombs available");
         }
     }
 
@@ -120,7 +149,7 @@ public class BattleController {
             System.out.println("Health Potion used");
             myHeroHPLabel.setText("+" + healingPoints);
         } else {
-            System.out.println("No health potions available");
+            noItemLabel.setText("No health potions available");
         }
     }
 

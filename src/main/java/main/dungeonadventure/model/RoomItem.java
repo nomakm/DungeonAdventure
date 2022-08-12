@@ -5,5 +5,6 @@ public enum RoomItem {
     HEALTH_POTION,
     VISION_POTION,
     MONSTER,
-    PILLAR
+    PILLAR,
+    BOMB
 }

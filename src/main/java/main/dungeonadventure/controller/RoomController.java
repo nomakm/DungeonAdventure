@@ -1,10 +1,8 @@
 package main.dungeonadventure.controller;
 
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,11 +15,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
-
 import javafx.stage.Stage;
-
 import main.dungeonadventure.model.*;
-
 import java.awt.*;
 import java.io.File;
 import java.util.HashMap;

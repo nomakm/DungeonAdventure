@@ -9,6 +9,7 @@ public class Hero extends DungeonCharacter {
     private int myHealPotionCount;
     private int myVisionPotionCount;
     private int myPillarCount;
+    private int myBombCount;
 
     public Hero (final HeroType theHeroType, final String theCharacterName, final int theHP,
                  final int theDmgMin, final int theDmgMax,
@@ -22,6 +23,7 @@ public class Hero extends DungeonCharacter {
         this.myHealPotionCount = 0;
         this.myVisionPotionCount = 0;
         this.myPillarCount = 0;
+        this.myBombCount = 0;
     }
 
     public int getHealthPotionCount() {
@@ -46,6 +48,18 @@ public class Hero extends DungeonCharacter {
         } else {
             throw new IllegalArgumentException("Potion is either added or used");
         }
+    }
+
+    public void setBombCount(int setAmount) {
+        if (setAmount == 1 || setAmount == -1)  {
+            myBombCount += setAmount;
+        } else {
+            throw new IllegalArgumentException("Bomb is either added or used");
+        }
+    }
+
+    public int getBombCount() {
+        return myBombCount;
     }
 
     public int getPillarCount() {
