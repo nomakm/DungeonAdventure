@@ -5,15 +5,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -23,7 +20,6 @@ import javafx.stage.Stage;
 
 import main.dungeonadventure.model.*;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -33,7 +29,7 @@ import java.util.Objects;
  * @Author Luke Smith
  * @version 8-2022
  */
-public class ChooseHeroController {
+public class CharacterSelectionController {
     @FXML
     private TextField myHeroText;
     @FXML
@@ -47,7 +43,6 @@ public class ChooseHeroController {
     private Scene myScene;
     private Parent myRoot;
 
-    private static Dungeon myDungeon;
     private Hero myHero;
     private String myHeroName;
     private HeroType myHeroType;
@@ -89,13 +84,13 @@ public class ChooseHeroController {
     private void chooseHero(final ActionEvent theEvent) {
         if (myThiefButton.isSelected()) {
             myHeroType = HeroType.THIEF;
-            System.out.println("Thief is chosen");
+System.out.println("DEBUG - Thief is chosen");
         } else if (myPriestessButton.isSelected()) {
             myHeroType = HeroType.PRIESTESS;
-            System.out.println("Priestess is chosen");
+System.out.println("DEBUG - Priestess is chosen");
         } else if (myWarriorButton.isSelected()) {
             myHeroType = HeroType.WARRIOR;
-            System.out.println("Warrior is chosen");
+System.out.println("DEBUG - Warrior is chosen");
         }
     }
 
@@ -105,18 +100,18 @@ public class ChooseHeroController {
      * @param theEvent - button click
      */
     @FXML
-    private void switchToRoom1(final ActionEvent theEvent) throws IOException {
+    private void switchToDungeon(final ActionEvent theEvent) throws IOException {
         if (myHeroText.getText().length() == 0) {
             myNameLabel.setTextFill(Color.RED);
         } else if (!myThiefButton.isSelected() && !myPriestessButton.isSelected()
                     && !myWarriorButton.isSelected()) {
             myHeroLabel.setTextFill(Color.RED);
         } else {
-            myDungeon = new Dungeon();
+            DungeonAdventureGame.buildNewDungeon();
             createHero(myHeroType, myHeroName);
             String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
             myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
-            switchStageBuilder("room1.fxml");
+            switchStageBuilder("dungeon.fxml");
         }
     }
 
@@ -130,11 +125,11 @@ public class ChooseHeroController {
             myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(theFxmlName));
             Parent root = loader.load();
-            if(theFxmlName.equals("room1.fxml")) {
-                TestRoomController roomController = loader.getController();
-                roomController.setDungeon(myDungeon, myHeroImage);
+            if(theFxmlName.equals("dungeon.fxml")) {
+                RoomController roomController = loader.getController();
+                roomController.setHeroImage(myHeroImage);
             }
-            System.out.println("fxml was loaded.");
+System.out.println("DEBUG - dungeon.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -160,7 +155,7 @@ public class ChooseHeroController {
         } else {
             throw new IllegalArgumentException("Invalid HeroType");
         }
-        myDungeon.setHero(myHero);
+        DungeonAdventureGame.getDungeon().setHero(myHero);
     }
 
     private void playMedia(String theSongName) {

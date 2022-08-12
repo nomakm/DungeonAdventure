@@ -1,21 +1,15 @@
 package main.dungeonadventure.controller;
 
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
-
 import javafx.scene.Parent;
-
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 
 /**
@@ -37,14 +31,17 @@ public class WelcomeScreenController {
     public void initialize() {
         playMusic();
     }
+
+
     /**
-     * Starts a new game and switches to start screen
+     * Starts a new game and switches to character selection screen
      * @param theEvent - button or menuItem click
      */
     @FXML
-    private void switchToStartScreen(final ActionEvent theEvent) {
-        switchStageBuilder(theEvent, "start_game.fxml");
+    private void switchToCharacterSelection(final ActionEvent theEvent) {
+        switchStageBuilder(theEvent, "character_selection.fxml");
     }
+
 
     /**
      * Gives the user a brief description about the game
@@ -55,40 +52,6 @@ public class WelcomeScreenController {
         System.out.println("this is the about section");
     }
 
-    /**
-     * Starts a game that was saved previously
-     * @param theEvent - button or menuItem click
-     */
-    @FXML
-    private void loadGame(final ActionEvent theEvent) {
-        FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ser files (*.ser)", "*.ser");
-
-        File recordsDir = new File(System.getProperty("user.home"), ".DungeonAdventure/saves");
-        if (! recordsDir.exists()) {
-            recordsDir.mkdirs();
-        }
-
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        fileChooser.setInitialDirectory(recordsDir);
-
-        //Show save file dialog
-        File saveLocation = fileChooser.showOpenDialog(stage);
-
-        if (saveLocation != null) {
-            boolean gameLoaded = DungeonAdventureGame.loadGame(saveLocation);
-            if (gameLoaded) {
-                switchStageBuilder(theEvent, "room1.fxml");
-            }
-        }
-
-
-
-        System.out.println("you clicked load a game");
-    }
 
     /**
      * Starts a tutorial for the game
@@ -99,6 +62,7 @@ public class WelcomeScreenController {
         //switchStageBuilder(event, "tutorial.fxml");
         System.out.println("you clicked start a tutorial");
     }
+
 
     /**
      * Switches screens back to the start_game screen, tutorial, or about section
@@ -120,11 +84,45 @@ public class WelcomeScreenController {
         }
     }
 
+
     private void playMusic() {
         myMedia = new Media(getClass().getResource("/assets/titletheme.mp3").toString());
         myMediaPlayer = new MediaPlayer(myMedia);
         myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         myMediaPlayer.play();
+    }
+
+
+    /**
+     * Starts a game that was saved previously.
+     * @param theEvent - button or menuItem click
+     */
+    @FXML
+    private void loadGame(final ActionEvent theEvent) {
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ser files (*.ser)", "*.ser");
+
+        File recordsDir = new File(System.getProperty("user.home"), ".DungeonAdventure/saves");
+        if (! recordsDir.exists()) {
+            recordsDir.mkdirs();
+        }
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialDirectory(recordsDir);
+
+        //Show save file dialog
+        File saveLocation = fileChooser.showOpenDialog(stage);
+
+        if (saveLocation != null) {
+            boolean gameLoaded = DungeonAdventureGame.loadGame(saveLocation);
+            if (gameLoaded) {
+
+                switchStageBuilder(theEvent, "dungeon.fxml");
+            }
+        }
+
+        System.out.println("you clicked load a game");
     }
 
 }

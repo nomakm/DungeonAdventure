@@ -34,7 +34,7 @@ import java.util.Random;
  * @Author Luke Smith
  * @version 8-2022
  */
-public class TestRoomController {
+public class RoomController {
     @FXML
     private Group myEastDoors, myWestDoors;
     @FXML
@@ -75,6 +75,34 @@ public class TestRoomController {
     public void initialize() {
         playMedia("/assets/dungeon.mp3");
         myLabels = addLabels();
+        myDungeon = DungeonAdventureGame.getDungeon();
+        loadRoom();
+    }
+
+    public void loadRoom() {
+        this.myRoom = myDungeon.getCurrentRoom();
+        this.myHero = myDungeon.getHero();
+        this.myRoomMonster = myRoom.getMonster();
+        this.myItems = myRoom.getItems();
+        setItems(myRoom);
+        setDoors(myRoom);
+    }
+
+    public void setHeroImage(Image theHeroImage) {
+        this.myHeroImage = theHeroImage;
+        myHeroImg.setImage(myHeroImage);
+    }
+
+    public void setDungeon(Image theHeroImage) {
+        this.myDungeon = DungeonAdventureGame.getDungeon();
+        this.myRoom = myDungeon.getCurrentRoom();
+        this.myHero = myDungeon.getHero();
+        this.myRoomMonster = myRoom.getMonster();
+        this.myItems = myRoom.getItems();
+        this.myHeroImage = theHeroImage;
+        myHeroImg.setImage(myHeroImage);
+        setItems(myRoom);
+        setDoors(myRoom);
     }
 
     /**
@@ -127,10 +155,10 @@ public class TestRoomController {
 
     private void finishGame(String finishGame) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("finish_screen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("game_over_screen.fxml"));
             Parent root = loader.load();
-            FinishGameController finishGameController = loader.getController();
-            finishGameController.setScreen(finishGame);
+            GameOverController gameOverController = loader.getController();
+            gameOverController.setScreen(finishGame);
             System.out.println("fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -276,23 +304,11 @@ public class TestRoomController {
     }
 
     public void setStatsAfterBattle(Dungeon theDungeon, Image theHeroImage) {
-        setDungeon(theDungeon, theHeroImage);
+        setDungeon(theHeroImage);
         System.out.println("Monster was defeated");
         myRoom.removeItem(RoomItem.MONSTER);
         myItems.remove(RoomItem.MONSTER);
         myMonsterButton.setVisible(false);
-    }
-
-    public void setDungeon(Dungeon theDungeon, Image theHeroImage) {
-        this.myDungeon = theDungeon;
-        this.myRoom = myDungeon.getCurrentRoom();
-        this.myHero = myDungeon.getHero();
-        this.myRoomMonster = myRoom.getMonster();
-        this.myItems = myRoom.getItems();
-        this.myHeroImage = theHeroImage;
-        myHeroImg.setImage(myHeroImage);
-        setItems(myRoom);
-        setDoors(myRoom);
     }
 
 
@@ -430,8 +446,6 @@ public class TestRoomController {
         return myDungeon.getCurrentRoom();
     }
 
-    protected static Dungeon getDungeon() {
-        return myDungeon;
-    }
+
 
 }

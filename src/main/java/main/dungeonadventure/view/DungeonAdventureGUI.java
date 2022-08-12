@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.dungeonadventure.controller.FinishGameController;
-import main.dungeonadventure.model.Dungeon;
-
-import java.io.IOException;
 
 public class DungeonAdventureGUI extends Application {
 
-    //private Dungeon myDungeon;
-
+    /**
+     * Starts game to initial starting screen.
+     * @param stage JavaFX Stage to execute.
+     */
     @Override
     public void start(final Stage stage) {
         try {
@@ -34,13 +32,4 @@ public class DungeonAdventureGUI extends Application {
         launch();
     }
 
-    /**
-     * Adds a dungeon object and assigns to myDungeon.
-     * Can't create a constructor to handle this due to class
-     * extending Application.
-     * @param theDungeon Input Dungeon
-     */
-    public void addDungeon(final Dungeon theDungeon) {
-        //myDungeon = theDungeon;
-    }
 }

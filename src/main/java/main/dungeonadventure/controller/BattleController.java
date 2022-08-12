@@ -7,15 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.dungeonadventure.model.*;
@@ -79,7 +76,7 @@ public class BattleController {
             myHero.attack(myMonster);
             if (myMonster.getHP() <= 0) {
                 myMonsterHPBar.setProgress(0.0);
-                switchScreen("room1.fxml");
+                switchScreen("dungeon.fxml");
             } else {
                 Double monsterHP = (myMonster.getHP() * 1.0) / myMonster.getStartHP();
                 int attackPoints = myMonster.getStartHP() - myMonster.getHP();
@@ -96,7 +93,7 @@ public class BattleController {
                 int heroAttackPoints = myHero.getStartHP() - myHero.getHP();
                 myHeroHPLabel.setText("-" + heroAttackPoints);
                 if (myHero.getHP() <= 0) {
-                    switchScreen("finish_screen.fxml");
+                    switchScreen("game_over_screen.fxml");
                     System.out.println("Hero died, game lost");
                 }
             }
@@ -132,11 +129,11 @@ public class BattleController {
             myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FxmlName));
             Parent root = loader.load();
-            if (FxmlName.equals("finish_screen.fxml")) {
-                FinishGameController finishGameController = loader.getController();
-                finishGameController.setScreen("lost");
+            if (FxmlName.equals("game_over_screen.fxml")) {
+                GameOverController gameOverController = loader.getController();
+                gameOverController.setScreen("lost");
             } else {
-                TestRoomController roomController = loader.getController();
+                RoomController roomController = loader.getController();
                 roomController.setStatsAfterBattle(myDungeon, myHeroImage);
                 myMediaPlayer.stop();
             }

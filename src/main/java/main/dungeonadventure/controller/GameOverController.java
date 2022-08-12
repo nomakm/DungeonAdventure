@@ -13,14 +13,17 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import main.dungeonadventure.model.Dungeon;
 
-public class FinishGameController {
+public class GameOverController {
     @FXML
     private Label myFinishLabel;
     private MediaPlayer myMediaPlayer;
 
+
     public void initialize() {
         playMedia("/assets/titletheme.mp3");
     }
+
+
     private void playMedia(String theSongName) {
         Media myMedia = new Media(getClass().getResource(theSongName).toString());
         myMediaPlayer = new MediaPlayer(myMedia);
