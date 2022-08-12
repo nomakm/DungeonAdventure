@@ -87,7 +87,7 @@ public class RoomController {
         this.myRoomMonster = myRoom.getMonster();
         this.myItems = myRoom.getItems();
         setItems(myRoom);
-        setDoors(myRoom);
+        setDoors();
     }
 
     public void setHeroImage() {
@@ -97,17 +97,17 @@ public class RoomController {
     }
 
     //Deprecated by LS
-    public void setDungeon(Image theHeroImage) {
-        this.myDungeon = DungeonAdventureGame.getDungeon();
-        this.myRoom = myDungeon.getCurrentRoom();
-        this.myHero = myDungeon.getHero();
-        this.myRoomMonster = myRoom.getMonster();
-        this.myItems = myRoom.getItems();
-        this.myHeroImage = theHeroImage;
-        myHeroImg.setImage(myHeroImage);
-        setItems(myRoom);
-        setDoors(myRoom);
-    }
+//    public void setDungeon(Image theHeroImage) {
+//        this.myDungeon = DungeonAdventureGame.getDungeon();
+//        this.myRoom = myDungeon.getCurrentRoom();
+//        this.myHero = myDungeon.getHero();
+//        this.myRoomMonster = myRoom.getMonster();
+//        this.myItems = myRoom.getItems();
+//        this.myHeroImage = theHeroImage;
+//        myHeroImg.setImage(myHeroImage);
+//        setItems(myRoom);
+//        setDoors(myRoom);
+//    }
 
     /**
      * Switches between rooms in the dungeon based on room items.
@@ -125,7 +125,7 @@ public class RoomController {
                 finishGame("won");
             }
             myItems = myRoom.getItems();
-            setDoors(myRoom);
+            setDoors();
             setItems(myRoom);
         }
     }
@@ -313,6 +313,7 @@ System.out.println("DEBUG - Monster was defeated");
         myRoom.removeItem(RoomItem.MONSTER);
         myItems.remove(RoomItem.MONSTER);
         myMonsterButton.setVisible(false);
+        setDoors();
     }
 
 
@@ -356,36 +357,48 @@ System.out.println("DEBUG - Monster was defeated");
 
     /**
      * Checks the closed doors in a room to set room details
-     * @param theRoom - the Room to check
      */
-    protected void setDoors(final Room theRoom) {
-        if(!theRoom.isDoorOpen(Direction.NORTH)) {
+    protected void setDoors() {
+
+        //Trap player in room if monster is in room
+        if (myRoom.getItems().contains(RoomItem.MONSTER)) {
             myNorthDoor.setVisible(true);
             myNorthArrow.setVisible(false);
-        } else {
-            myNorthDoor.setVisible(false);
-            myNorthArrow.setVisible(true);
-        }
-        if(!theRoom.isDoorOpen(Direction.EAST)) {
             myEastDoors.setVisible(true);
             myEastArrow.setVisible(false);
-        } else {
-            myEastDoors.setVisible(false);
-            myEastArrow.setVisible(true);
-        }
-        if(!theRoom.isDoorOpen(Direction.SOUTH)) {
             mySouthDoor.setVisible(true);
             mySouthArrow.setVisible(false);
-        } else {
-            mySouthDoor.setVisible(false);
-            mySouthArrow.setVisible(true);
-        }
-        if(!theRoom.isDoorOpen(Direction.WEST)) {
             myWestDoors.setVisible(true);
             myWestArrow.setVisible(false);
         } else {
-            myWestDoors.setVisible(false);
-            myWestArrow.setVisible(true);
+            if (!myRoom.isDoorOpen(Direction.NORTH)) {
+                myNorthDoor.setVisible(true);
+                myNorthArrow.setVisible(false);
+            } else {
+                myNorthDoor.setVisible(false);
+                myNorthArrow.setVisible(true);
+            }
+            if (!myRoom.isDoorOpen(Direction.EAST)) {
+                myEastDoors.setVisible(true);
+                myEastArrow.setVisible(false);
+            } else {
+                myEastDoors.setVisible(false);
+                myEastArrow.setVisible(true);
+            }
+            if (!myRoom.isDoorOpen(Direction.SOUTH)) {
+                mySouthDoor.setVisible(true);
+                mySouthArrow.setVisible(false);
+            } else {
+                mySouthDoor.setVisible(false);
+                mySouthArrow.setVisible(true);
+            }
+            if (!myRoom.isDoorOpen(Direction.WEST)) {
+                myWestDoors.setVisible(true);
+                myWestArrow.setVisible(false);
+            } else {
+                myWestDoors.setVisible(false);
+                myWestArrow.setVisible(true);
+            }
         }
     }
 
