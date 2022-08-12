@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="someRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.ChooseHeroController">
    <children>
-      <Group layoutX="263.0" layoutY="200.0" styleClass="roomItems">
+      <Group layoutX="263.0" layoutY="200.0">
          <children>
             <ImageView fitHeight="92.0" fitWidth="126.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,7 +26,7 @@
             </RadioButton>
          </children>
       </Group>
-      <Group layoutX="89.0" layoutY="190.0" styleClass="roomItems">
+      <Group layoutX="89.0" layoutY="190.0">
          <children>
             <ImageView fitHeight="92.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,7 +36,7 @@
             <RadioButton fx:id="myThiefButton" contentDisplay="TEXT_ONLY" layoutY="122.0" mnemonicParsing="false" onAction="#chooseHero" text="Thief" toggleGroup="$hero" />
          </children>
       </Group>
-      <Group layoutX="449.0" layoutY="190.0" styleClass="roomItems">
+      <Group layoutX="449.0" layoutY="190.0">
          <children>
             <ImageView fitHeight="92.0" fitWidth="119.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
                <image>

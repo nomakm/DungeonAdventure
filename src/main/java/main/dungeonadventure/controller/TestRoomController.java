@@ -1,6 +1,5 @@
 package main.dungeonadventure.controller;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -19,11 +17,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import main.dungeonadventure.model.*;
 
 import java.awt.*;
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -55,6 +54,9 @@ public class TestRoomController {
             mySWLabel, mySLabel, mySELabel;
     @FXML
     private Parent someRoot;
+
+    @FXML
+    private Stage stage;
 
     private static Dungeon myDungeon;
     private Room myRoom;
@@ -88,6 +90,33 @@ public class TestRoomController {
             setDoors(myRoom);
             setItems(myRoom);
         }
+    }
+
+    @FXML
+    private void saveAndExit(final ActionEvent theEvent) {
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ser files (*.ser)", "*.ser");
+
+        File recordsDir = new File(System.getProperty("user.home"), ".DungeonAdventure/saves");
+        if (! recordsDir.exists()) {
+            recordsDir.mkdirs();
+        }
+
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        fileChooser.setInitialDirectory(recordsDir);
+
+        //Show save file dialog
+        File saveLocation = fileChooser.showSaveDialog(stage);
+
+        if (saveLocation != null) {
+            DungeonAdventureGame.saveGame(saveLocation);
+        }
+
+        System.exit(0);
+
     }
 
     private void finishGame(String finishGame) {

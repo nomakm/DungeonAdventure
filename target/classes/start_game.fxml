@@ -26,7 +26,7 @@
             </RadioButton>
          </children>
       </Group>
-      <Group layoutX="89.0" layoutY="190.0" styleClass="roomItems">
+      <Group layoutX="89.0" layoutY="190.0">
          <children>
             <ImageView fitHeight="92.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                <image>

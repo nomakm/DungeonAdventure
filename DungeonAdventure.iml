@@ -11,11 +11,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18-ea+2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:18-ea+2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:18-ea+2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18-ea+2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:18-ea+2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:18-ea+2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:18-ea+2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:mac:18-ea+2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:18-ea+2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
@@ -23,8 +23,17 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18-ea+6" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:18-ea+6" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18-ea+6" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18-ea+2" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:18-ea+2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18-ea+2" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/java/sqlite-jdbc-3.34.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

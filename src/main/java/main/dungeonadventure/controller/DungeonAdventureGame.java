@@ -1,10 +1,8 @@
 package main.dungeonadventure.controller;
 
-import javafx.scene.control.skin.TextInputControlSkin;
 import main.dungeonadventure.model.*;
 import main.dungeonadventure.view.DungeonAdventureGUI;
 
-import java.awt.*;
 import java.io.*;
 
 /**
@@ -31,10 +29,10 @@ public class DungeonAdventureGame {
 
     }
 
-    public void saveGame(String theFilePath) {
+    public static void saveGame(File theFilePath) {
         try {
-            FileOutputStream fileOut = new FileOutputStream("/saves/game.ser");
-            //FileOutputStream fileOut = new FileOutputStream(theFilePath);
+            //FileOutputStream fileOut = new FileOutputStream("/src/main/saves/game.ser");
+            FileOutputStream fileOut = new FileOutputStream(theFilePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(myDungeon);
             out.close();
@@ -47,7 +45,7 @@ public class DungeonAdventureGame {
 
     public void loadGame(String theFilePath) {
         try {
-            FileInputStream fileIn = new FileInputStream("/saves/game.ser");
+            FileInputStream fileIn = new FileInputStream("/src/main/saves/game.ser");
             //FileInputStream fileIn = new FileInputStream(theFilePath);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             myDungeon = (Dungeon) in.readObject();
