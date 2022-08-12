@@ -43,19 +43,21 @@ public class BattleController {
     private Image myHeroImage;
     private Media myMedia;
 
-    public void setScreen(Dungeon theDungeon, MediaPlayer myMediaPlayer, Image theHeroImage, Image theMonsterImage) {
+    public void setScreen(Dungeon theDungeon, Image theHeroImage, Image theMonsterImage) {
         this.myDungeon = theDungeon;
         this.myRoom = myDungeon.getCurrentRoom();
         this.myHero = myDungeon.getHero();
         this.myMonster = myRoom.getMonster();
         this.myItems = myRoom.getItems();
-        this.myMediaPlayer = myMediaPlayer;
         this.myHeroImage = theHeroImage;
         myBattleHero.setImage(theHeroImage);
         myBattleMonster.setImage(theMonsterImage);
         Double hp = myHero.getHP() * 1.0;
         myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
         myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
+    }
+
+    public void initialize() {
         playMedia("/assets/battle.mp3");
     }
 
@@ -125,7 +127,7 @@ public class BattleController {
                 finishGameController.setScreen("lost");
             } else {
                 TestRoomController roomController = loader.getController();
-                roomController.setStatsAfterBattle(myDungeon, myMediaPlayer, myHeroImage);
+                roomController.setStatsAfterBattle(myDungeon, myHeroImage);
                 myMediaPlayer.stop();
             }
             System.out.println("fxml was loaded.");
@@ -143,10 +145,6 @@ public class BattleController {
         myMediaPlayer = new MediaPlayer(myMedia);
         myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         myMediaPlayer.play();
-    }
-
-    private void stopMedia() {
-        myMediaPlayer.stop();
     }
 
 }

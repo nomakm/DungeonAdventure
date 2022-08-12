@@ -5,14 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 
+import javafx.scene.Parent;
+
+import javafx.scene.Scene;
+
+import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -29,6 +29,10 @@ public class WelcomeScreenController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Button musicButton;
+    private Media myMedia;
+    private MediaPlayer myMediaPlayer;
 
     /**
      * Starts a new game and switches to start screen
@@ -101,6 +105,7 @@ public class WelcomeScreenController {
     @FXML
     private void switchStageBuilder(final ActionEvent theEvent, final String theFxmlName) {
         try {
+            myMediaPlayer.stop();
             root = FXMLLoader.load(getClass().getClassLoader().getResource(theFxmlName));
             System.out.println("fxml was loaded.");
             stage = (Stage) someRoot.getScene().getWindow();
@@ -110,6 +115,17 @@ public class WelcomeScreenController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void initialize() {
+        playMusic();
+    }
+
+    private void playMusic() {
+        myMedia = new Media(getClass().getResource("/assets/titletheme.mp3").toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
     }
 
 }

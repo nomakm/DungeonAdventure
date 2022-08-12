@@ -3,8 +3,8 @@ package main.dungeonadventure.controller;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,12 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+
 import javafx.stage.Stage;
+
 import main.dungeonadventure.model.*;
 
 import java.awt.*;
@@ -70,6 +71,11 @@ public class TestRoomController {
     private Image myHeroImage;
     private Image myMonsterImage;
 
+
+    public void initialize() {
+        playMedia("/assets/dungeon.mp3");
+        myLabels = addLabels();
+    }
 
     /**
      * Switches between rooms in the dungeon based on room items.
@@ -258,7 +264,7 @@ public class TestRoomController {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("battle.fxml"));
             Parent root = loader.load();
             BattleController battleController = loader.getController();
-            battleController.setScreen(myDungeon, myMediaPlayer, myHeroImage, myMonsterImage);
+            battleController.setScreen(myDungeon, myHeroImage, myMonsterImage);
             System.out.println("fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -269,33 +275,24 @@ public class TestRoomController {
         }
     }
 
-    public void setStatsAfterBattle(Dungeon theDungeon, MediaPlayer theMediaPlayer, Image theHeroImage) {
-        setDungeon(theDungeon, theMediaPlayer, theHeroImage);
+    public void setStatsAfterBattle(Dungeon theDungeon, Image theHeroImage) {
+        setDungeon(theDungeon, theHeroImage);
         System.out.println("Monster was defeated");
         myRoom.removeItem(RoomItem.MONSTER);
         myItems.remove(RoomItem.MONSTER);
         myMonsterButton.setVisible(false);
-        //fightPane.setVisible(false);
     }
 
-
-    public void setDungeon(Dungeon theDungeon, MediaPlayer theMediaPlayer, Image theHeroImage) {
+    public void setDungeon(Dungeon theDungeon, Image theHeroImage) {
         this.myDungeon = theDungeon;
         this.myRoom = myDungeon.getCurrentRoom();
         this.myHero = myDungeon.getHero();
         this.myRoomMonster = myRoom.getMonster();
         this.myItems = myRoom.getItems();
-        this.myMediaPlayer = theMediaPlayer;
         this.myHeroImage = theHeroImage;
         myHeroImg.setImage(myHeroImage);
         setItems(myRoom);
         setDoors(myRoom);
-        stopMedia();
-        playMedia("/assets/dungeon.mp3");
-    }
-
-    public static Dungeon getDungeon() {
-        return myDungeon;
     }
 
 
@@ -318,7 +315,6 @@ public class TestRoomController {
         myItems.remove(RoomItem.PILLAR);
         myColumn.setVisible(false);
     }
-
 
     /**
      * moves the hero position in the dungeon based on which room the user is in
@@ -434,6 +430,8 @@ public class TestRoomController {
         return myDungeon.getCurrentRoom();
     }
 
-
+    protected static Dungeon getDungeon() {
+        return myDungeon;
+    }
 
 }

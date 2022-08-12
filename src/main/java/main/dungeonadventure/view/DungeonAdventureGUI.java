@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.dungeonadventure.controller.FinishGameController;
 import main.dungeonadventure.model.Dungeon;
 
 import java.io.IOException;

@@ -113,7 +113,6 @@ public class ChooseHeroController {
             myHeroLabel.setTextFill(Color.RED);
         } else {
             myDungeon = new Dungeon();
-            playMedia("/assets/choosecharacter.mp3");
             createHero(myHeroType, myHeroName);
             String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
             myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
@@ -128,11 +127,12 @@ public class ChooseHeroController {
     @FXML
     private void switchStageBuilder(final String theFxmlName) {
         try {
+            myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(theFxmlName));
             Parent root = loader.load();
             if(theFxmlName.equals("room1.fxml")) {
                 TestRoomController roomController = loader.getController();
-                roomController.setDungeon(myDungeon, myMediaPlayer, myHeroImage);
+                roomController.setDungeon(myDungeon, myHeroImage);
             }
             System.out.println("fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
@@ -168,6 +168,10 @@ public class ChooseHeroController {
         myMediaPlayer = new MediaPlayer(myMedia);
         myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         myMediaPlayer.play();
+    }
+
+    public void initialize() {
+        playMedia("/assets/choosecharacter.mp3");
     }
 
 }
