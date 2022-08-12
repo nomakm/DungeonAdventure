@@ -16,7 +16,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem fx:id="myNewGame" mnemonicParsing="false" onAction="#switchToStartScreen" text="New Game" />
+                  <MenuItem fx:id="myNewGame" mnemonicParsing="false" onAction="#switchToCharacterSelection" text="New Game" />
                   <MenuItem fx:id="myLoadGame" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
                </items>
           </Menu>
@@ -42,7 +42,7 @@
             <Image url="@assets/OGRE.png" />
          </image>
       </ImageView>
-      <Button fx:id="myNewGameButton" layoutX="180.0" layoutY="230.0" mnemonicParsing="false" onAction="#switchToStartScreen" styleClass="buttonControl" text="New Game" />
+      <Button fx:id="myNewGameButton" layoutX="180.0" layoutY="230.0" mnemonicParsing="false" onAction="#switchToCharacterSelection" styleClass="buttonControl" text="New Game" />
       <Button fx:id="myLoadGameButton" layoutX="292.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadGame" styleClass="buttonControl" text="Load Game" />
    </children>
 </AnchorPane>

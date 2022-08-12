@@ -72,12 +72,18 @@ public class RoomController {
     private Image myMonsterImage;
 
 
+    /**
+     * This method will run everytime dungeon.fxml is loaded.
+     * Retrieve's the game's dungeon instance, grabs data from hero's
+     * room to preload assets before launching view.
+     */
     public void initialize() {
         playMedia("/assets/dungeon.mp3");
         myLabels = addLabels();
         myDungeon = DungeonAdventureGame.getDungeon();
         loadRoom();
         setHeroImage();
+
     }
 
     public void loadRoom() {
@@ -95,6 +101,7 @@ public class RoomController {
         myHeroImg.setImage(myHeroImage);
     }
 
+    //Deprecated by LS
     public void setDungeon(Image theHeroImage) {
         this.myDungeon = DungeonAdventureGame.getDungeon();
         this.myRoom = myDungeon.getCurrentRoom();
@@ -161,7 +168,7 @@ public class RoomController {
             Parent root = loader.load();
             GameOverController gameOverController = loader.getController();
             gameOverController.setScreen(finishGame);
-            System.out.println("fxml was loaded.");
+System.out.println("DEBUG - game_over_screen.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -295,7 +302,7 @@ public class RoomController {
             Parent root = loader.load();
             BattleController battleController = loader.getController();
             battleController.setScreen(myDungeon, myHeroImage, myMonsterImage);
-            System.out.println("fxml was loaded.");
+System.out.println("DEBUG - battle.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -303,11 +310,11 @@ public class RoomController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
-    public void setStatsAfterBattle(Dungeon theDungeon, Image theHeroImage) {
-        setDungeon(theHeroImage);
-        System.out.println("Monster was defeated");
+    public void endBattle() {
+System.out.println("DEBUG - Monster was defeated");
         myRoom.removeItem(RoomItem.MONSTER);
         myItems.remove(RoomItem.MONSTER);
         myMonsterButton.setVisible(false);

@@ -51,5 +51,6 @@ public class GameOverController {
 
     @FXML
     private void quitGame() {
+        System.exit(0);
     }
 }
