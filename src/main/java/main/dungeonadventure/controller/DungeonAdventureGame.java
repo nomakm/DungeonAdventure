@@ -26,7 +26,7 @@ public class DungeonAdventureGame {
     /**
      * Constructs a new Dungeon instance
      */
-    public static void buildNewDungeon() {
+    protected static void buildNewDungeon() {
         myDungeon = new Dungeon();
     }
 
@@ -34,11 +34,11 @@ public class DungeonAdventureGame {
      * Returns game's Dungeon object.
      * @return Game Dungeon object.
      */
-    public static Dungeon getDungeon() {
+    protected static Dungeon getDungeon() {
         return myDungeon;
     }
 
-    public static void saveGame(File theFilePath) {
+    protected static void saveGame(File theFilePath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(theFilePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -50,7 +50,7 @@ public class DungeonAdventureGame {
         }
     }
 
-    public static boolean loadGame(File theFilePath) {
+    protected static boolean loadGame(File theFilePath) {
         try {
             //FileInputStream fileIn = new FileInputStream("/src/main/saves/game.ser");
             FileInputStream fileIn = new FileInputStream(theFilePath);

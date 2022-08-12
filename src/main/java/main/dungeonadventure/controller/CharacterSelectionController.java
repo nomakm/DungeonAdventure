@@ -135,7 +135,7 @@ System.out.println("DEBUG - dungeon.fxml was loaded.");
      * @param theHeroType - type of hero user chooses
      * @param theHeroName - name of hero user chooses
      */
-    public void createHero(final HeroType theHeroType,
+    private void createHero(final HeroType theHeroType,
                            final String theHeroName) {
         if (theHeroType == HeroType.WARRIOR) {
             myHero = new Warrior(theHeroName);

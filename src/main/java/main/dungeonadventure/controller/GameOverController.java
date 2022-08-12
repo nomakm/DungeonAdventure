@@ -16,19 +16,6 @@ public class GameOverController {
     private Label myFinishLabel;
     private MediaPlayer myMediaPlayer;
 
-
-    public void initialize() {
-        playMedia("/assets/titletheme.mp3");
-    }
-
-
-    private void playMedia(String theSongName) {
-        Media myMedia = new Media(getClass().getResource(theSongName).toString());
-        myMediaPlayer = new MediaPlayer(myMedia);
-        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        myMediaPlayer.play();
-    }
-
     @FXML
     private void playAgain(ActionEvent theEvent) {
         try {
@@ -43,11 +30,24 @@ public class GameOverController {
         }
     }
 
+    @FXML
+    private void quitGame() {
+    }
+
+    public void initialize() {
+        playMedia("/assets/titletheme.mp3");
+    }
+
+
+    private void playMedia(String theSongName) {
+        Media myMedia = new Media(getClass().getResource(theSongName).toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
+    }
+
     public void setScreen(String gameOutcome) {
         myFinishLabel.setText("You " + gameOutcome + "!");
     }
 
-    @FXML
-    private void quitGame() {
-    }
 }

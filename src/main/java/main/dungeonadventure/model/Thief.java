@@ -29,7 +29,7 @@ public class Thief extends Hero {
             for (int i = 0; i < 2; i++) {
                 super.attack(theOpponent);
             }
-        } else if (myCaught < (rand.nextInt(10) + 1)) {
+        } else if (myCaught <= chance) {
             System.out.println("Hero not caught");
             super.attack(theOpponent);
         }

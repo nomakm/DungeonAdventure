@@ -18,6 +18,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -44,26 +46,7 @@ public class BattleController {
     private MediaPlayer myMediaPlayer;
     private Image myHeroImage;
     private Media myMedia;
-
-    public void setScreen(Dungeon theDungeon, Image theHeroImage, Image theMonsterImage) {
-        this.myDungeon = theDungeon;
-        this.myRoom = myDungeon.getCurrentRoom();
-        this.myHero = myDungeon.getHero();
-        this.myMonster = myRoom.getMonster();
-        this.myItems = myRoom.getItems();
-        this.myHeroImage = theHeroImage;
-        myBattleHero.setImage(theHeroImage);
-        myBattleMonster.setImage(theMonsterImage);
-        myMonsterNameLabel.setText(myMonster.getMonsterType().toString() + " HP");
-        myHeroNameLabel.setText(myHero.getMyCharacterName() + " HP");
-        Double hp = myHero.getHP() * 1.0;
-        myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
-        myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
-    }
-
-    public void initialize() {
-        playMedia("/assets/battle.mp3");
-    }
+    private DecimalFormat myDf;
 
     @FXML
     private void attackClicked() {
@@ -75,42 +58,6 @@ public class BattleController {
                 myAttackButton.setDisable(false);
             });
             pt.play();
-    }
-
-    private void battle() {
-        int monsterSpd = myMonster.getMyAtkSpd();
-        int heroSpd = myHero.getMyAtkSpd();
-        int timesAtk = heroSpd / monsterSpd;
-        if (timesAtk == 0) {
-            timesAtk = 1;
-        }
-        for (int i = 0; i < timesAtk; i++) {
-            System.out.println("Hero attacking monster");
-            myHero.attack(myMonster);
-            if (myMonster.getHP() <= 0) {
-                myMonsterHPBar.setProgress(0.0);
-                switchScreen("dungeon.fxml");
-            } else {
-                Double monsterHP = (myMonster.getHP() * 1.0) / myMonster.getStartHP();
-                int attackPoints = myMonster.getStartHP() - myMonster.getHP();
-                myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
-                myMonsterHPLabel.setText("-" + attackPoints);
-            }
-        }
-        if (myMonster.getHP() > 0 && myItems.contains(RoomItem.MONSTER)) {
-            int chanceToBlock = myHero.getMyChanceToBlock();
-            if (chanceToBlock <= (myRand.nextInt(10) + 1)) {
-                System.out.println("Monster attacking hero");
-                myMonster.attack(myHero);
-                myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
-                int heroAttackPoints = myHero.getStartHP() - myHero.getHP();
-                myHeroHPLabel.setText("-" + heroAttackPoints);
-                if (myHero.getHP() <= 0) {
-                    switchScreen("game_over_screen.fxml");
-                    System.out.println("Hero died, game lost");
-                }
-            }
-        }
     }
 
     @FXML
@@ -129,17 +76,6 @@ public class BattleController {
         }
     }
 
-    private void animateAttack() {
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(myHeroFight);
-        translate.setDuration(Duration.millis(1000));
-        translate.setCycleCount(2);
-        Double origPos = myHeroFight.getLayoutX();
-        translate.setByX((myBattleMonster.getLayoutX() - origPos - 20));
-        translate.setAutoReverse(true);
-        translate.play();
-    }
-
     @FXML
     private void useHealthPotion(ActionEvent event) {
         if (myHero.getHealthPotionCount() > 0) {
@@ -151,6 +87,83 @@ public class BattleController {
         } else {
             noItemLabel.setText("No health potions available");
         }
+    }
+
+    protected void setScreen(Dungeon theDungeon, Image theHeroImage, Image theMonsterImage) {
+        this.myDungeon = theDungeon;
+        this.myRoom = myDungeon.getCurrentRoom();
+        this.myHero = myDungeon.getHero();
+        this.myMonster = myRoom.getMonster();
+        this.myItems = myRoom.getItems();
+        this.myHeroImage = theHeroImage;
+        myBattleHero.setImage(theHeroImage);
+        myBattleMonster.setImage(theMonsterImage);
+        myMonsterNameLabel.setText(myMonster.getMonsterType().toString() + " HP");
+        myHeroNameLabel.setText(myHero.getMyCharacterName() + " HP");
+        Double hp = myHero.getHP() * 1.0;
+        myDf = new DecimalFormat("#,#");
+        Double hpDec = Double.valueOf(myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP()));
+        myHeroHPLabel.setText("" + hpDec);
+        myHeroHPBar.setProgress(hpDec);
+        myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
+    }
+
+    public void initialize() {
+        playMedia("/assets/battle.mp3");
+    }
+
+
+    private void battle() {
+        int monsterSpd = myMonster.getMyAtkSpd();
+        int heroSpd = myHero.getMyAtkSpd();
+        int timesAtk = heroSpd / monsterSpd;
+        if (timesAtk == 0) {
+            timesAtk = 1;
+        }
+        myDf = new DecimalFormat("#.#");
+        for (int i = 0; i < timesAtk; i++) {
+            System.out.println("Hero attacking monster");
+            myHero.attack(myMonster);
+            attackCharacter(myMonsterHPBar, myMonsterHPLabel, myMonster, "dungeon.fxml");
+        }
+        if (myMonster.getHP() > 0 && myItems.contains(RoomItem.MONSTER)) {
+            int chanceToBlock = myHero.getMyChanceToBlock();
+            if (chanceToBlock <= (myRand.nextInt(10) + 1)) {
+                attackCharacter(myHeroHPBar, myHeroHPLabel, myHero, "game_over_screen.fxml");
+            }
+        }
+    }
+
+    private void attackCharacter(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter, String theFxmlName) {
+        if (theCharacter.getHP() <= 0) {
+            theProgressBar.setProgress(0.0);
+            theLabel.setText("0.0");
+            noItemLabel.setText(theCharacter.getClass().getSimpleName() + " was Defeated");
+            final PauseTransition pt = new PauseTransition(Duration.millis(2500));
+            pt.play();
+            pt.setOnFinished( ( ActionEvent event ) -> {
+                switchScreen(theFxmlName);;
+            });
+        } else {
+            setHPChanges(theProgressBar, theLabel, theCharacter);
+        }
+    }
+
+    private void setHPChanges(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter) {
+        Double hpLevel = Double.valueOf(myDf.format((theCharacter.getHP() * 1.0) / theCharacter.getStartHP()));
+        theProgressBar.setProgress(hpLevel);
+        theLabel.setText("" + hpLevel);
+    }
+
+    private void animateAttack() {
+        TranslateTransition translate = new TranslateTransition();
+        translate.setNode(myHeroFight);
+        translate.setDuration(Duration.millis(1000));
+        translate.setCycleCount(2);
+        Double origPos = myHeroFight.getLayoutX();
+        translate.setByX((myBattleMonster.getLayoutX() - origPos - 20));
+        translate.setAutoReverse(true);
+        translate.play();
     }
 
     private void switchScreen(String FxmlName) {

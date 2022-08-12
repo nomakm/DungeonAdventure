@@ -28,11 +28,6 @@ public class WelcomeScreenController {
     private Media myMedia;
     private MediaPlayer myMediaPlayer;
 
-    public void initialize() {
-        playMusic();
-    }
-
-
     /**
      * Starts a new game and switches to character selection screen
      * @param theEvent - button or menuItem click
@@ -84,15 +79,6 @@ public class WelcomeScreenController {
         }
     }
 
-
-    private void playMusic() {
-        myMedia = new Media(getClass().getResource("/assets/titletheme.mp3").toString());
-        myMediaPlayer = new MediaPlayer(myMedia);
-        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        myMediaPlayer.play();
-    }
-
-
     /**
      * Starts a game that was saved previously.
      * @param theEvent - button or menuItem click
@@ -124,5 +110,17 @@ public class WelcomeScreenController {
 
         System.out.println("you clicked load a game");
     }
+
+    public void initialize() {
+        playMusic();
+    }
+
+    private void playMusic() {
+        myMedia = new Media(getClass().getResource("/assets/titletheme.mp3").toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
+    }
+
 
 }
