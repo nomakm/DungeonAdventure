@@ -457,6 +457,15 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="myBomb" contentDisplay="GRAPHIC_ONLY" layoutX="507.0" layoutY="74.0" mnemonicParsing="false" onAction="#pickUpBomb" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <ImageView fitHeight="68.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/bomb.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
       <Button fx:id="myMonsterButton" contentDisplay="GRAPHIC_ONLY" layoutX="420.0" layoutY="197.0" mnemonicParsing="false" onAction="#monsterClicked" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <ImageView fx:id="myMonster" fitHeight="142.0" fitWidth="126.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
@@ -587,7 +596,7 @@
                   <Button fx:id="myUseVisionPotionButton" layoutX="236.0" layoutY="17.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
                </children>
             </Group>
-            <Group layoutX="37.0" layoutY="198.0">
+            <Group layoutX="41.0" layoutY="234.0">
                <children>
                   <Group layoutY="-1.0">
                      <children>
@@ -622,6 +631,24 @@
                         <Font name="Goudy Old Style Bold" size="22.0" />
                      </font>
                   </Label>
+               </children>
+            </Group>
+            <Group layoutX="37.0" layoutY="176.0">
+               <children>
+                  <ImageView fitHeight="62.0" fitWidth="59.0" layoutX="-7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/bomb.png" />
+                     </image>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="myBombCountLabel" layoutX="43.0" layoutY="13.0" prefHeight="32.0" prefWidth="299.0" style="-fx-alignment: center-left;" text="BOMB_COUNT" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="myUseVisionPotionButton1" layoutX="236.0" layoutY="17.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
                </children>
             </Group>
          </children>

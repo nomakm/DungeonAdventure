@@ -61,7 +61,7 @@ public class DungeonCharacter implements Serializable {
 
     public void attack(DungeonCharacter opponent) {
         if ((myHitRate * 10) > rand.nextInt(100)) {
-            int damage = rand.nextInt((myDmgMax + 1)) +  myDmgMin;
+            int damage = rand.nextInt(((myDmgMax + 1)) - myDmgMin) + myDmgMin;
             opponent.setHP(opponent.getHP() - damage);
             System.out.println(opponent.getClass().descriptorString() + " loses " + damage + " points");
         }

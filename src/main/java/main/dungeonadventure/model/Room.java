@@ -30,6 +30,8 @@ public class Room implements Serializable {
     private static final int CHANCE_FOR_HP_POTION = 20;
     /** Value used for chance to spawn vision potion */
     private static final int CHANCE_FOR_VISION_POTION = 15;
+    /** Value used for chance to spawn vision potion */
+    private static final int CHANCE_FOR_BOMB = 5;
 
     public Room() {
         myRoomItems = new HashSet<>();
@@ -58,6 +60,10 @@ public class Room implements Serializable {
 
         if (CHANCE_FOR_VISION_POTION > Dungeon.getRandomRoll()) {
             myRoomItems.add(RoomItem.VISION_POTION);
+        }
+
+        if (CHANCE_FOR_BOMB > Dungeon.getRandomRoll()) {
+            myRoomItems.add(RoomItem.BOMB);
         }
 
 
