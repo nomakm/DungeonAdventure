@@ -27,6 +27,8 @@ public class BattleController {
     @FXML
     private Group myHeroFight;
     @FXML
+    private Label myMonsterNameLabel, myHeroNameLabel, myHeroHPLabel, myMonsterHPLabel;
+    @FXML
     private ImageView myBattleHero, myBattleMonster;
     @FXML
     private ProgressBar myHeroHPBar, myMonsterHPBar;
@@ -52,6 +54,8 @@ public class BattleController {
         this.myHeroImage = theHeroImage;
         myBattleHero.setImage(theHeroImage);
         myBattleMonster.setImage(theMonsterImage);
+        myMonsterNameLabel.setText(myMonster.getMonsterType().toString() + " HP");
+        myHeroNameLabel.setText(myHero.getMyCharacterName() + " HP");
         Double hp = myHero.getHP() * 1.0;
         myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
         myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
@@ -78,7 +82,9 @@ public class BattleController {
                 switchScreen("room1.fxml");
             } else {
                 Double monsterHP = (myMonster.getHP() * 1.0) / myMonster.getStartHP();
+                int attackPoints = myMonster.getStartHP() - myMonster.getHP();
                 myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
+                myMonsterHPLabel.setText("-" + attackPoints);
             }
         }
         if (myItems.contains(RoomItem.MONSTER)) {
@@ -87,6 +93,8 @@ public class BattleController {
                 System.out.println("Monster attacking hero");
                 myMonster.attack(myHero);
                 myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
+                int heroAttackPoints = myHero.getStartHP() - myHero.getHP();
+                myHeroHPLabel.setText("-" + heroAttackPoints);
                 if (myHero.getHP() <= 0) {
                     switchScreen("finish_screen.fxml");
                     System.out.println("Hero died, game lost");
@@ -113,6 +121,7 @@ public class BattleController {
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
             System.out.println("Health Potion used");
+            myHeroHPLabel.setText("+" + healingPoints);
         } else {
             System.out.println("No health potions available");
         }
@@ -120,6 +129,7 @@ public class BattleController {
 
     private void switchScreen(String FxmlName) {
         try {
+            myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FxmlName));
             Parent root = loader.load();
             if (FxmlName.equals("finish_screen.fxml")) {

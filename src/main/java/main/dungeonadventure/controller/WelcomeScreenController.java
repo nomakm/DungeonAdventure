@@ -34,6 +34,9 @@ public class WelcomeScreenController {
     private Media myMedia;
     private MediaPlayer myMediaPlayer;
 
+    public void initialize() {
+        playMusic();
+    }
     /**
      * Starts a new game and switches to start screen
      * @param theEvent - button or menuItem click
@@ -115,10 +118,6 @@ public class WelcomeScreenController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void initialize() {
-        playMusic();
     }
 
     private void playMusic() {
