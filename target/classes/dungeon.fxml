@@ -416,6 +416,15 @@
             <Image url="@assets/wall_corner_top_right.png" />
          </image>
       </ImageView>
+      <Button fx:id="myBomb" contentDisplay="GRAPHIC_ONLY" layoutX="517.0" layoutY="84.0" mnemonicParsing="false" onAction="#pickUpBomb" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
+         <graphic>
+            <ImageView fitHeight="68.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/bomb.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
       <Button fx:id="myColumn" contentDisplay="GRAPHIC_ONLY" layoutX="397.0" layoutY="44.0" mnemonicParsing="false" onAction="#pickupPillar" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
          <graphic>
             <Group>
@@ -453,15 +462,6 @@
             <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/flask_big_blue.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="myBomb" contentDisplay="GRAPHIC_ONLY" layoutX="507.0" layoutY="74.0" mnemonicParsing="false" onAction="#pickUpBomb" styleClass="roomItems" stylesheets="@stylesheet.css" text="Button">
-         <graphic>
-            <ImageView fitHeight="68.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/bomb.png" />
                </image>
             </ImageView>
          </graphic>
@@ -570,7 +570,7 @@
                         <Blend />
                      </effect>
                   </ImageView>
-                  <Label fx:id="myHPPotionCountLabel" layoutX="43.0" layoutY="11.0" prefHeight="32.0" prefWidth="281.0" style="-fx-alignment: center-left;" text="POTION_COUNT" textFill="WHITE">
+                  <Label fx:id="myHPPotionCountLabel" layoutX="47.0" layoutY="11.0" prefHeight="32.0" prefWidth="281.0" style="-fx-alignment: center-left;" text="POTION_COUNT" textFill="WHITE">
                      <font>
                         <Font name="Goudy Old Style Bold" size="22.0" />
                      </font>
@@ -588,7 +588,7 @@
                         <Blend />
                      </effect>
                   </ImageView>
-                  <Label fx:id="myVisionPotionCountLabel" layoutX="43.0" layoutY="13.0" prefHeight="32.0" prefWidth="299.0" style="-fx-alignment: center-left;" text="POTION_COUNT" textFill="WHITE">
+                  <Label fx:id="myVisionPotionCountLabel" layoutX="47.0" layoutY="13.0" prefHeight="32.0" prefWidth="299.0" style="-fx-alignment: center-left;" text="POTION_COUNT" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="22.0" />
                      </font>
@@ -596,7 +596,7 @@
                   <Button fx:id="myUseVisionPotionButton" layoutX="236.0" layoutY="17.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
                </children>
             </Group>
-            <Group layoutX="37.0" layoutY="198.0">
+            <Group layoutX="41.0" layoutY="244.0">
                <children>
                   <Group layoutY="-1.0">
                      <children>
@@ -631,23 +631,23 @@
                         <Font name="Goudy Old Style Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Group layoutX="37.0" layoutY="176.0">
-                     <children>
-                        <ImageView fitHeight="62.0" fitWidth="59.0" layoutX="-7.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@assets/bomb.png" />
-                           </image>
-                           <effect>
-                              <Blend />
-                           </effect>
-                        </ImageView>
-                        <Label fx:id="myBombCountLabel" layoutX="43.0" layoutY="13.0" prefHeight="32.0" prefWidth="299.0" style="-fx-alignment: center-left;" text="BOMB_COUNT" textFill="WHITE">
-                           <font>
-                              <Font name="Arial Bold" size="22.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
+               </children>
+            </Group>
+            <Group layoutX="42.0" layoutY="178.0">
+               <children>
+                  <ImageView fitHeight="71.0" fitWidth="63.0" layoutX="-12.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/bomb.png" />
+                     </image>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="myBombCountLabel" layoutX="43.0" layoutY="13.0" prefHeight="32.0" prefWidth="299.0" style="-fx-alignment: center-left;" text="BOMB_COUNT" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Label>
                </children>
             </Group>
          </children>

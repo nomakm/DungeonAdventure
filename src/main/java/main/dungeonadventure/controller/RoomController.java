@@ -159,6 +159,7 @@ public class RoomController {
 
     private void finishGame(String finishGame) {
         try {
+            myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("game_over_screen.fxml"));
             Parent root = loader.load();
             GameOverController gameOverController = loader.getController();
