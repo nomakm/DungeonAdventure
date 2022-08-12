@@ -109,8 +109,7 @@ System.out.println("DEBUG - Warrior is chosen");
         } else {
             DungeonAdventureGame.buildNewDungeon();
             createHero(myHeroType, myHeroName);
-            String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
-            myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
+
             switchStageBuilder("dungeon.fxml");
         }
     }
@@ -125,10 +124,7 @@ System.out.println("DEBUG - Warrior is chosen");
             myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(theFxmlName));
             Parent root = loader.load();
-            if(theFxmlName.equals("dungeon.fxml")) {
-                RoomController roomController = loader.getController();
-                roomController.setHeroImage(myHeroImage);
-            }
+
 System.out.println("DEBUG - dungeon.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);

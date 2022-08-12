@@ -77,6 +77,7 @@ public class RoomController {
         myLabels = addLabels();
         myDungeon = DungeonAdventureGame.getDungeon();
         loadRoom();
+        setHeroImage();
     }
 
     public void loadRoom() {
@@ -88,8 +89,9 @@ public class RoomController {
         setDoors(myRoom);
     }
 
-    public void setHeroImage(Image theHeroImage) {
-        this.myHeroImage = theHeroImage;
+    public void setHeroImage() {
+        String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
+        myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
         myHeroImg.setImage(myHeroImage);
     }
 
