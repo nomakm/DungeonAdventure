@@ -278,6 +278,7 @@ public class TestRoomController {
         //fightPane.setVisible(false);
     }
 
+
     public void setDungeon(Dungeon theDungeon, MediaPlayer theMediaPlayer, Image theHeroImage) {
         this.myDungeon = theDungeon;
         this.myRoom = myDungeon.getCurrentRoom();
@@ -291,6 +292,10 @@ public class TestRoomController {
         setDoors(myRoom);
         stopMedia();
         playMedia("/assets/dungeon.mp3");
+    }
+
+    public static Dungeon getDungeon() {
+        return myDungeon;
     }
 
 

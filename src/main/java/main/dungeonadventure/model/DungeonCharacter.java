@@ -1,8 +1,9 @@
 package main.dungeonadventure.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class DungeonCharacter {
+public class DungeonCharacter implements Serializable {
 
 
     private int myHP;

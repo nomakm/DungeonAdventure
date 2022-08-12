@@ -13,7 +13,10 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * Controller class for the welcome screen
@@ -51,6 +54,32 @@ public class WelcomeScreenController {
      */
     @FXML
     private void loadGame(final ActionEvent theEvent) {
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("ser files (*.ser)", "*.ser");
+
+        File recordsDir = new File(System.getProperty("user.home"), ".DungeonAdventure/saves");
+        if (! recordsDir.exists()) {
+            recordsDir.mkdirs();
+        }
+
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        fileChooser.setInitialDirectory(recordsDir);
+
+        //Show save file dialog
+        File saveLocation = fileChooser.showOpenDialog(stage);
+
+        if (saveLocation != null) {
+            boolean gameLoaded = DungeonAdventureGame.loadGame(saveLocation);
+            if (gameLoaded) {
+                switchStageBuilder(theEvent, "room1.fxml");
+            }
+        }
+
+
+
         System.out.println("you clicked load a game");
     }
 

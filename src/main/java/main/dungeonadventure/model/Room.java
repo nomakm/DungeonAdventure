@@ -1,5 +1,6 @@
 package main.dungeonadventure.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.Scanner;
  * @author Luke Smith
  * @version 8-6-22
  */
-public class Room {
+public class Room implements Serializable {
 
     final private HashSet<RoomItem> myRoomItems;
     final private HashMap<Direction, Boolean> myDoors;

@@ -1,5 +1,7 @@
 package main.dungeonadventure.controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import main.dungeonadventure.model.*;
 import main.dungeonadventure.view.DungeonAdventureGUI;
 
@@ -12,7 +14,7 @@ import java.io.*;
  */
 public class DungeonAdventureGame {
 
-    private static Dungeon myDungeon;
+    //private static Dungeon myDungeon;
     private static DungeonAdventureGUI myGui;
 
     public static void main(final String[] theArgs) {
@@ -34,7 +36,9 @@ public class DungeonAdventureGame {
             //FileOutputStream fileOut = new FileOutputStream("/src/main/saves/game.ser");
             FileOutputStream fileOut = new FileOutputStream(theFilePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(myDungeon);
+
+            Dungeon currentDungeon = TestRoomController.getDungeon();
+            out.writeObject(currentDungeon);
             out.close();
             fileOut.close();
             System.out.printf("Serialized data is saved in /saves/game.ser");
@@ -43,22 +47,27 @@ public class DungeonAdventureGame {
         }
     }
 
-    public void loadGame(String theFilePath) {
+    public static boolean loadGame(File theFilePath) {
         try {
-            FileInputStream fileIn = new FileInputStream("/src/main/saves/game.ser");
-            //FileInputStream fileIn = new FileInputStream(theFilePath);
+            //FileInputStream fileIn = new FileInputStream("/src/main/saves/game.ser");
+            FileInputStream fileIn = new FileInputStream(theFilePath);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            myDungeon = (Dungeon) in.readObject();
+            Dungeon loadedDungeon = (Dungeon) in.readObject();
+
+System.out.println("DEBUG - Dungeon object loaded");
+
             in.close();
             fileIn.close();
+
         } catch (IOException i) {
             i.printStackTrace();
-            return;
+            return false;
         } catch (ClassNotFoundException c) {
             System.out.println("Dungeon class not found");
             c.printStackTrace();
-            return;
+            return false;
         }
+        return true;
     }
 
     //moved to testRoomController
