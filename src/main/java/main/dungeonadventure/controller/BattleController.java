@@ -83,7 +83,7 @@ public class BattleController {
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
             System.out.println("Health Potion used");
-            myHeroHPLabel.setText("+" + healingPoints);
+            myHeroHPLabel.setText("+10");
             myHeroHPBar.setProgress(Double.valueOf(myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP())));
         } else {
             noItemLabel.setText("No health potions available");
@@ -103,9 +103,9 @@ public class BattleController {
         myHeroNameLabel.setText(myHero.getMyCharacterName() + " HP");
         Double hp = myHero.getHP() * 1.0;
         myDf = new DecimalFormat("#,#");
-        Double hpDec = Double.valueOf(myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP()));
-        myHeroHPLabel.setText("" + hpDec);
-        myHeroHPBar.setProgress(hpDec);
+        Double hpDec = (myHero.getHP() * 1.0) / myHero.getStartHP();
+        myHeroHPLabel.setText("" + Double.valueOf(myDf.format(hpDec)));
+        myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
         myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
     }
 
@@ -127,9 +127,10 @@ public class BattleController {
             myHero.attack(myMonster);
             attackCharacter(myMonsterHPBar, myMonsterHPLabel, myMonster, "dungeon.fxml");
         }
-        if (myMonster.getHP() > 0 && myItems.contains(RoomItem.MONSTER)) {
+        if (myMonster.getHP() > 0) {
             int chanceToBlock = myHero.getMyChanceToBlock();
             if (chanceToBlock <= (myRand.nextInt(10) + 1)) {
+                myMonster.attack(myHero);
                 attackCharacter(myHeroHPBar, myHeroHPLabel, myHero, "game_over_screen.fxml");
             }
         }
