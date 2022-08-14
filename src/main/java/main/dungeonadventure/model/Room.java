@@ -62,10 +62,9 @@ public class Room implements Serializable {
             myRoomItems.add(RoomItem.VISION_POTION);
         }
 
-        //if (CHANCE_FOR_BOMB > Dungeon.getRandomRoll()) {
+        if (CHANCE_FOR_BOMB > Dungeon.getRandomRoll()) {
             myRoomItems.add(RoomItem.BOMB);
-        //}
-
+        }
 
     }
 

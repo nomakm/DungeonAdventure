@@ -1,0 +1,121 @@
+package main.dungeonadventure.controller;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+
+import java.util.LinkedList;
+
+public class TutorialController {
+    @FXML
+    private ImageView myTutImage;
+    @FXML
+    private Label myTutText;
+    @FXML
+    private Button myBackButton, myNextButton;
+
+    private LinkedList<Image> images = new LinkedList<>();
+    private LinkedList<String> imageText = new LinkedList<>();
+    private int myStep = 0;
+    private MediaPlayer myMediaPlayer;
+
+    public void initialize() {
+        images.add(new Image(getClass().getResourceAsStream(
+                        "/assets/tutorial_images/select_char_image.png")));
+        images.add(new Image(getClass().getResourceAsStream(
+                        "/assets/tutorial_images/dungeon_image.png")));
+        images.add(new Image(getClass().getResourceAsStream(
+                        "/assets/tutorial_images/fight_image.png")));
+        images.add(new Image(getClass().getResourceAsStream(
+                "/assets/tutorial_images/inventory_image.png")));
+        images.add(new Image(getClass().getResourceAsStream(
+                "/assets/tutorial_images/vision_image.png")));
+        images.add(new Image(getClass().getResourceAsStream(
+                "/assets/tutorial_images/win_image.png")));
+
+        imageText.add("When starting a game, give your hero a name and select from the " +
+                "3 hero types: The thief is quick and may attack twice at once! " +
+                "The Priestess is a healer and heals with every attack! " +
+                "The warrior is strong and may hit the monster with a super strong attack!");
+        imageText.add("Enter the dungeon and search for 4 Pillars. " +
+                "Come across many different items: " +
+                "a blue vision potion will help you see neighboring rooms," +
+                " a red health potion will give you more HP, " +
+                "a pit will do instant damage to you, a bomb will help you attack the monster," +
+                " a monster will need to be attacked before continuing on, " +
+                "and a pillar will need to be picked up to exit the maze");
+        imageText.add("Clicking the Monster will launch an attack " +
+                "between your hero and the monster! " +
+                "Press attack to fire an attack on the monster and the monster will attack back!" +
+                " Use an Health potion to increase your HP when you're low. " +
+                "Use a bomb to blast the monster, immediately dealing 20 HP!");
+        imageText.add("When picking up items in a room, " +
+                "you can open your inventory and see the items you've collected! " +
+                "Make sure you have 4 Pillars before exiting the dungeon. " +
+                "You can use the Health Potions and Vision Potions anytime you are in a room");
+        imageText.add("If you use the Vision Potion you acquire the ability to see " +
+                "8 neighboring rooms surrounding your room. " +
+                "Use this to avoid entering rooms with pits and monsters," +
+                " and to see where the pillars are!");
+        imageText.add("Once you have found 4 pillars and the exit room you have won the game!!" +
+                " Good luck on your next adventure!");
+
+        playMusic();
+    }
+
+    @FXML
+    private void nextStep(ActionEvent theEvent) {
+        Button button = (Button)theEvent.getSource();
+        if (button.getText().equals("Back")) {
+            myStep--;
+        } else {
+            myStep++;
+        }
+        if (myStep <= 0) {
+            myStep = 0;
+            myBackButton.setVisible(false);
+        } else {
+            myBackButton.setVisible(true);
+        }
+        if (myStep != images.size() - 1) {
+            myNextButton.setVisible(true);
+        } else {
+            myNextButton.setVisible(false);
+        }
+        myTutImage.setImage(images.get(myStep));
+        myTutText.setText(imageText.get(myStep));
+    }
+
+    @FXML
+    private void switchToWelcomeScreen(ActionEvent theEvent) {
+        try {
+            myMediaPlayer.stop();
+            Parent root = FXMLLoader.load(
+                    getClass().getClassLoader().getResource("welcome_screen.fxml"));
+            System.out.println("fxml was loaded.");
+            Stage stage = (Stage) ((Node)theEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void playMusic() {
+        Media myMedia = new Media(getClass().getResource("/assets/dungeon.mp3").toString());
+        myMediaPlayer = new MediaPlayer(myMedia);
+        myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        myMediaPlayer.play();
+    }
+}

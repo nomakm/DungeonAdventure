@@ -44,5 +44,15 @@
       </ImageView>
       <Button fx:id="myNewGameButton" layoutX="180.0" layoutY="230.0" mnemonicParsing="false" onAction="#switchToCharacterSelection" styleClass="buttonControl" text="New Game" />
       <Button fx:id="myLoadGameButton" layoutX="292.0" layoutY="230.0" mnemonicParsing="false" onAction="#loadGame" styleClass="buttonControl" text="Load Game" />
+      <AnchorPane fx:id="myAboutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" visible="false">
+         <children>
+            <Label layoutX="56.0" layoutY="42.0" prefHeight="101.0" prefWidth="500.0" text="Dungeon Adventure, is a single-player, interactive adventure game where a hero, the user, must navigate their way through a maze, fighting monsters and drinking potions along the way, to retrieve the four pillars of OO." textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="152.0" prefHeight="17.0" prefWidth="500.0" text="Created by Luke Smith, Micaela Nomakchteinsky, and Michael Doan" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="192.0" prefHeight="17.0" prefWidth="500.0" text="Dungeon Music by Crossed Killer" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="232.0" prefHeight="17.0" prefWidth="500.0" text="All other music by Marllon Silva a.k.a xDeviruchi" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="272.0" prefHeight="17.0" prefWidth="500.0" text="Pixel Art by 0x72" textAlignment="CENTER" wrapText="true" />
+            <Button layoutX="257.0" layoutY="346.0" mnemonicParsing="false" onAction="#exitAbout" styleClass="buttonControl" text="Exit About" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

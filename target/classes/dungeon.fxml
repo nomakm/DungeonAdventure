@@ -493,7 +493,7 @@
             </RadialGradient>
          </fill>
       </Circle>
-      <Button layoutX="507.0" layoutY="378.0" mnemonicParsing="false" onAction="#openInventory" styleClass="buttonControl" text="View Inventory" />
+      <Button layoutX="492.0" layoutY="378.0" mnemonicParsing="false" onAction="#openInventory" styleClass="buttonControl" text="View Inventory" />
       <Button fx:id="saveAndExitButton" layoutX="26.0" layoutY="378.0" mnemonicParsing="false" onAction="#saveAndExit" styleClass="buttonControl" text="Save and Exit" />
       <ImageView fx:id="mySouthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -748,7 +748,7 @@
                   <Label fx:id="mySELabel" layoutX="17.0" layoutY="27.0" text="No Room" />
                </children>
             </Group>
-            <Button fx:id="myExitVision" layoutX="490.0" layoutY="395.0" mnemonicParsing="false" onAction="#exitVision" styleClass="buttonControl" text="Exit Vision" />
+            <Button fx:id="myExitVision" layoutX="546.0" layoutY="395.0" mnemonicParsing="false" onAction="#exitVision" styleClass="buttonControl" text="Exit Vision" />
             <Label layoutX="69.0" layoutY="76.0" text="NW" />
             <Label layoutX="315.0" layoutY="31.0" text="N" />
             <Label layoutX="554.0" layoutY="76.0" text="NE" />
@@ -758,7 +758,7 @@
             <Label layoutX="558.0" layoutY="179.0" text="E" />
             <Label layoutX="551.0" layoutY="283.0" text="SE" />
             <Label layoutX="315.0" layoutY="335.0" text="S" />
-            <Label layoutX="29.0" layoutY="378.0" text="H = Health Potion  V= Vision Potion  M = Monster  P = Pit  PI = Pillar" />
+            <Label layoutX="29.0" layoutY="378.0" text="H = Health Potion  V= Vision Potion  M = Monster  P = Pit  PI = Pillar B = Bomb" />
          </children>
       </AnchorPane>
    </children>

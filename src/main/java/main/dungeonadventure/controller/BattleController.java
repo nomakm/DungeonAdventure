@@ -84,6 +84,7 @@ public class BattleController {
             myHero.setHealPotionCount(-1);
             System.out.println("Health Potion used");
             myHeroHPLabel.setText("+" + healingPoints);
+            myHeroHPBar.setProgress(Double.valueOf(myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP())));
         } else {
             noItemLabel.setText("No health potions available");
         }

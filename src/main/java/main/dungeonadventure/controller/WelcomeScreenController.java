@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -23,6 +24,8 @@ public class WelcomeScreenController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private AnchorPane myAboutPane;
     @FXML
     private Button musicButton;
     private Media myMedia;
@@ -44,7 +47,13 @@ public class WelcomeScreenController {
      */
     @FXML
     private void about(final ActionEvent theEvent) {
+        myAboutPane.setVisible(true);
         System.out.println("this is the about section");
+    }
+
+    @FXML
+    private void exitAbout() {
+        myAboutPane.setVisible(false);
     }
 
 
@@ -54,7 +63,7 @@ public class WelcomeScreenController {
      */
     @FXML
     private void startTutorial(final ActionEvent theEvent) {
-        //switchStageBuilder(event, "tutorial.fxml");
+        switchStageBuilder(theEvent, "tutorial_screen.fxml");
         System.out.println("you clicked start a tutorial");
     }
 
