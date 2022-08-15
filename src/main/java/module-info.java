@@ -4,6 +4,7 @@ module main.dungeonadventure {
     requires java.desktop;
     requires javafx.media;
     requires sqlite.jdbc;
+    requires java.sql;
 
     exports main.dungeonadventure.controller;
     opens main.dungeonadventure.controller to javafx.fxml;
