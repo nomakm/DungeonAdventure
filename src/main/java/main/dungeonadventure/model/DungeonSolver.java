@@ -15,8 +15,12 @@ import java.util.Stack;
  */
 public class DungeonSolver {
 
-
-    public static boolean isDungeonSolvable(Dungeon theDungeon) {
+    /**
+     * Navigates through dungeon, returns if it can or not.
+     * @param theDungeon input dungeon object.
+     * @return is dungeon can be beat.
+     */
+    public static boolean isDungeonSolvable(final Dungeon theDungeon) {
 
         Room[][] rooms = theDungeon.getRooms();
 

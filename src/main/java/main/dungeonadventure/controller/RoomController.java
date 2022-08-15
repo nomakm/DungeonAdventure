@@ -96,18 +96,6 @@ public class RoomController {
         myHeroImg.setImage(myHeroImage);
     }
 
-    //Deprecated by LS
-//    public void setDungeon(Image theHeroImage) {
-//        this.myDungeon = DungeonAdventureGame.getDungeon();
-//        this.myRoom = myDungeon.getCurrentRoom();
-//        this.myHero = myDungeon.getHero();
-//        this.myRoomMonster = myRoom.getMonster();
-//        this.myItems = myRoom.getItems();
-//        this.myHeroImage = theHeroImage;
-//        myHeroImg.setImage(myHeroImage);
-//        setItems(myRoom);
-//        setDoors(myRoom);
-//    }
 
     /**
      * Switches between rooms in the dungeon based on room items.

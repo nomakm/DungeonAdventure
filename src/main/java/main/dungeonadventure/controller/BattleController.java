@@ -115,8 +115,8 @@ public class BattleController {
 
 
     private void battle() {
-        int monsterSpd = myMonster.getMyAtkSpd();
-        int heroSpd = myHero.getMyAtkSpd();
+        int monsterSpd = myMonster.getAtkSpd();
+        int heroSpd = myHero.getAtkSpd();
         int timesAtk = heroSpd / monsterSpd;
         if (timesAtk == 0) {
             timesAtk = 1;

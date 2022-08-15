@@ -13,15 +13,6 @@ import java.util.Scanner;
  */
 public class Room implements Serializable {
 
-    final private HashSet<RoomItem> myRoomItems;
-    final private HashMap<Direction, Boolean> myDoors;
-    private boolean myIsExit;
-    private boolean myIsEntrance;
-
-
-
-    private Monster myMonster;
-
     /** Value used for chance to spawn pit */
     private static final int CHANCE_FOR_PIT = 10;
     /** Value used for chance to spawn monster */
@@ -32,6 +23,12 @@ public class Room implements Serializable {
     private static final int CHANCE_FOR_VISION_POTION = 15;
     /** Value used for chance to spawn vision potion */
     private static final int CHANCE_FOR_BOMB = 5;
+
+    final private HashSet<RoomItem> myRoomItems;
+    final private HashMap<Direction, Boolean> myDoors;
+    private boolean myIsExit;
+    private boolean myIsEntrance;
+    private Monster myMonster;
 
     public Room() {
         myRoomItems = new HashSet<>();

@@ -61,21 +61,6 @@ public class CharacterSelectionController {
         switchStageBuilder("welcome_screen.fxml");
     }
 
-    //Deprecated by LS
-//    /**
-//     * When submit button is clicked and name is filled out, saves the name
-//     * @param theEvent - button click
-//     */
-//    @FXML
-//    private void heroNameSet(final ActionEvent theEvent) {
-//        if (!Objects.equals(myHeroText.getText(), null)) {
-//            String heroName = myHeroText.getText();
-//            myHeroText.setText(heroName);
-//            System.out.println(heroName);
-//            myNameLabel.setTextFill(Color.WHITE);
-//            myHeroName = heroName;
-//        }
-//    }
 
     /**
      * When a hero is selected from choices, saves the hero type

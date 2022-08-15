@@ -156,7 +156,7 @@ public class Dungeon implements Serializable {
      *
      * @param theLocation Location of room.
      */
-    private void setEntrance(Point theLocation) {
+    private void setEntrance(final Point theLocation) {
         //Check for out of bounds
         if (theLocation.x < 1 || theLocation.x > DUNGEON_WIDTH
             && theLocation.y < 1 || theLocation.y > DUNGEON_HEIGHT) {
@@ -225,7 +225,7 @@ public class Dungeon implements Serializable {
      * Set's hero object for dungeon.
      * @param theHero Hero object.
      */
-    public void setHero(Hero theHero) {
+    public void setHero(final Hero theHero) {
         if (theHero == null) {
             throw new IllegalArgumentException("Hero is null");
         } else {

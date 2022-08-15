@@ -1,10 +1,12 @@
 package main.dungeonadventure.model;
 
-public class Hero extends DungeonCharacter {
+/**
+ * Hero object that extends Dungeon character.
+ */
+public abstract class Hero extends DungeonCharacter {
 
     private final String myCharName;
     private final int myBlockChance;
-
     private final HeroType myHeroType;
     private int myHealPotionCount;
     private int myVisionPotionCount;
