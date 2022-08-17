@@ -64,7 +64,7 @@ public abstract class DungeonCharacter implements Serializable {
      */
     public void setHP(final int theHP) {
         if (theHP < 0) {
-            throw new IllegalArgumentException("HP cannot be negative.");
+            this.myHP = 0;
         }
         this.myHP = theHP;
     }
