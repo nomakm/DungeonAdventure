@@ -49,8 +49,12 @@
     -fx-stroke: #550808;
 }
 
-.progressBar {
-    -fx-accent: #550808;
+.progressBarHero {
+    -fx-accent: #075e02;
+}
+
+.progressBarMonster {
+    -fx-accent: #5e0000;
 }
 
 

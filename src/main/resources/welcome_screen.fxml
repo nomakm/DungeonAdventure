@@ -447,13 +447,17 @@
                         <Image url="@assets/THIEF.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="myWelcomeLabel" layoutX="32.0" layoutY="150.0" prefHeight="17.0" prefWidth="600.0" styleClass="largeLabel" text="Dungeon Adventure" />
-                  <Button fx:id="myNewGameButton" layoutX="227.0" layoutY="275.0" mnemonicParsing="false" onAction="#switchToCharacterSelection" styleClass="buttonControl" text="New Game" />
-                  <Button fx:id="myLoadGameButton" layoutX="329.0" layoutY="274.0" mnemonicParsing="false" onAction="#loadGame" styleClass="buttonControl" text="Load Game" />
+                  <Button fx:id="myNewGameButton" layoutX="229.0" layoutY="237.0" mnemonicParsing="false" onAction="#switchToCharacterSelection" styleClass="buttonControl" text="New Game" />
+                  <Button fx:id="myLoadGameButton" layoutX="331.0" layoutY="236.0" mnemonicParsing="false" onAction="#loadGame" styleClass="buttonControl" text="Load Game" />
                </children>
             </Group>
          </children>
       </AnchorPane>
+      <ImageView fitHeight="67.0" fitWidth="539.0" layoutX="51.0" layoutY="128.0">
+         <image>
+            <Image url="@assets/title.png" />
+         </image>
+      </ImageView>
       <MenuBar fx:id="menu" layoutX="-6.0" prefHeight="27.0" prefWidth="647.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">

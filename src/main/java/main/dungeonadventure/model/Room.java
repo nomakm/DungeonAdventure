@@ -223,7 +223,7 @@ public class Room implements Serializable {
 
     //added by MN
     public HashSet<RoomItem> getItems() {
-System.out.println("DEBUG - ROOM CONTAINS: " + myRoomItems.toString());
+//System.out.println("DEBUG - ROOM CONTAINS: " + myRoomItems.toString());
         return myRoomItems;
     }
 
