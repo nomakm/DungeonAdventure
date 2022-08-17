@@ -25,7 +25,7 @@ public class Dungeon implements Serializable {
     private static final int DUNGEON_HEIGHT = 4;
     /** Width of Dungeon rooms */
     private static final int DUNGEON_WIDTH = 4;
-    /** Total pillars on map*/
+    /** Total pillars on map */
     private static final int PILLAR_COUNT = 4;
 
     /** 2D array for storing rooms. Represents Dungeon map. */
