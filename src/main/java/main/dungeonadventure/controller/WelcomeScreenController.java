@@ -78,7 +78,7 @@ public class WelcomeScreenController {
         try {
             myMediaPlayer.stop();
             root = FXMLLoader.load(getClass().getClassLoader().getResource(theFxmlName));
-            System.out.println("fxml was loaded.");
+            System.out.println("DEBUG - character_selection.fxml was loaded.");
             stage = (Stage) someRoot.getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -117,7 +117,6 @@ public class WelcomeScreenController {
             }
         }
 
-        System.out.println("you clicked load a game");
     }
 
     public void initialize() {

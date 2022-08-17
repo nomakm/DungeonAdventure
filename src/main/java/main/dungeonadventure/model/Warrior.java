@@ -10,7 +10,7 @@ public class Warrior extends Hero {
     public Warrior(final String theCharacterName) {
 
         //TODO These values should be retrieved from the database
-        super(HeroType.WARRIOR, theCharacterName, 500, 35, 60, 4, 8, 2);
+        super(HeroType.WARRIOR, theCharacterName, 600, 35, 120, 4, 8, 2);
 
         //TODO These values should be retrieved from the database
         this.myCrushingBlowMax = 175;

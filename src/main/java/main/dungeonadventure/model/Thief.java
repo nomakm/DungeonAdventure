@@ -7,7 +7,7 @@ public class Thief extends Hero {
     private final int myCaught;
 
     public Thief(final String theCharacterName) {
-        super(HeroType.THIEF, theCharacterName, 75, 20, 40, 6, 8, 4);
+        super(HeroType.THIEF, theCharacterName, 175, 20, 50, 6, 8, 4);
         this.mySurpriseAtk = 4;
         this.myCaught = 2;
     }

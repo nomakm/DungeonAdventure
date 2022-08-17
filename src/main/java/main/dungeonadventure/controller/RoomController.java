@@ -44,7 +44,7 @@ public class RoomController {
     @FXML
     private AnchorPane myInventoryPane, myVisionPane;
     @FXML
-    private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel, myBombCountLabel;
+    private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel, myBombCountLabel, myHeroHPLabel;
     @FXML
     private Label myNWLabel, myNLabel, myNELabel, myWLabel, myCurrLabel, myELabel,
             mySWLabel, mySLabel, mySELabel;
@@ -192,7 +192,7 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
     @FXML
     private void useHealthPotion(ActionEvent event) {
         if (myHero.getHealthPotionCount() > 0) {
-            int healingPoints = myHero.getHP() + 10;
+            int healingPoints = myHero.getHP() + 30;
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
             Button button = (Button)event.getSource();
@@ -325,6 +325,7 @@ System.out.println("DEBUG - Monster was defeated");
         myVisionPotionCountLabel.setText("x " + myHero.getVisionPotionCount()+ " Vision Potions");
         myBombCountLabel.setText("x " + myHero.getBombCount() + " Bombs");
         myPillarCountLabel.setText("x " + myHero.getPillarCount() + " Pillars");
+        myHeroHPLabel.setText("" + myHero.getHP());
         myInventoryPane.setVisible(true);
         if (myHero.getHealthPotionCount() > 0) {
             myUseHealthPotionButton2.setVisible(true);

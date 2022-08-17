@@ -19,6 +19,7 @@ public class DungeonAdventureGame {
 
         //Start the GUI / Game
         myGui = new DungeonAdventureGUI();
+        DungeonAdventureSQLDataBase.startDB();
         myGui.launchGUI();
 
     }

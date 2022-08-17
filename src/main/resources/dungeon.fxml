@@ -559,7 +559,7 @@
       </Button>
       <AnchorPane fx:id="myInventoryPane" layoutX="-7.0" layoutY="-8.0" prefHeight="442.0" prefWidth="655.0" style="-fx-background-color: radial-gradient(center 50% 50% , radius 50% , rgba(0,0,0,.5), rgba(0,0,0,0.9));" visible="false">
          <children>
-            <Button layoutX="512.0" layoutY="386.0" mnemonicParsing="false" onAction="#closeInventory" styleClass="buttonControl" text="Close Inventory" />
+            <Button layoutX="499.0" layoutY="386.0" mnemonicParsing="false" onAction="#closeInventory" styleClass="buttonControl" text="Close Inventory" />
             <Group layoutX="37.0" layoutY="28.0">
                <children>
                   <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
@@ -578,7 +578,7 @@
                   <Button fx:id="myUseHealthPotionButton2" layoutX="237.0" layoutY="13.0" mnemonicParsing="false" onAction="#useHealthPotion" styleClass="buttonControl" text="Use Health Potion" visible="false" />
                </children>
             </Group>
-            <Group layoutX="37.0" layoutY="112.0">
+            <Group layoutX="37.0" layoutY="98.0">
                <children>
                   <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -633,7 +633,7 @@
                   </Label>
                </children>
             </Group>
-            <Group layoutX="42.0" layoutY="178.0">
+            <Group layoutX="42.0" layoutY="166.0">
                <children>
                   <ImageView fitHeight="71.0" fitWidth="63.0" layoutX="-12.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -648,6 +648,19 @@
                         <Font name="Arial Bold" size="22.0" />
                      </font>
                   </Label>
+               </children>
+            </Group>
+            <Group layoutX="553.0" layoutY="28.0">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/heart.png" />
+                     </image>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="myHeroHPLabel" layoutX="26.0" layoutY="1.0" text="heroHP" />
                </children>
             </Group>
          </children>

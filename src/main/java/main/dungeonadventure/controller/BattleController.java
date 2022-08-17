@@ -79,11 +79,11 @@ public class BattleController {
     @FXML
     private void useHealthPotion(ActionEvent event) {
         if (myHero.getHealthPotionCount() > 0) {
-            int healingPoints = myHero.getHP() + 10;
+            int healingPoints = myHero.getHP() + 30;
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
             System.out.println("Health Potion used");
-            myHeroHPLabel.setText("+10");
+            myHeroHPLabel.setText("+30");
             myHeroHPBar.setProgress(Double.valueOf(myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP())));
         } else {
             noItemLabel.setText("No health potions available");
@@ -97,6 +97,7 @@ public class BattleController {
         this.myMonster = myRoom.getMonster();
         this.myItems = myRoom.getItems();
         this.myHeroImage = theHeroImage;
+
         myBattleHero.setImage(theHeroImage);
         myBattleMonster.setImage(theMonsterImage);
         myMonsterNameLabel.setText(myMonster.getMonsterType().toString() + " HP");
@@ -104,7 +105,9 @@ public class BattleController {
         Double hp = myHero.getHP() * 1.0;
         myDf = new DecimalFormat("#,#");
         Double hpDec = (myHero.getHP() * 1.0) / myHero.getStartHP();
-        myHeroHPLabel.setText("" + Double.valueOf(myDf.format(hpDec)));
+        myHeroHPLabel.setText("" + myHero.getHP());
+        myMonsterHPLabel.setText("" + myMonster.getHP());
+        //myHeroHPLabel.setText("" + Double.valueOf(myDf.format(hpDec)));
         myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
         myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
     }
@@ -139,7 +142,7 @@ public class BattleController {
     private void attackCharacter(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter, String theFxmlName) {
         if (theCharacter.getHP() <= 0) {
             theProgressBar.setProgress(0.0);
-            theLabel.setText("0.0");
+            theLabel.setText("0");
             noItemLabel.setText(theCharacter.getClass().getSimpleName() + " was Defeated");
             final PauseTransition pt = new PauseTransition(Duration.millis(2500));
             pt.play();
@@ -154,7 +157,7 @@ public class BattleController {
     private void setHPChanges(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter) {
         Double hpLevel = Double.valueOf(myDf.format((theCharacter.getHP() * 1.0) / theCharacter.getStartHP()));
         theProgressBar.setProgress(hpLevel);
-        theLabel.setText("" + hpLevel);
+        theLabel.setText("" + theCharacter.getHP());
     }
 
     private void animateAttack() {
@@ -181,7 +184,7 @@ public class BattleController {
                 roomController.endBattle();
                 myMediaPlayer.stop();
             }
-            System.out.println("fxml was loaded.");
+            System.out.println("game_over_screen.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

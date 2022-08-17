@@ -3,7 +3,6 @@ package main.dungeonadventure.model;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -67,9 +66,9 @@ public class Room implements Serializable {
 
     private void generateMonster() {
         //Rolls a random value of total monster types
-        int roll = Dungeon.RAND_GEN.nextInt(MonsterType.values().length - 1) + 1;
+        int roll = Dungeon.RAND_GEN.nextInt(MonsterType.values().length);
         MonsterType type = MonsterType.values()[roll];
-        myMonster = monsterFactory.buildMonster(type);
+        myMonster = MonsterFactory.buildMonster(type);
     }
 
     public Monster getMonster() {

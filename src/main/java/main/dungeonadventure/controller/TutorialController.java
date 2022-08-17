@@ -102,7 +102,7 @@ public class TutorialController {
             myMediaPlayer.stop();
             Parent root = FXMLLoader.load(
                     getClass().getClassLoader().getResource("welcome_screen.fxml"));
-            System.out.println("fxml was loaded.");
+            System.out.println("DEBUG - welcome_screen.fxml was loaded.");
             Stage stage = (Stage) ((Node)theEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
