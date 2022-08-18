@@ -23,6 +23,11 @@ import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * Starts battle with monster
+ * @Author Micaela Nomakchteinsky
+ * @version 8-2022
+ */
 public class BattleController {
     @FXML
     private Group myHeroFight;

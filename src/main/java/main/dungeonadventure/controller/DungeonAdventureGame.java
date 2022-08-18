@@ -51,7 +51,7 @@ public class DungeonAdventureGame {
      * Saves game by serializing dungeon object
      * @param theFilePath File location/name to save to
      */
-    protected static void saveGame(File theFilePath) {
+    protected static void saveGame(final File theFilePath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(theFilePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -69,7 +69,7 @@ public class DungeonAdventureGame {
      * @param theFilePath File location/name to load from
      * @return
      */
-    protected static boolean loadGame(File theFilePath) {
+    protected static boolean loadGame(final File theFilePath) {
         try {
             FileInputStream fileIn = new FileInputStream(theFilePath);
             ObjectInputStream in = new ObjectInputStream(fileIn);

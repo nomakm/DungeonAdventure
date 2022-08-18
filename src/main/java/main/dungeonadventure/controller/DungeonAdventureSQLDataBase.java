@@ -6,8 +6,15 @@ import main.dungeonadventure.model.MonsterType;
 import java.sql.*;
 import java.util.HashMap;
 
+/**
+ * Class is used to build/access database for storing Hero and Monster values
+ * depending on the type.
+ * @author Luke Smith
+ */
 public class DungeonAdventureSQLDataBase {
 
+    //Not really needed if database already exists, DB could be just edited
+    //with an editor.
     public static void buildDB() {
 
         createMonstersTable();
@@ -18,6 +25,9 @@ public class DungeonAdventureSQLDataBase {
     }
 
 
+    /**
+     * Builds monsters table
+     */
     private static void createMonstersTable() {
         Connection c = null;
         Statement stmt = null;
@@ -53,6 +63,10 @@ public class DungeonAdventureSQLDataBase {
 
     }
 
+
+    /**
+     * Builds hero table
+     */
     private static void createHeroesTable() {
         Connection c = null;
         Statement stmt = null;
@@ -91,6 +105,10 @@ public class DungeonAdventureSQLDataBase {
         }
     }
 
+
+    /**
+     * Places monster values in monsters table
+     */
     private static void placeMonsterValues() {
         Connection c = null;
         Statement stmt = null;
@@ -140,6 +158,9 @@ public class DungeonAdventureSQLDataBase {
     }
 
 
+    /**
+     * Places hero values in heroes table
+     */
     private static void placeHeroValues() {
         Connection c = null;
         Statement stmt = null;
@@ -196,6 +217,12 @@ public class DungeonAdventureSQLDataBase {
 
     }
 
+
+    /**
+     * Pulls values from monsters table depending on the type
+     * @param theMonster Monster type to pull data from
+     * @return HashMap of compiled monster values
+     */
     public static HashMap<String, Integer> pullMonsterValues(final MonsterType theMonster) {
         Connection c = null;
         Statement stmt = null;
@@ -229,6 +256,12 @@ public class DungeonAdventureSQLDataBase {
         return monsterData;
     }
 
+
+    /**
+     * Pulls hero values depending on the type
+     * @param theHero Hero type to pull data from
+     * @return HashMap of compiled hero values
+     */
     public static HashMap<String, Integer> pullHeroValues(final HeroType theHero) {
         Connection c = null;
         Statement stmt = null;
@@ -265,10 +298,5 @@ public class DungeonAdventureSQLDataBase {
         }
         return heroData;
     }
-
-
-
-
-
 
 }
