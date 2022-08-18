@@ -4,11 +4,24 @@ import main.dungeonadventure.controller.DungeonAdventureSQLDataBase;
 
 import java.util.Random;
 
+/**
+ * Warrior object extending hero
+ * @author Luke Smith
+ * @author Micaela Nomakchteinsky
+ * @author Michael Doan
+ */
 public class Warrior extends Hero {
+    /** Maximum damage when special is used */
     private final int myCrushingBlowMax;
+    /** Min damage when special is used */
     private final int myCrushingBlowMin;
+    /** Chance to land special */
     private final int mySurpriseAtk;
 
+    /**
+     * Constructor for Warrior object
+     * @param theCharacterName Name of character
+     */
     public Warrior(final String theCharacterName) {
 
         //This is incredibly inefficient as each call to pullHeroValues
@@ -31,16 +44,14 @@ public class Warrior extends Hero {
         this.mySurpriseAtk = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("SurpriseAttackChance");
     }
 
-    public int getMyCrushingBlowMax() {
-        return myCrushingBlowMax;
-    }
 
-    public int getMyCrushingBlowMin() {
-        return myCrushingBlowMin;
-    }
-
+    /**
+     * Overrides DungeonCharacter attack()
+     * Rolls for a chance to do crushing blow (Special)
+     * @param theOpponent monster to attack
+     */
     @Override
-    public void attack(DungeonCharacter theOpponent) {
+    public void attack(final DungeonCharacter theOpponent) {
         Random rand = new Random();
         if (mySurpriseAtk > (rand.nextInt(10) + 1)) {
             System.out.println("Special Attack used");

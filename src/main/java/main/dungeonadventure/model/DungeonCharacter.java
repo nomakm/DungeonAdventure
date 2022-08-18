@@ -5,6 +5,9 @@ import java.util.Random;
 
 /**
  * Higher class for shared values between Hero and Monster classes.
+ *  * @author Luke Smith
+ *  * @author Micaela Nomakchteinsky
+ *  * @author Michael Doan
  */
 public abstract class DungeonCharacter implements Serializable {
 
@@ -19,9 +22,9 @@ public abstract class DungeonCharacter implements Serializable {
     private final int myDmgMin;
     /** Maximum damage output character can do. */
     private final int myDmgMax;
-    /** Character's attack speed */
+    /** Character's attack speed Value 0 - 10 */
     private final int myAtkSpd;
-    /** Chance for character to land a hit */
+    /** Chance for character to land a hit Value 0 - 10 */
     private final int myHitRate;
     /**  Character's starting HP. */
     private int myStartHP;
@@ -60,7 +63,7 @@ public abstract class DungeonCharacter implements Serializable {
 
     /**
      * Sets HP of character
-     * @param theHP
+     * @param theHP HP to set
      */
     public void setHP(final int theHP) {
         if (theHP < 0) {
@@ -69,9 +72,10 @@ public abstract class DungeonCharacter implements Serializable {
         this.myHP = theHP;
     }
 
+
     /**
      * Gets starting HP of character.
-     * @return
+     * @return Character's initial HP
      */
     public int getStartHP() {
         return myStartHP;
@@ -79,26 +83,8 @@ public abstract class DungeonCharacter implements Serializable {
 
 
     /**
-     * Gets minimum damage output.
-     * @return
-     */
-    public int getDmgMin() {
-        return myDmgMin;
-    }
-
-
-    /**
-     * Gets maximum damage output.
-     * @return
-     */
-    public int getDmgMax() {
-        return myDmgMax;
-    }
-
-
-    /**
      * Gets character's attack speed
-     * @return
+     * @return character's attack speed
      */
     public int getAtkSpd() {
         return myAtkSpd;
@@ -107,13 +93,10 @@ public abstract class DungeonCharacter implements Serializable {
 
 
     /**
-     * Gets characters chance to hit.
-     * @return
+     * Attacks an opponent. Rolls a random num to determine if the hit
+     * will land.
+     * @param theOpponent The Character to attack (Hero or Monster)
      */
-    public int getHitRate() {
-        return myHitRate;
-    }
-
     public void attack(final DungeonCharacter theOpponent) {
         if ((myHitRate * 10) > RAND_GEN.nextInt(RAND_UPPERBOUND)) {
             int damage = RAND_GEN.nextInt(((myDmgMax + 1)) - myDmgMin) + myDmgMin;

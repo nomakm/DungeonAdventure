@@ -12,17 +12,23 @@ import java.io.*;
  */
 public class DungeonAdventureGame {
 
-    private static DungeonAdventureGUI myGui;
+    /** Dungeon object to be used throughout game */
     private static Dungeon myDungeon;
 
+
+    /**
+     * Starting method for launching game
+     * @param theArgs command line args
+     */
     public static void main(final String[] theArgs) {
 
-        //Start the GUI / Game
-        myGui = new DungeonAdventureGUI();
         DungeonAdventureSQLDataBase.buildDB();
+        //Start the GUI / Game
+        DungeonAdventureGUI myGui = new DungeonAdventureGUI();
         myGui.launchGUI();
 
     }
+
 
     /**
      * Constructs a new Dungeon instance
@@ -30,6 +36,7 @@ public class DungeonAdventureGame {
     protected static void buildNewDungeon() {
         myDungeon = new Dungeon();
     }
+
 
     /**
      * Returns game's Dungeon object.
@@ -39,6 +46,11 @@ public class DungeonAdventureGame {
         return myDungeon;
     }
 
+
+    /**
+     * Saves game by serializing dungeon object
+     * @param theFilePath File location/name to save to
+     */
     protected static void saveGame(File theFilePath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(theFilePath);
@@ -51,6 +63,12 @@ public class DungeonAdventureGame {
         }
     }
 
+
+    /**
+     * Loads in game from existing save
+     * @param theFilePath File location/name to load from
+     * @return
+     */
     protected static boolean loadGame(File theFilePath) {
         try {
             FileInputStream fileIn = new FileInputStream(theFilePath);

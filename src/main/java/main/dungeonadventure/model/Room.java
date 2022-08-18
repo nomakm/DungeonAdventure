@@ -3,6 +3,7 @@ package main.dungeonadventure.model;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -23,22 +24,36 @@ public class Room implements Serializable {
     /** Value used for chance to spawn vision potion */
     private static final int CHANCE_FOR_BOMB = 5;
 
+    /** Items contained in room */
     final private HashSet<RoomItem> myRoomItems;
+    /** Doors in room */
     final private HashMap<Direction, Boolean> myDoors;
+    /** If room is an exit */
     private boolean myIsExit;
+    /** If room is an entrance */
     private boolean myIsEntrance;
+    /** Monster in room */
     private Monster myMonster;
 
+
+    /**
+     * Constructor for room object
+     */
     public Room() {
         myRoomItems = new HashSet<>();
         myDoors = new HashMap<>();
         myIsExit = false;
         myIsEntrance = false;
+        myMonster = null;
 
         generateRoomItems();
         generateDoors();
     }
 
+
+    /**
+     * Rolls random values to spawn items in room
+     */
     private void generateRoomItems() {
         //Spawn items/entities in room.
         if (CHANCE_FOR_PIT > Dungeon.getRandomRoll()) {
@@ -64,6 +79,10 @@ public class Room implements Serializable {
 
     }
 
+
+    /**
+     * Randomly generates a monster and places it in the room
+     */
     private void generateMonster() {
         //Rolls a random value of total monster types
         int roll = Dungeon.RAND_GEN.nextInt(MonsterType.values().length);
@@ -71,10 +90,19 @@ public class Room implements Serializable {
         myMonster = MonsterFactory.buildMonster(type);
     }
 
+
+    /**
+     * Returns monster object in room
+     * @return Monster object in room
+     */
     public Monster getMonster() {
         return myMonster;
     }
 
+
+    /**
+     * Generates door values, all closed by default.
+     */
     public void generateDoors() {
         myDoors.put(Direction.NORTH, false);
         myDoors.put(Direction.SOUTH, false);
@@ -82,6 +110,11 @@ public class Room implements Serializable {
         myDoors.put(Direction.EAST, false);
     }
 
+
+    /**
+     * Opens specific door
+     * @param theDoorDirection Door to open
+     */
     public void openDoor(final Direction theDoorDirection) {
         if (theDoorDirection == Direction.NORTH) {
             myDoors.replace(Direction.NORTH, true);
@@ -100,6 +133,11 @@ public class Room implements Serializable {
         }
     }
 
+
+    /**
+     * Closes specific door
+     * @param theDoorDirection Door to close
+     */
     public void closeDoor(final Direction theDoorDirection) {
         if (theDoorDirection == Direction.NORTH) {
             myDoors.replace(Direction.NORTH, false);
@@ -118,10 +156,19 @@ public class Room implements Serializable {
         }
     }
 
+
+    /**
+     * Adds pillar to room
+     */
     public void addPillar() {
         myRoomItems.add(RoomItem.PILLAR);
     }
 
+
+    /**
+     * Checks to see if pillar is in room
+     * @return if pillar in room
+     */
     public boolean containsPillar() {
         return myRoomItems.contains(RoomItem.PILLAR);
     }
@@ -195,12 +242,15 @@ public class Room implements Serializable {
         row[1] = tempScanner.nextLine();
         row[2] = tempScanner.nextLine();
 
-
         return row[theRowNum];
-
 
     }
 
+
+    /**
+     * Sets whether room is entrance or not
+     * @param theValue is entrance or not
+     */
     public void setEntrance(final boolean theValue) {
         myIsEntrance = theValue;
         if (theValue) {
@@ -208,10 +258,20 @@ public class Room implements Serializable {
         }
     }
 
+
+    /**
+     * Checks to see if room is an entrance
+     * @return is entrance?
+     */
     public boolean isEntrance() {
         return myIsEntrance;
     }
 
+
+    /**
+     * Sets whether room is exit or not
+     * @param theValue is exit or not
+     */
     public void setExit(final boolean theValue) {
         myIsExit = theValue;
         if (theValue) {
@@ -219,20 +279,40 @@ public class Room implements Serializable {
         }
     }
 
+
+    /**
+     * Checks to see if room is an exit
+     * @return is exit?
+     */
     public boolean isExit() {
         return myIsExit;
     }
 
+
+    /**
+     * Checks to see if specific door is open
+     * @param theDirection direction of door
+     * @return if door is open
+     */
     public boolean isDoorOpen(final Direction theDirection) {
         return myDoors.get(theDirection);
     }
 
-    //added by MN
+
+    /**
+     * Returns hashset of room items
+     * @return room items
+     */
     public HashSet<RoomItem> getItems() {
 //System.out.println("DEBUG - ROOM CONTAINS: " + myRoomItems.toString());
         return myRoomItems;
     }
 
+
+    /**
+     * Removes item from room
+     * @param theItem item to remove
+     */
     public void removeItem(final RoomItem theItem) {
 System.out.println("DEBUG - ATTEMPTING TO REMOVE " + theItem.toString());
         if (!myRoomItems.contains(theItem)) {
@@ -240,10 +320,5 @@ System.out.println("DEBUG - ATTEMPTING TO REMOVE " + theItem.toString());
         }
         myRoomItems.remove(theItem);
     }
-
-    public Monster getMyMonster() {
-        return myMonster;
-    }
-
 
 }

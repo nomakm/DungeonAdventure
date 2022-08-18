@@ -16,7 +16,8 @@ import java.util.Stack;
 public class DungeonSolver {
 
     /**
-     * Navigates through dungeon, returns if it can or not.
+     * Navigates through dungeon, returns if it can reach end with all
+     * pillars or not.
      * @param theDungeon input dungeon object.
      * @return is dungeon can be beat.
      */
@@ -24,7 +25,9 @@ public class DungeonSolver {
 
         Room[][] rooms = theDungeon.getRooms();
 
+        //Visited locations are added to set
         HashSet<Point> visited = new HashSet<>();
+        //Position order added to stack for back tracking
         Stack<Point> posStack = new Stack<>();
 
         Point curPos = new Point(1,1);
@@ -35,10 +38,7 @@ public class DungeonSolver {
 
         posStack.add(curPos);
 
-        int testCounter = 0;
-
         while (!posStack.isEmpty()) {
-        //while (testCounter < 16) {
 
 //System.out.println("DEBUG - curPos: (" + curPos.x + ", " + curPos.y + ")");
 

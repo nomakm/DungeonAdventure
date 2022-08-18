@@ -53,6 +53,14 @@ public class Dungeon implements Serializable {
 
     }
 
+    /**
+     * Gets a random roll used for game RNG system.
+     * @return random value from 0 -> UPPERBOUND
+     */
+    public static int getRandomRoll() {
+        return RAND_GEN.nextInt(RAND_UPPERBOUND);
+    }
+
 
     /**
      * Builds a dungeon step by step.
@@ -196,13 +204,7 @@ public class Dungeon implements Serializable {
     }
 
 
-    /**
-     * Gets a random roll used for game RNG system.
-     * @return random value from 0 -> UPPERBOUND
-     */
-    public static int getRandomRoll() {
-        return RAND_GEN.nextInt(RAND_UPPERBOUND);
-    }
+
 
 
     /**
@@ -290,7 +292,6 @@ public class Dungeon implements Serializable {
 
         return neighbors;
     }
-
 
 
     /**

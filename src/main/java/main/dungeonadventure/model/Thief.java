@@ -4,10 +4,23 @@ import main.dungeonadventure.controller.DungeonAdventureSQLDataBase;
 
 import java.util.Random;
 
+
+/**
+ * Thief object extending hero
+ * @author Luke Smith
+ * @author Micaela Nomakchteinsky
+ * @author Michael Doan
+ */
 public class Thief extends Hero {
+    /** Surprise attack chance Value 0 - 10 */
     private final int mySurpriseAtk;
+    /** Chance of getting caught value 0 - 10 */
     private final int myCaught;
 
+    /**
+     * Constructor for creating thief
+     * @param theCharacterName name of character
+     */
     public Thief(final String theCharacterName) {
         //This is incredibly inefficient as each call to pullHeroValues
         //will create the same hashmap, can't call it before super though
@@ -23,20 +36,19 @@ public class Thief extends Hero {
                 DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("BlockChance")
 
         );
+
         this.mySurpriseAtk = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("SurpriseAttackChance");
         this.myCaught = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("CaughtChance");
     }
 
-    public int getMySurpriseAtk() {
-        return mySurpriseAtk;
-    }
 
-    public int getMyCaught() {
-        return myCaught;
-    }
-
+    /**
+     * Overrides DungeonCharacter attack()
+     * Rolls for a chance to attack several times (Special)
+     * @param theOpponent monster to attack
+     */
     @Override
-    public void attack(DungeonCharacter theOpponent) {
+    public void attack(final DungeonCharacter theOpponent) {
         Random rand = new Random();
         int chance = (rand.nextInt(10) + 1);
         if (mySurpriseAtk > chance) {
