@@ -1,5 +1,7 @@
 package main.dungeonadventure.model;
 
+import main.dungeonadventure.controller.DungeonAdventureSQLDataBase;
+
 import java.util.Random;
 
 public class Thief extends Hero {
@@ -7,9 +9,22 @@ public class Thief extends Hero {
     private final int myCaught;
 
     public Thief(final String theCharacterName) {
-        super(HeroType.THIEF, theCharacterName, 175, 20, 50, 6, 8, 4);
-        this.mySurpriseAtk = 4;
-        this.myCaught = 2;
+        //This is incredibly inefficient as each call to pullHeroValues
+        //will create the same hashmap, can't call it before super though
+        //for an easy fix. A new solution will have to be made.
+        super(
+                HeroType.THIEF,
+                theCharacterName,
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("HP"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("DmgMin"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("DmgMax"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("AtkSpd"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("HitRate"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("BlockChance")
+
+        );
+        this.mySurpriseAtk = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("SurpriseAttackChance");
+        this.myCaught = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.THIEF).get("CaughtChance");
     }
 
     public int getMySurpriseAtk() {

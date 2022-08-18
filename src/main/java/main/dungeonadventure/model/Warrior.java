@@ -1,5 +1,7 @@
 package main.dungeonadventure.model;
 
+import main.dungeonadventure.controller.DungeonAdventureSQLDataBase;
+
 import java.util.Random;
 
 public class Warrior extends Hero {
@@ -9,13 +11,24 @@ public class Warrior extends Hero {
 
     public Warrior(final String theCharacterName) {
 
-        //TODO These values should be retrieved from the database
-        super(HeroType.WARRIOR, theCharacterName, 600, 35, 120, 4, 8, 2);
+        //This is incredibly inefficient as each call to pullHeroValues
+        //will create the same hashmap, can't call it before super though
+        //for an easy fix. A new solution will have to be made.
+        super(
+                HeroType.WARRIOR,
+                theCharacterName,
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("HP"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("DmgMin"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("DmgMax"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("AtkSpd"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("HitRate"),
+                DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("BlockChance")
 
-        //TODO These values should be retrieved from the database
-        this.myCrushingBlowMax = 175;
-        this.myCrushingBlowMin = 75;
-        this.mySurpriseAtk = 4;
+        );
+
+        this.myCrushingBlowMax = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("CrushingBlowMax");
+        this.myCrushingBlowMin = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("CrushingBlowMin");
+        this.mySurpriseAtk = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("SurpriseAttackChance");
     }
 
     public int getMyCrushingBlowMax() {

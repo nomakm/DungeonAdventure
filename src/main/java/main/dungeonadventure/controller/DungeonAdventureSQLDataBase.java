@@ -1,5 +1,6 @@
 package main.dungeonadventure.controller;
 
+import main.dungeonadventure.model.HeroType;
 import main.dungeonadventure.model.MonsterType;
 
 import java.sql.*;
@@ -7,35 +8,24 @@ import java.util.HashMap;
 
 public class DungeonAdventureSQLDataBase {
 
-    private static Connection myConnection;
+    public static void buildDB() {
 
-    public static void startDB() {
-
-        connect();
-        createTable();
-        placeValues();
-
-    }
-
-    public static void connect() {
-        myConnection = null;
-
-        //establish connection (creates db file if it does not exist :-)
-        try {
-            Class.forName("org.sqlite.JDBC");
-            myConnection = DriverManager.getConnection("jdbc:sqlite:monsters.db");
-        } catch ( Exception e ) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        System.out.println( "Opened database successfully" );
+        createMonstersTable();
+        createHeroesTable();
+        placeMonsterValues();
+        placeHeroValues();
 
     }
 
-    private static void createTable() {
+
+    private static void createMonstersTable() {
+        Connection c = null;
+        Statement stmt = null;
+
         try {
 
-            Statement stmt = myConnection.createStatement();
+            c = DriverManager.getConnection("jdbc:sqlite:dungeon_adventure.db");
+            stmt = c.createStatement();
 
             String query = "CREATE TABLE IF NOT EXISTS MONSTERS " +
                     "(" +
@@ -54,25 +44,62 @@ public class DungeonAdventureSQLDataBase {
             stmt.executeUpdate(query);
 
             stmt.close();
-            myConnection.close();
+            c.close();
+//System.out.println("DEBUG - Monsters Table created successfully");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
 
-        System.out.println("Table created successfully");
-
     }
 
-    private static void placeValues() {
+    private static void createHeroesTable() {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+
+            c = DriverManager.getConnection("jdbc:sqlite:dungeon_adventure.db");
+            stmt = c.createStatement();
+
+            String query = "CREATE TABLE IF NOT EXISTS HEROES " +
+                    "(" +
+                    " HERO_TYPE                 HeroType            ," +
+                    " HP                        INT                 ," +
+                    " MIN_DMG                   INT                 ," +
+                    " MAX_DMG                   INT                 ," +
+                    " ATK_SPD                   INT                 ," +
+                    " HIT_RATE                  INT                 ," +
+                    " BLOCK_CHANCE              INT                 ," +
+                    " CRUSHING_BLOW_MAX         INT                 ," +
+                    " CRUSHING_BLOW_MIN         INT                 ," +
+                    " SURPRISE_ATTACK_CHANCE     INT                 ," +
+                    " CAUGHT_CHANCE             INT                 ," +
+                    " HEAL_MAX                  INT                 ," +
+                    " HEAL_MIN                  INT                 ," +
+                    "UNIQUE(HERO_TYPE)" +
+                    ") ";
+
+            stmt.executeUpdate(query);
+
+            stmt.close();
+            c.close();
+//System.out.println("DEBUG - Heroes Table created successfully");
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    }
+
+    private static void placeMonsterValues() {
         Connection c = null;
         Statement stmt = null;
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:monsters.db");
+            c = DriverManager.getConnection("jdbc:sqlite:dungeon_adventure.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+//System.out.println("DEBUG - Opened monsters database successfully");
             stmt = c.createStatement();
 
             String sql = "";
@@ -104,24 +131,80 @@ public class DungeonAdventureSQLDataBase {
             stmt.close();
             c.commit();
             c.close();
+//System.out.println("DEBUG - Monster Records created successfully");
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Records created successfully");
+
+    }
+
+
+    private static void placeHeroValues() {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:dungeon_adventure.db");
+            c.setAutoCommit(false);
+//System.out.println("DEBUG - Opened heroes database successfully");
+            stmt = c.createStatement();
+
+            String sql = "";
+
+            sql = "INSERT OR IGNORE INTO HEROES (" +
+                    "HERO_TYPE, HP, MIN_DMG, MAX_DMG, ATK_SPD, HIT_RATE, BLOCK_CHANCE, " +
+                    "CRUSHING_BLOW_MAX, CRUSHING_BLOW_MIN, SURPRISE_ATTACK_CHANCE" +
+                    ") " +
+                    "VALUES (" +
+                    "'WARRIOR', 250, 30, 50, 4, 7, 2, " +
+                    "120, 75, 2" +
+                    ");";
+            stmt.executeUpdate(sql);
+
+            sql = "INSERT OR IGNORE INTO HEROES (" +
+                    "HERO_TYPE, HP, MIN_DMG, MAX_DMG, ATK_SPD, HIT_RATE, BLOCK_CHANCE, " +
+                    "SURPRISE_ATTACK_CHANCE, CAUGHT_CHANCE" +
+                    ") " +
+                    "VALUES (" +
+                    "'THIEF', 175, 20, 35, 7, 8, 4, " +
+                    "4, 2" +
+                    ");";
+            stmt.executeUpdate(sql);
+
+            sql = "INSERT OR IGNORE INTO HEROES (" +
+                    "HERO_TYPE, HP, MIN_DMG, MAX_DMG, ATK_SPD, HIT_RATE, BLOCK_CHANCE, " +
+                    "HEAL_MAX, HEAL_MIN" +
+                    ") " +
+                    "VALUES (" +
+                    "'PRIESTESS', 175, 25, 45, 5, 7, 4, " +
+                    "20, 10" +
+                    ");";
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            c.close();
+//System.out.println("DEBUG - Hero Records created successfully");
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+
 
 
     }
 
-    public static HashMap<String, Integer> pullValues(MonsterType theMonster) {
+    public static HashMap<String, Integer> pullMonsterValues(final MonsterType theMonster) {
         Connection c = null;
         Statement stmt = null;
         HashMap<String, Integer> monsterData = new HashMap<>();
 
         try {
-            c = DriverManager.getConnection("jdbc:sqlite:monsters.db");
+            c = DriverManager.getConnection("jdbc:sqlite:dungeon_adventure.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+//System.out.println("DEBUG - Opened monster database successfully");
 
             stmt = c.createStatement();
 
@@ -144,6 +227,43 @@ public class DungeonAdventureSQLDataBase {
             System.exit(0);
         }
         return monsterData;
+    }
+
+    public static HashMap<String, Integer> pullHeroValues(final HeroType theHero) {
+        Connection c = null;
+        Statement stmt = null;
+        HashMap<String, Integer> heroData = new HashMap<>();
+
+        try {
+            c = DriverManager.getConnection("jdbc:sqlite:dungeon_adventure.db");
+            c.setAutoCommit(false);
+//System.out.println("DEBUG - Opened hero database successfully");
+
+            stmt = c.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM HEROES WHERE HERO_TYPE = \'" +
+                    theHero.toString() +
+                    "\' ;");
+
+
+            heroData.put("HP", rs.getInt("HP"));
+            heroData.put("DmgMin", rs.getInt("MIN_DMG"));
+            heroData.put("DmgMax", rs.getInt("MAX_DMG"));
+            heroData.put("AtkSpd", rs.getInt("ATK_SPD"));
+            heroData.put("HitRate", rs.getInt("HIT_RATE"));
+            heroData.put("BlockChance", rs.getInt("BLOCK_CHANCE"));
+            heroData.put("CrushingBlowMax", rs.getInt("CRUSHING_BLOW_MAX"));
+            heroData.put("CrushingBlowMin", rs.getInt("CRUSHING_BLOW_MIN"));
+            heroData.put("SurpriseAttackChance", rs.getInt("SURPRISE_ATTACK_CHANCE"));
+            heroData.put("CaughtChance", rs.getInt("CAUGHT_CHANCE"));
+            heroData.put("HealMax", rs.getInt("HEAL_MAX"));
+            heroData.put("HealMin", rs.getInt("HEAL_MIN"));
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return heroData;
     }
 
 

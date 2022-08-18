@@ -203,6 +203,9 @@ public class Room implements Serializable {
 
     public void setEntrance(final boolean theValue) {
         myIsEntrance = theValue;
+        if (theValue) {
+            myRoomItems.clear();
+        }
     }
 
     public boolean isEntrance() {
@@ -211,6 +214,9 @@ public class Room implements Serializable {
 
     public void setExit(final boolean theValue) {
         myIsExit = theValue;
+        if (theValue) {
+            myRoomItems.clear();
+        }
     }
 
     public boolean isExit() {

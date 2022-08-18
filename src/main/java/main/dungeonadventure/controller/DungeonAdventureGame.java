@@ -19,7 +19,7 @@ public class DungeonAdventureGame {
 
         //Start the GUI / Game
         myGui = new DungeonAdventureGUI();
-        DungeonAdventureSQLDataBase.startDB();
+        DungeonAdventureSQLDataBase.buildDB();
         myGui.launchGUI();
 
     }
@@ -53,7 +53,6 @@ public class DungeonAdventureGame {
 
     protected static boolean loadGame(File theFilePath) {
         try {
-            //FileInputStream fileIn = new FileInputStream("/src/main/saves/game.ser");
             FileInputStream fileIn = new FileInputStream(theFilePath);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Dungeon loadedDungeon = (Dungeon) in.readObject();

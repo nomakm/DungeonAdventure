@@ -184,7 +184,7 @@ public class BattleController {
                 roomController.endBattle();
                 myMediaPlayer.stop();
             }
-            System.out.println("game_over_screen.fxml was loaded.");
+//System.out.println("game_over_screen.fxml was loaded.");
             Stage stage = (Stage) someRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

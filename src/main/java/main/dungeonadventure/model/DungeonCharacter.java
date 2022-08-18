@@ -118,7 +118,7 @@ public abstract class DungeonCharacter implements Serializable {
         if ((myHitRate * 10) > RAND_GEN.nextInt(RAND_UPPERBOUND)) {
             int damage = RAND_GEN.nextInt(((myDmgMax + 1)) - myDmgMin) + myDmgMin;
             theOpponent.setHP(theOpponent.getHP() - damage);
-            System.out.println(theOpponent.getClass().descriptorString() + " loses " + damage + " points");
+            System.out.println(theOpponent.getClass().getSimpleName() + " loses " + damage + " points");
         }
     }
 }

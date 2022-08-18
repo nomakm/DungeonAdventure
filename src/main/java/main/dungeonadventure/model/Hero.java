@@ -19,9 +19,9 @@ public abstract class Hero extends DungeonCharacter {
                  int theBlockChance) {
 
         super(theHP, theDmgMin, theDmgMax, theAtkSpd, theHitRate);
+        this.myHeroType = theHeroType;
         this.myCharName = theCharacterName;
         this.myBlockChance = theBlockChance;
-        this.myHeroType = theHeroType;
         this.myHealPotionCount = 0;
         this.myVisionPotionCount = 0;
         this.myPillarCount = 0;
