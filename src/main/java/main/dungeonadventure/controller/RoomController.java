@@ -30,40 +30,63 @@ import java.util.Random;
  * @version 8-2022
  */
 public class RoomController {
+
+    /** Groups representing doors in the room */
     @FXML
     private Group myEastDoors, myWestDoors;
+    /** Image View controls
+     * myNorthDoor - represents the north door in the room
+     * mySouthDoor - represents the south door in the room
+     * myHeroImg - holds image of the hero
+     * myMonsterImg - holds image of the monster
+     */
     @FXML
     private ImageView myNorthDoor, mySouthDoor, myHeroImg, myMonster;
+    /** Button controls representing arrows to other rooms based on direction */
     @FXML
     private Button myNorthArrow, mySouthArrow, myEastArrow, myWestArrow;
+    /** Button control representing the items in the room */
     @FXML
     private Button  myColumn, myMonsterButton, myVisPot, myHPPot,
             myUseVisionPotionButton, myUseHealthPotionButton2, myBomb;
+    /** Circle shape representing the pit */
     @FXML
     private Circle myPit;
+    /** Anchor Panes displaying the inventory or the vision */
     @FXML
     private AnchorPane myInventoryPane, myVisionPane;
+    /** Labels used in the inventory screen used to display item count and hero HP */
     @FXML
     private Label myPillarCountLabel, myHPPotionCountLabel, myVisionPotionCountLabel, myBombCountLabel, myHeroHPLabel;
+    /** Labels used in the vision to display neighboring room items */
     @FXML
     private Label myNWLabel, myNLabel, myNELabel, myWLabel, myCurrLabel, myELabel,
             mySWLabel, mySLabel, mySELabel;
+    /** First Anchor Pane in hierarchy is the parent root */
     @FXML
-    private Parent someRoot;
+    private Parent myRoot;
 
-    @FXML
-    private Stage stage;
-
+    /** Game Dungeon */
     private static Dungeon myDungeon;
+    /** Current Room hero is in */
     private Room myRoom;
+    /** Game Hero */
     private Hero myHero;
+    /** Room Monster*/
     private Monster myRoomMonster;
+    /** Items in the Room */
     private HashSet<RoomItem> myItems;
+    /** Labels of 8 neighboring rooms + current room */
     private HashMap<String, Label> myLabels;
+    /** Random object to generate random number */
     private Random myRand = new Random();
+    /** Song Media for dungeon */
     private Media myMedia;
+    /** Used to play Media */
     private MediaPlayer myMediaPlayer;
+    /** Image of hero selected */
     private Image myHeroImage;
+    /** Image of the monster in the room */
     private Image myMonsterImage;
 
 
@@ -81,6 +104,10 @@ public class RoomController {
 
     }
 
+
+    /**
+     * Loads room details, including: current room, hero, monster, doors, and items, in to game
+     */
     public void loadRoom() {
         this.myRoom = myDungeon.getCurrentRoom();
         this.myHero = myDungeon.getHero();
@@ -90,6 +117,10 @@ public class RoomController {
         setDoors();
     }
 
+
+    /**
+     * Sets the hero Image chosen in room screen
+     */
     public void setHeroImage() {
         String imageURL = "/assets/" + myHero.getHeroType().toString() + ".png";
         myHeroImage = new Image(getClass().getResourceAsStream(imageURL));
@@ -98,8 +129,9 @@ public class RoomController {
 
 
     /**
-     * Switches between rooms in the dungeon based on room items.
-     * @param theEvent - button click
+     * Switches between rooms in the dungeon based on direction clicked
+     * and updates room items.
+     * @param theEvent - button click used for getting direction
      */
     @FXML
     private void switchRoom(final ActionEvent theEvent) {
@@ -118,8 +150,12 @@ public class RoomController {
         }
     }
 
+
+    /**
+     *  Saves the current game user is in file and exits the game
+     */
     @FXML
-    private void saveAndExit(final ActionEvent theEvent) {
+    private void saveAndExit() {
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter for text files
@@ -135,6 +171,7 @@ public class RoomController {
         fileChooser.setInitialDirectory(recordsDir);
 
         //Show save file dialog
+        Stage stage = new Stage();
         File saveLocation = fileChooser.showSaveDialog(stage);
 
         if (saveLocation != null) {
@@ -145,15 +182,21 @@ public class RoomController {
 
     }
 
-    private void finishGame(String finishGame) {
+
+    /**
+     * When the game is  finished, switches to game over screen and updates it depending on
+     * win or lose outcome
+     * @param theOutcome - String representing win or lose scenario
+     */
+    private void finishGame(final String theOutcome) {
         try {
             myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("game_over_screen.fxml"));
             Parent root = loader.load();
             GameOverController gameOverController = loader.getController();
-            gameOverController.setScreen(finishGame);
+            gameOverController.setScreen(theOutcome);
 System.out.println("DEBUG - game_over_screen.fxml was loaded.");
-            Stage stage = (Stage) someRoot.getScene().getWindow();
+            Stage stage = (Stage) myRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -162,8 +205,10 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         }
     }
 
+
     /**
-     * Gives the hero the potion when a potion is clicked
+     * Gives the hero a health potion when a potion is clicked and removes it
+     * from the room
      */
     @FXML
     private void pickUpHealingPotion() {
@@ -172,8 +217,9 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         myRoom.removeItem(RoomItem.HEALTH_POTION);
     }
 
+
     /**
-     * Gives the hero a vision potion when picked up
+     * Gives the hero a vision potion when picked up and removes it from the room
      */
     @FXML
     private void pickUpVisionPotion() {
@@ -182,6 +228,10 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         myRoom.removeItem(RoomItem.VISION_POTION);
     }
 
+
+    /**
+     * Adds bomb to user inventory and removes it from the room
+     */
     @FXML
     private void pickUpBomb() {
         myHero.setBombCount(1);
@@ -189,16 +239,19 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         myRoom.removeItem(RoomItem.BOMB);
     }
 
+
+    /**
+     * Gives user 30 HP when health potion use button is clicked and user has a health potion.
+     * Removes health potion from room and updates potion count
+     * in inventory screen
+     */
     @FXML
-    private void useHealthPotion(ActionEvent event) {
+    private void useHealthPotion() {
         if (myHero.getHealthPotionCount() > 0) {
             int healingPoints = myHero.getHP() + 30;
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
-            Button button = (Button)event.getSource();
-            if (button.getId().equals("" + myUseHealthPotionButton2.getId())) {
-                openInventory();
-            }
+            openInventory();
             System.out.println("Health Potion used");
             if (myHero.getHealthPotionCount() == 0) {
                 myUseHealthPotionButton2.setVisible(false);
@@ -208,8 +261,13 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         }
     }
 
+
+    /**
+     * Displays vision screen showing 8 neighboring rooms and their items.
+     * Removes vision potion from room
+     */
     @FXML
-    private void useVisionPotion(final ActionEvent theEvent) {
+    private void useVisionPotion() {
         if (myHero.getVisionPotionCount() > 0) {
             HashMap<String, Room> neighbors = myDungeon.getNeighbors();
             for (String direction : neighbors.keySet()) {
@@ -252,12 +310,20 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         }
     }
 
+
+    /**
+     * Exits the vision
+     */
     @FXML
     private void exitVision() {
         myVisionPane.setVisible(false);
     }
 
 
+    /**
+     * Plays specified song
+     * @param theSongName - song to be played
+     */
     private void playMedia(String theSongName) {
         myMedia = new Media(getClass().getResource(theSongName).toString());
         myMediaPlayer = new MediaPlayer(myMedia);
@@ -265,10 +331,12 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         myMediaPlayer.play();
     }
 
-    private void stopMedia() {
-        myMediaPlayer.stop();
-    }
 
+    /**
+     * Groups the neighboring labels in the vision potion screen to be used
+     * when the vision screen is displayed
+     * @return HashMap of neighboring room labels
+     */
     private HashMap<String, Label> addLabels() {
         HashMap<String, Label> labels = new HashMap<>();
         labels.put("NORTHWEST", myNWLabel);
@@ -283,8 +351,9 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
         return labels;
     }
 
+
     /**
-     * Starts battle with the monster when monster is clicked
+     * Switches to battle screen with the monster when monster is clicked
      */
     @FXML
     private void monsterClicked() {
@@ -295,7 +364,7 @@ System.out.println("DEBUG - game_over_screen.fxml was loaded.");
             BattleController battleController = loader.getController();
             battleController.setScreen(myDungeon, myHeroImage, myMonsterImage);
 System.out.println("DEBUG - battle.fxml was loaded.");
-            Stage stage = (Stage) someRoot.getScene().getWindow();
+            Stage stage = (Stage) myRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -305,6 +374,10 @@ System.out.println("DEBUG - battle.fxml was loaded.");
 
     }
 
+
+    /**
+     * When a battle is over, removes the monster from the room and sets the doors
+     */
     public void endBattle() {
 System.out.println("DEBUG - Monster was defeated");
         myRoom.removeItem(RoomItem.MONSTER);
@@ -314,11 +387,21 @@ System.out.println("DEBUG - Monster was defeated");
     }
 
 
+    /**
+     * Closes inventory viewer
+     */
     @FXML
     public void closeInventory() {
         myInventoryPane.setVisible(false);
     }
 
+
+    /**
+     * Opens up the inventory viewer when the open inventory button is clicked.
+     * Sets Health Potion, Vision Potion, Bomb, and Pillar Count.
+     * Displays use buttons when user has health potion and/or vision potion.
+     * Displays HP Count
+     */
     @FXML
     public void openInventory() {
         myHPPotionCountLabel.setText("x " + myHero.getHealthPotionCount()+ " HP Potions");
@@ -335,6 +418,10 @@ System.out.println("DEBUG - Monster was defeated");
         }
     }
 
+
+    /**
+     * Adds Pillar to users inventory and removes the pillar from the room
+     */
     @FXML
     public void pickupPillar() {
         myHero.addPillarToInventory();
@@ -342,8 +429,9 @@ System.out.println("DEBUG - Monster was defeated");
         myColumn.setVisible(false);
     }
 
+
     /**
-     * moves the hero position in the dungeon based on which room the user is in
+     * Moves the hero position in the dungeon based on which room the user is in
      * @param theDirection - direction in which the user goes
      */
     private void moveHero(final Direction theDirection) {
@@ -359,6 +447,7 @@ System.out.println("DEBUG - Monster was defeated");
         }
 
     }
+
 
     /**
      * Checks the closed doors in a room to set room details
@@ -406,6 +495,7 @@ System.out.println("DEBUG - Monster was defeated");
             }
         }
     }
+
 
     /**
      * Checks the items in a room to set the room details
@@ -455,6 +545,11 @@ System.out.println("DEBUG - Monster was defeated");
         }
     }
 
+
+    /**
+     * Applies automatic damage to the player each time they enter a room with a pit,
+     * If the player's HP falls below 0, they lose the game
+     */
     private void fallInPit() {
         int damagePit = myHero.getHP() - (myRand.nextInt(20) + 1);
         System.out.println("you now have " + damagePit + " HP");
@@ -465,6 +560,7 @@ System.out.println("DEBUG - Monster was defeated");
         }
     }
 
+
     /**
      * Gets the current room the hero is in
      * @return Room - the current room the hero is in
@@ -472,7 +568,5 @@ System.out.println("DEBUG - Monster was defeated");
     private Room getHeroRoom() {
         return myDungeon.getCurrentRoom();
     }
-
-
 
 }

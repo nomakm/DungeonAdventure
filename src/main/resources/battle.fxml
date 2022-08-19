@@ -44,6 +44,6 @@
       <Label fx:id="myHeroHPLabel" layoutX="213.0" layoutY="284.0" />
       <Label fx:id="myMonsterHPLabel" layoutX="552.0" layoutY="284.0" />
       <Button fx:id="myUseBombButton" layoutX="176.0" layoutY="123.0" mnemonicParsing="false" onAction="#useBomb" styleClass="buttonControl" text="Use Bomb" />
-      <Label fx:id="noItemLabel" layoutX="14.0" layoutY="93.0" />
+      <Label fx:id="myItemLabel" layoutX="14.0" layoutY="93.0" />
    </children>
 </AnchorPane>

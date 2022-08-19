@@ -8,7 +8,8 @@ public class RoomTests {
     private static Room myRoom;
 
     @BeforeAll
-    static void buildDungeon() {
+    @Timeout(1)
+    static void buildDungeon() throws InterruptedException {
         myDungeon = new Dungeon();
         myRoom = myDungeon.getCurrentRoom();
     }

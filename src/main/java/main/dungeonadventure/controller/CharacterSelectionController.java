@@ -26,48 +26,60 @@ import java.util.Objects;
  * @version 8-2022
  */
 public class CharacterSelectionController {
+
+    /** Text Field control for user typing in their hero name */
     @FXML
     private TextField myHeroText;
+    /** RadioButton controls for selecting heroes */
     @FXML
     private RadioButton myThiefButton, myPriestessButton, myWarriorButton;
+    /** Label displaying error when hero name is not entered or hero is not chosen */
     @FXML
-    private Label myHeroLabel, myNameLabel, myErrorMessage;
+    private Label myErrorMessage;
+    /** First Anchor Pane in hierarchy is the parent root */
     @FXML
-    private AnchorPane someRoot;
+    private AnchorPane myRoot;
+    /**
+     * Image View Controls
+     * myThiefImage - holds the image for the Thief
+     * myPriestessImage - holds the image for the Priestess
+     * myWarriorImage - holds the image for the Warrior
+     */
     @FXML
     private ImageView myThiefImage, myPriestessImage, myWarriorImage;
 
-    private Stage myStage;
-    private Scene myScene;
-    private Parent myRoot;
-
+    /** Game hero object */
     private Hero myHero;
-    private String myHeroName;
+    /** Hero Type selected used to specify hero */
     private HeroType myHeroType;
+    /** Song Media for character selection */
     private Media myMedia;
+    /** Used to play Media */
     private MediaPlayer myMediaPlayer;
 
 
+    /**
+     * Initializes music when entering screen
+     */
     public void initialize() {
         playMedia("/assets/choosecharacter.mp3");
     }
 
+
     /**
      * When back button is hit, switches to welcome screen
-     * @param theEvent - button click
      */
     @FXML
-    private void switchToWelcomeScreen(final ActionEvent theEvent) {
+    private void switchToWelcomeScreen() {
         switchStageBuilder("welcome_screen.fxml");
     }
 
 
     /**
-     * When a hero is selected from choices, saves the hero type
-     * @param theEvent - radio button click
+     * When a hero is selected from choices, saves the hero type and styles the button selected
      */
     @FXML
-    private void chooseHero(final ActionEvent theEvent) {
+    private void chooseHero() {
         String thiefSelected = "/assets/THIEF_HIGHLIGHTED.png";
         String thiefUnselected = "/assets/THIEF.png";
         String priestessSelected = "/assets/PRIESTESS_HIGHLIGHTED.png";
@@ -101,26 +113,25 @@ public class CharacterSelectionController {
         }
     }
 
+
     /**
      * When name and hero are chosen and the next button is clicked will go to the
      * first room in the dungeon
-     * @param theEvent - button click
      */
     @FXML
-    private void switchToDungeon(final ActionEvent theEvent) throws IOException {
+    private void switchToDungeon() {
         if (myHeroText.getText().length() == 0) {
             myErrorMessage.setText("Please give your character a name.");
-            //myNameLabel.setTextFill(Color.RED);
         } else if (!myThiefButton.isSelected() && !myPriestessButton.isSelected()
                     && !myWarriorButton.isSelected()) {
             myErrorMessage.setText("Please select a character.");
-            //myHeroLabel.setTextFill(Color.RED);
         } else {
             DungeonAdventureGame.buildNewDungeon();
             createHero(myHeroType, myHeroText.getText());
             switchStageBuilder("dungeon.fxml");
         }
     }
+
 
     /**
      * Switches screens back to the welcome screen or the first room in the dungeon
@@ -132,9 +143,8 @@ public class CharacterSelectionController {
             myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(theFxmlName));
             Parent root = loader.load();
-
-System.out.println("DEBUG - dungeon.fxml was loaded.");
-            Stage stage = (Stage) someRoot.getScene().getWindow();
+            System.out.println("DEBUG - dungeon.fxml was loaded.");
+            Stage stage = (Stage) myRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -142,6 +152,7 @@ System.out.println("DEBUG - dungeon.fxml was loaded.");
             e.printStackTrace();
         }
     }
+
 
     /**
      * Creates the hero for the game given the hero type and hero name
@@ -162,13 +173,16 @@ System.out.println("DEBUG - dungeon.fxml was loaded.");
         DungeonAdventureGame.getDungeon().setHero(myHero);
     }
 
-    private void playMedia(String theSongName) {
+
+    /**
+     * Plays specified song
+     * @param theSongName - song to be played
+     */
+    private void playMedia(final String theSongName) {
         myMedia = new Media(getClass().getResource(theSongName).toString());
         myMediaPlayer = new MediaPlayer(myMedia);
         myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         myMediaPlayer.play();
     }
-
-
 
 }

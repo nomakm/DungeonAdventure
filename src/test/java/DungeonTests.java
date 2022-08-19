@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import main.dungeonadventure.model.*;
 import org.junit.jupiter.api.*;
 import java.awt.*;
+import java.time.Duration;
 import java.util.HashMap;
 
 public class DungeonTests {
@@ -9,7 +10,8 @@ public class DungeonTests {
     private static Dungeon myDungeon;
 
     @BeforeAll
-    static void makeDungeon() {
+    @Timeout(1)
+    static void makeDungeon() throws InterruptedException {
         myDungeon = new Dungeon();
     }
 

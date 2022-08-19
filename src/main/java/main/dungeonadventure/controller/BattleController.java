@@ -30,6 +30,7 @@ import java.util.Random;
  * @version 8-2022
  */
 public class BattleController {
+
     /** Group representing hero with sword */
     @FXML
     private Group myHeroFight;
@@ -42,7 +43,8 @@ public class BattleController {
      * noItemLabel - label displayed if hero does not contain an item
      */
     @FXML
-    private Label myMonsterNameLabel, myHeroNameLabel, myHeroHPLabel, myMonsterHPLabel, noItemLabel;
+    private Label myMonsterNameLabel, myHeroNameLabel, myHeroHPLabel, myMonsterHPLabel,
+            myItemLabel;
     /**
      * ImageView controls
      * myBattleHero - Image of the hero
@@ -63,15 +65,16 @@ public class BattleController {
     /** First Anchor Pane in hierarchy is the parent root */
     @FXML
     private Parent myRoot;
+
     /** Game Dungeon */
     private static Dungeon myDungeon;
     /** Current Room hero is in */
     private Room myRoom;
     /** Game Hero */
     private Hero myHero;
-    /** Room dungeon */
+    /** Room Monster*/
     private Monster myMonster;
-    /** Game dungeon */
+    /** Items in the Room */
     private HashSet<RoomItem> myItems;
     /** Random Object used in battle */
     private Random myRand = new Random();
@@ -99,6 +102,7 @@ public class BattleController {
             pt.play();
     }
 
+
     /**
      * Uses bomb on monster dealing 30 damage, checks if bomb is available and if monster is dead
      */
@@ -114,9 +118,10 @@ public class BattleController {
                 switchScreen("room1.fxml");
             }
         } else {
-            noItemLabel.setText("No bombs available");
+            myItemLabel.setText("No bombs available");
         }
     }
+
 
     /**
      * Uses a health potion. Checks if hero has health potion and gives Hero +30 HP if so.
@@ -133,18 +138,20 @@ public class BattleController {
             myHeroHPBar.setProgress(Double.valueOf(
                     myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP())));
         } else {
-            noItemLabel.setText("No health potions available");
+            myItemLabel.setText("No health potions available");
         }
     }
 
+
     /**
-     * Sets room fields for screen changes. Sets battle screen with Hero and Monster images, HP progress bars
-     * and labels.
+     * Sets room fields for screen changes. Sets battle screen with Hero and Monster images,
+     * HP progress bars and labels.
      * @param theDungeon - Dungeon used in the game
      * @param theHeroImage - Image used displaying the hero
      * @param theMonsterImage - Image used displaying the monster
      */
-    protected void setScreen(Dungeon theDungeon, Image theHeroImage, Image theMonsterImage) {
+    protected void setScreen(final Dungeon theDungeon, final Image theHeroImage,
+                             final Image theMonsterImage) {
         this.myDungeon = theDungeon;
         this.myRoom = myDungeon.getCurrentRoom();
         this.myHero = myDungeon.getHero();
@@ -163,15 +170,17 @@ public class BattleController {
         myMonsterHPBar.setProgress(getProgress(myMonster));
     }
 
+
     /**
      * Calculates the ratio of the current character HP vs their start HP level.
      * Used for progress bars
      * @param theCharacter - either the hero or room monster
      * @return Double - a Double representing the ratio of HP
      */
-    private Double getProgress(DungeonCharacter theCharacter) {
+    private Double getProgress(final DungeonCharacter theCharacter) {
         return (theCharacter.getHP() * 1.0) / theCharacter.getStartHP();
     }
+
 
     /**
      * Initializes music when entering screen
@@ -179,6 +188,7 @@ public class BattleController {
     public void initialize() {
         playMedia("/assets/battle.mp3");
     }
+
 
     /**
      * Goes through one round of battle;
@@ -192,11 +202,19 @@ public class BattleController {
         if (timesAtk == 0) {
             timesAtk = 1;
         }
+        System.out.println("Attack times = " + timesAtk);
         myDf = new DecimalFormat("#.#");
         for (int i = 0; i < timesAtk; i++) {
             System.out.println("Hero attacking monster");
             myHero.attack(myMonster);
             attackCharacter(myMonsterHPBar, myMonsterHPLabel, myMonster, "dungeon.fxml");
+//            if (myMonster.getHP() <= 0) {
+//                final PauseTransition pt = new PauseTransition(Duration.millis(2500));
+//                pt.setOnFinished( ( ActionEvent event ) -> {
+//                    switchScreen("dungeon.fxml");;
+//                });
+//                pt.play();
+//            }
         }
         if (myMonster.getHP() > 0) {
             int chanceToBlock = myHero.getMyChanceToBlock();
@@ -207,6 +225,7 @@ public class BattleController {
         }
     }
 
+
     /**
      * Sets HP progress bar and labels for the character getting attacked.
      * If character is dead the battle will end and switch to the specified screen.
@@ -215,21 +234,23 @@ public class BattleController {
      * @param theCharacter - the Dungeon Character getting attacked
      * @param theFxmlName - the fxml file to switch screens
      */
-    private void attackCharacter(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter, String theFxmlName) {
+    private void attackCharacter(final ProgressBar theProgressBar, final Label theLabel,
+                                 final DungeonCharacter theCharacter, final String theFxmlName) {
         if (theCharacter.getHP() <= 0) {
             theProgressBar.setProgress(0.0);
             theLabel.setText("0");
-            noItemLabel.setText(theCharacter.getClass().getSimpleName() + " was Defeated");
+            myItemLabel.setText(theCharacter.getClass().getSimpleName() + " was Defeated");
             final PauseTransition pt = new PauseTransition(Duration.millis(2500));
-            pt.play();
             pt.setOnFinished( ( ActionEvent event ) -> {
                 switchScreen(theFxmlName);;
             });
+            pt.play();
         } else {
             theProgressBar.setProgress(getProgress(theCharacter));
             theLabel.setText("" + theCharacter.getHP());
         }
     }
+
 
     /**
      * Animates hero attack on Monster lasting 1 second
@@ -245,11 +266,12 @@ public class BattleController {
         translate.play();
     }
 
+
     /**
      * Switches screen to dungeon or game over screen based on specified fxml name
      * @param FxmlName
      */
-    private void switchScreen(String FxmlName) {
+    private void switchScreen(final String FxmlName) {
         try {
             myMediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FxmlName));
@@ -260,7 +282,6 @@ public class BattleController {
             } else {
                 RoomController roomController = loader.getController();
                 roomController.endBattle();
-                myMediaPlayer.stop();
             }
             Stage stage = (Stage) myRoot.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -271,11 +292,12 @@ public class BattleController {
         }
     }
 
+
     /**
-     * Plays specified media
+     * Plays specified song
      * @param theSongName - song to be played
      */
-    private void playMedia(String theSongName) {
+    private void playMedia(final String theSongName) {
         myMedia = new Media(getClass().getResource(theSongName).toString());
         myMediaPlayer = new MediaPlayer(myMedia);
         myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

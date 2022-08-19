@@ -13,7 +13,8 @@ public class DungeonCharacterTests {
     private static DungeonCharacter myOpponent;
 
     @BeforeAll
-    static void createDungeon() {
+    @Timeout(1)
+    static void createDungeon() throws InterruptedException {
         myDungeon = new Dungeon();
     }
 

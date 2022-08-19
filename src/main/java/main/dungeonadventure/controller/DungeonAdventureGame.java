@@ -75,7 +75,7 @@ public class DungeonAdventureGame {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Dungeon loadedDungeon = (Dungeon) in.readObject();
             myDungeon = loadedDungeon;
-System.out.println("DEBUG - Dungeon object loaded");
+            System.out.println("DEBUG - Dungeon object loaded");
 
             in.close();
             fileIn.close();
@@ -84,10 +84,11 @@ System.out.println("DEBUG - Dungeon object loaded");
             i.printStackTrace();
             return false;
         } catch (ClassNotFoundException c) {
-System.out.println("DEBUG - Dungeon class not found");
+            System.out.println("DEBUG - Dungeon class not found");
             c.printStackTrace();
             return false;
         }
         return true;
     }
+
 }
