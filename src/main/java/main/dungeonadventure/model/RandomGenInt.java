@@ -10,5 +10,5 @@ public interface RandomGenInt {
          * @param theRandUpperbound - max upperbound integer for random generation
          * @return - a random or mock integer number
          */
-        int nextInt(int theRandUpperbound);
+        int nextInt(final int theRandUpperbound);
 }

@@ -14,7 +14,7 @@ public class MockRandomGen implements RandomGenInt {
      * Creates a Mock random generator
      * @param theInt - the int used as a mock random number
      */
-    public MockRandomGen(int theInt) {
+    public MockRandomGen(final int theInt) {
         this.myInt = theInt;
     }
 
@@ -23,7 +23,7 @@ public class MockRandomGen implements RandomGenInt {
      * @param theMax - max integer bound specified
      * @return myInt - the int used as a mock random number
      */
-    public int nextInt(int theMax) {
+    public int nextInt(final int theMax) {
         return myInt;
     }
 }

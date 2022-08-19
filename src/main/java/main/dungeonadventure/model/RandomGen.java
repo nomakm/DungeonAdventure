@@ -23,7 +23,7 @@ public class RandomGen implements RandomGenInt {
      * @param theMax - max upperbound integer specified
      * @return - returns a random number between 0-theMax
      */
-    public int nextInt(int theMax) {
+    public int nextInt(final int theMax) {
         return myRandom.nextInt(theMax);
     }
 }
