@@ -205,16 +205,11 @@ public class BattleController {
         System.out.println("Attack times = " + timesAtk);
         myDf = new DecimalFormat("#.#");
         for (int i = 0; i < timesAtk; i++) {
-            System.out.println("Hero attacking monster");
-            myHero.attack(myMonster);
-            attackCharacter(myMonsterHPBar, myMonsterHPLabel, myMonster, "dungeon.fxml");
-//            if (myMonster.getHP() <= 0) {
-//                final PauseTransition pt = new PauseTransition(Duration.millis(2500));
-//                pt.setOnFinished( ( ActionEvent event ) -> {
-//                    switchScreen("dungeon.fxml");;
-//                });
-//                pt.play();
-//            }
+            if (myMonster.getHP() > 0) {
+                System.out.println("Hero attacking monster");
+                myHero.attack(myMonster);
+                attackCharacter(myMonsterHPBar, myMonsterHPLabel, myMonster, "dungeon.fxml");
+            }
         }
         if (myMonster.getHP() > 0) {
             int chanceToBlock = myHero.getMyChanceToBlock();

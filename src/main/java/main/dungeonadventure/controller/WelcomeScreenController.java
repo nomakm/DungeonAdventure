@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -19,25 +18,23 @@ import java.io.File;
  * @version 8-2022
  */
 public class WelcomeScreenController {
+
+    /** First Anchor Pane in hierarchy is the parent root */
     @FXML
-    private Parent someRoot;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private Parent myRoot;
+    /** Displays about section*/
     @FXML
     private AnchorPane myAboutPane;
-    @FXML
-    private Button musicButton;
-    private Media myMedia;
+    /** Used to play Media */
     private MediaPlayer myMediaPlayer;
+
 
     /**
      * Starts a new game and switches to character selection screen
-     * @param theEvent - button or menuItem click
      */
     @FXML
-    private void switchToCharacterSelection(final ActionEvent theEvent) {
-        switchStageBuilder(theEvent, "character_selection.fxml");
+    private void switchToCharacterSelection() {
+        switchStageBuilder("character_selection.fxml");
     }
 
 
@@ -51,6 +48,10 @@ public class WelcomeScreenController {
         System.out.println("this is the about section");
     }
 
+
+    /**
+     * Exits the about section
+     */
     @FXML
     private void exitAbout() {
         myAboutPane.setVisible(false);
@@ -59,28 +60,26 @@ public class WelcomeScreenController {
 
     /**
      * Starts a tutorial for the game
-     * @param theEvent - menuItem click
      */
     @FXML
-    private void startTutorial(final ActionEvent theEvent) {
-        switchStageBuilder(theEvent, "tutorial_screen.fxml");
+    private void startTutorial() {
+        switchStageBuilder("tutorial_screen.fxml");
         System.out.println("you clicked start a tutorial");
     }
 
 
     /**
      * Switches screens back to the start_game screen, tutorial, or about section
-     * @param theEvent - button or menuItem click
      * @param theFxmlName - fxml file name for the screen to switch to
      */
     @FXML
-    private void switchStageBuilder(final ActionEvent theEvent, final String theFxmlName) {
+    private void switchStageBuilder(final String theFxmlName) {
         try {
             myMediaPlayer.stop();
-            root = FXMLLoader.load(getClass().getClassLoader().getResource(theFxmlName));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(theFxmlName));
             System.out.println("DEBUG - character_selection.fxml was loaded.");
-            stage = (Stage) someRoot.getScene().getWindow();
-            scene = new Scene(root);
+            Stage stage = (Stage) myRoot.getScene().getWindow();
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -88,12 +87,12 @@ public class WelcomeScreenController {
         }
     }
 
+
     /**
      * Starts a game that was saved previously.
-     * @param theEvent - button or menuItem click
      */
     @FXML
-    private void loadGame(final ActionEvent theEvent) {
+    private void loadGame() {
         FileChooser fileChooser = new FileChooser();
 
         //Set extension filter for text files
@@ -107,28 +106,36 @@ public class WelcomeScreenController {
         fileChooser.setInitialDirectory(recordsDir);
 
         //Show save file dialog
+        Stage stage = new Stage();
         File saveLocation = fileChooser.showOpenDialog(stage);
 
         if (saveLocation != null) {
             boolean gameLoaded = DungeonAdventureGame.loadGame(saveLocation);
             if (gameLoaded) {
 
-                switchStageBuilder(theEvent, "dungeon.fxml");
+                switchStageBuilder("dungeon.fxml");
             }
         }
 
     }
 
+
+    /**
+     * Initializes music when screen is displayed
+     */
     public void initialize() {
         playMusic();
     }
 
+
+    /**
+     * Plays title theme song
+     */
     private void playMusic() {
-        myMedia = new Media(getClass().getResource("/assets/titletheme.mp3").toString());
-        myMediaPlayer = new MediaPlayer(myMedia);
+        Media media = new Media(getClass().getResource("/assets/titletheme.mp3").toString());
+        myMediaPlayer = new MediaPlayer(media);
         myMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         myMediaPlayer.play();
     }
-
 
 }

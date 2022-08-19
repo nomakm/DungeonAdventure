@@ -5,16 +5,30 @@ import java.awt.*;
 import java.time.Duration;
 import java.util.HashMap;
 
+/**
+ * Tests class used for testing the Dungeon class
+ * @author Micaela Nomakchteinsky
+ * @version 8-2022
+ */
 public class DungeonTests {
 
+    /** Dungeon used for tests */
     private static Dungeon myDungeon;
 
+
+    /**
+     * Creates dungeon for use in tests
+     * @throws InterruptedException - throws exception if timed out. Timeout = 1s
+     */
     @BeforeAll
     @Timeout(1)
     static void makeDungeon() throws InterruptedException {
         myDungeon = new Dungeon();
     }
 
+    /**
+     * Tests that when starting the dungeon the hero is set at the Top Left room
+     */
     @Test
     @DisplayName("Get Position starts at Beginning")
     void getPosBeg() {
@@ -23,6 +37,10 @@ public class DungeonTests {
         assertEquals(expectedPoint, actualPoint);
     }
 
+
+    /**
+     * Tests setting the hero position at the start. Top left corner
+     */
     @Test
     @DisplayName("Set Pos at Start Test")
     void setPosAtStart() {
@@ -32,6 +50,10 @@ public class DungeonTests {
         assertEquals(pointExpected, pointActual);
     }
 
+
+    /**
+     * Tests setting the hero position at the end. Bottom right corner
+     */
     @Test
     @DisplayName("Set Pos at End Test")
     void setPosAtEnd() {
@@ -41,6 +63,10 @@ public class DungeonTests {
             assertEquals(pointExpected, pointActual);
     }
 
+
+    /**
+     * Tests setPosition throws exception when setting hero position in buffer rows/columns
+     */
     @Test
     @DisplayName("Set Position Throws Exception")
     void setPosException() {
@@ -52,6 +78,10 @@ public class DungeonTests {
         );
     }
 
+
+    /**
+     * Tests setting hero works for all types of heroes
+     */
     @Test
     @DisplayName("Set Hero Works For All Types")
     void setHeroAllTypes() {
@@ -71,12 +101,20 @@ public class DungeonTests {
         assertEquals(expectedHero, actualHero);
     }
 
+
+    /**
+     * Tests setHero throws exception when heroType is null
+     */
     @Test
     @DisplayName("Set Hero Throws Exception")
     void setHeroException() {
         assertThrows(IllegalArgumentException.class, () -> myDungeon.setHero(null));
     }
 
+
+    /**
+     * Tests that room size is correct 4x4 with 1 room buffer on each side
+     */
     @Test
     @DisplayName("Room Size is Correct")
     void roomSize() {
@@ -84,6 +122,10 @@ public class DungeonTests {
         assertEquals(6, actualSize);
     }
 
+
+    /**
+     * Tests that getPillarCount is set to 4
+     */
     @Test
     @DisplayName("Pillar Count is set to 4")
     void test() {
@@ -91,6 +133,10 @@ public class DungeonTests {
         assertEquals(4, actualCount);
     }
 
+
+    /**
+     * Tests correct neighbors are set to null for the top left corner room
+     */
     @Test
     @DisplayName("Neighbors for Top Left corner return correct null values")
     void neighborTLCorners() {
@@ -105,6 +151,10 @@ public class DungeonTests {
         );
     }
 
+
+    /**
+     * Tests correct neighbors are set to null for the top right corner room
+     */
     @Test
     @DisplayName("Neighbors for Top Right corner return correct null values")
     void neighborTRCorners() {
@@ -119,6 +169,10 @@ public class DungeonTests {
         );
     }
 
+
+    /**
+     * Tests correct neighbors are set to null for the bottom left corner room
+     */
     @Test
     @DisplayName("Neighbors for Bottom Left corner return correct null values")
     void neighborBLCorners() {
@@ -133,6 +187,10 @@ public class DungeonTests {
         );
     }
 
+
+    /**
+     * Tests correct neighbors are set to null for the bottom right corner room
+     */
     @Test
     @DisplayName("Neighbors for Bottom Right corner return correct null values")
     void neighborBRCorners() {
@@ -148,6 +206,10 @@ public class DungeonTests {
         );
     }
 
+
+    /**
+     * Tests that doors do not open for top left corner room
+     */
     @Test
     @DisplayName("Does not open Corner Doors")
     void cornerDoors() {

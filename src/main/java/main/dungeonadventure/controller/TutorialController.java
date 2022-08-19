@@ -1,5 +1,4 @@
 package main.dungeonadventure.controller;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,22 +12,31 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
 import java.util.LinkedList;
 
 public class TutorialController {
+
+    /** Image holding specific tutorial step */
     @FXML
     private ImageView myTutImage;
+    /** Label displaying text of specific tutorial step */
     @FXML
     private Label myTutText;
+    /** Button control for back and next*/
     @FXML
     private Button myBackButton, myNextButton;
 
+    /** Stores all images used in tutorial in step order */
     private LinkedList<Image> images = new LinkedList<>();
+    /** Stores all text used in tutorial in step order */
     private LinkedList<String> imageText = new LinkedList<>();
+    /** Integer used to keep track of step user is in tutorial */
     private int myStep = 0;
+    /** Used to play Media */
     private MediaPlayer myMediaPlayer;
 
+
+    /** Stores all tutorial Images and text. Plays music for tutorial screen */
     public void initialize() {
         images.add(new Image(getClass().getResourceAsStream(
                         "/assets/tutorial_images/select_char_image.png")));
@@ -73,6 +81,9 @@ public class TutorialController {
         playMusic();
     }
 
+
+    /** Increments step in tutorial based on if user presses back or next button.
+     * Sets tutorial image and text for step */
     @FXML
     private void nextStep(ActionEvent theEvent) {
         Button button = (Button)theEvent.getSource();
@@ -96,6 +107,10 @@ public class TutorialController {
         myTutText.setText(imageText.get(myStep));
     }
 
+
+    /** Switches back to welcome screen when user wants to end the tutorial
+     * @param theEvent - Button clicked
+     */
     @FXML
     private void switchToWelcomeScreen(ActionEvent theEvent) {
         try {
@@ -112,6 +127,10 @@ public class TutorialController {
         }
     }
 
+
+    /**
+     * Plays dungeon song
+     */
     private void playMusic() {
         Media myMedia = new Media(getClass().getResource("/assets/dungeon.mp3").toString());
         myMediaPlayer = new MediaPlayer(myMedia);
