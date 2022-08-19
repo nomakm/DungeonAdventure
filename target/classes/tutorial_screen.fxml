@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.TutorialController">
+   <children>
+      <ImageView fx:id="myTutImage" fitHeight="237.0" fitWidth="419.0" layoutX="122.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/tutorial_images/select_char_image.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="myTutText" contentDisplay="CENTER" layoutX="8.0" layoutY="257.0" lineSpacing="1.0" prefHeight="101.0" prefWidth="592.0" text="When starting a game, give your hero a name and select from the 3 hero types: The thief is quick and may attack twice at once! The Priestess is a healer and heals with every attack! The warrior is strong and may hit the monster with a super strong attack!" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="myBackButton" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#nextStep" styleClass="buttonControl" text="Back" visible="false" />
+      <Button fx:id="myNextButton" layoutX="542.0" layoutY="361.0" mnemonicParsing="false" onAction="#nextStep" styleClass="buttonControl" text="Next" />
+      <Button layoutX="253.0" layoutY="361.0" mnemonicParsing="false" onAction="#switchToWelcomeScreen" styleClass="buttonControl" text="Back to Game" />
+   </children>
+</AnchorPane>

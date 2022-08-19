@@ -44,6 +44,14 @@ public class Warrior extends Hero {
         this.mySurpriseAtk = DungeonAdventureSQLDataBase.pullHeroValues(HeroType.WARRIOR).get("SurpriseAttackChance");
     }
 
+    /**
+     * Gets Crushing Blow Min points of character
+     * @return Crushing blow min points of character
+     */
+    public int getCrushingBlowMin() {
+        return myCrushingBlowMin;
+    }
+
 
     /**
      * Overrides DungeonCharacter attack()
@@ -52,10 +60,9 @@ public class Warrior extends Hero {
      */
     @Override
     public void attack(final DungeonCharacter theOpponent) {
-        Random rand = new Random();
-        if (mySurpriseAtk > (rand.nextInt(10) + 1)) {
+        if (mySurpriseAtk > (myRand.nextInt(10) + 1)) {
             System.out.println("Special Attack used");
-            int damage = rand.nextInt(myCrushingBlowMax) + myCrushingBlowMin;
+            int damage = myRand.nextInt(myCrushingBlowMax) + myCrushingBlowMin;
             theOpponent.setHP(theOpponent.getHP() - damage);
             System.out.println(theOpponent.getClass().descriptorString() + " loses " + damage + " points");
         } else {

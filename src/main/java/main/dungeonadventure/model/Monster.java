@@ -44,6 +44,22 @@ public class Monster extends DungeonCharacter {
     }
 
     /**
+     * Gets minimum heal points of character
+     * @return minimum heal points of character
+     */
+    public int getMinHealPoints() {
+        return myMinHealPoints;
+    }
+
+    /**
+     * Gets maximum heal points of character
+     * @return maximum heal points of character
+     */
+    public int getMaxHealPoints() {
+        return myMaxHealPoints;
+    }
+
+    /**
      * Returns what type of monster
      * @return type of monster
      */

@@ -44,9 +44,9 @@ public class TutorialController {
                 "/assets/tutorial_images/win_image.png")));
 
         imageText.add("When starting a game, give your hero a name and select from the " +
-                "3 hero types: The thief is quick and may attack twice at once! " +
+                "3 hero types: The Thief is quick and may attack twice at once! " +
                 "The Priestess is a healer and heals with every attack! " +
-                "The warrior is strong and may hit the monster with a super strong attack!");
+                "The Warrior is strong and may hit the monster with a super strong attack!");
         imageText.add("Enter the dungeon and search for 4 Pillars. " +
                 "Come across many different items: " +
                 "a blue vision potion will help you see neighboring rooms," +
@@ -56,15 +56,15 @@ public class TutorialController {
                 "and a pillar will need to be picked up to exit the maze");
         imageText.add("Clicking the Monster will launch an attack " +
                 "between your hero and the monster! " +
-                "Press attack to fire an attack on the monster and the monster will attack back!" +
-                " Use an Health potion to increase your HP when you're low. " +
+                "Press attack to fire an attack on the monster!" +
+                " Use a Health potion to increase your HP when you're low. " +
                 "Use a bomb to blast the monster, immediately dealing 20 HP!");
         imageText.add("When picking up items in a room, " +
                 "you can open your inventory and see the items you've collected! " +
                 "Make sure you have 4 Pillars before exiting the dungeon. " +
                 "You can use the Health Potions and Vision Potions anytime you are in a room");
         imageText.add("If you use the Vision Potion you acquire the ability to see " +
-                "8 neighboring rooms surrounding your room. " +
+                "8 neighboring rooms surrounding you. " +
                 "Use this to avoid entering rooms with pits and monsters," +
                 " and to see where the pillars are!");
         imageText.add("Once you have found 4 pillars and the exit room you have won the game!!" +

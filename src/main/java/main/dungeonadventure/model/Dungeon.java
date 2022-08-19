@@ -3,7 +3,6 @@ package main.dungeonadventure.model;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -50,7 +49,6 @@ public class Dungeon implements Serializable {
         do {
             buildDungeon();
         } while (!DungeonSolver.isDungeonSolvable(this));
-
     }
 
     /**

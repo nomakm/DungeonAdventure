@@ -11,8 +11,6 @@ import java.util.Random;
  */
 public abstract class DungeonCharacter implements Serializable {
 
-    /** Random object for random number generation in code.*/
-    public static final Random RAND_GEN = new Random();
     /** This integer is used for creating a random number from 0 - 100*/
     private static final int RAND_UPPERBOUND = 100;
 
@@ -28,6 +26,8 @@ public abstract class DungeonCharacter implements Serializable {
     private final int myHitRate;
     /**  Character's starting HP. */
     private int myStartHP;
+    /** Random object for random number generation in code.*/
+    protected static RandomGenInt myRand = new RandomGen();
 
 
     /**
@@ -49,6 +49,39 @@ public abstract class DungeonCharacter implements Serializable {
         this.myHitRate = theHitRate;
         this.myStartHP = theHP;
 
+    }
+
+    /**
+     * Sets the Random Generator for the hero
+     * @param theRandom - random generator to be used
+     */
+    public void setRandom(RandomGenInt theRandom) {
+        myRand = theRandom;
+    }
+
+
+    /**
+     * Gets minimum damage of character
+     * @return Gets minimum damage of character
+     */
+    public int getDmgMin() {
+        return myDmgMin;
+    }
+
+    /**
+     * Gets maximum damage of character
+     * @return Gets maximum damage of character
+     */
+    public int getDmgMax() {
+        return myDmgMax;
+    }
+
+    /**
+     * Gets hit of character
+     * @return Gets hit rate of character
+     */
+    public int getHitRate() {
+        return myHitRate;
     }
 
 
@@ -98,8 +131,8 @@ public abstract class DungeonCharacter implements Serializable {
      * @param theOpponent The Character to attack (Hero or Monster)
      */
     public void attack(final DungeonCharacter theOpponent) {
-        if ((myHitRate * 10) > RAND_GEN.nextInt(RAND_UPPERBOUND)) {
-            int damage = RAND_GEN.nextInt(((myDmgMax + 1)) - myDmgMin) + myDmgMin;
+        if ((myHitRate * 10) > myRand.nextInt(RAND_UPPERBOUND)) {
+            int damage = myRand.nextInt(((myDmgMax + 1)) - myDmgMin) + myDmgMin;
             theOpponent.setHP(theOpponent.getHP() - damage);
             System.out.println(theOpponent.getClass().getSimpleName() + " loses " + damage + " points");
         }

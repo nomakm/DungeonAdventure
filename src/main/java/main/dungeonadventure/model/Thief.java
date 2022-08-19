@@ -49,8 +49,7 @@ public class Thief extends Hero {
      */
     @Override
     public void attack(final DungeonCharacter theOpponent) {
-        Random rand = new Random();
-        int chance = (rand.nextInt(10) + 1);
+        int chance = (myRand.nextInt(10) + 1);
         if (mySurpriseAtk > chance) {
             System.out.println("Special Attack used");
             for (int i = 0; i < 2; i++) {

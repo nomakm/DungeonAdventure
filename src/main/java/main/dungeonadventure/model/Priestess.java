@@ -46,11 +46,10 @@ public class Priestess extends Hero {
      */
     @Override
     public void attack(final DungeonCharacter theOpponent) {
-        Random rand = new Random();
         int chanceForSpecial = 2;
-        if(rand.nextInt(10) < chanceForSpecial) {
+        if(myRand.nextInt(10) < chanceForSpecial) {
             System.out.println("Healed priestess special attack");
-            setHP(getHP() + (rand.nextInt(myHealMax - myHealMin + 1) + myHealMin));
+            setHP(getHP() + (myRand.nextInt(myHealMax - myHealMin + 1) + myHealMin));
         }
         super.attack(theOpponent);
     }

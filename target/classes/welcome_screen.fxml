@@ -442,7 +442,7 @@
                         <Image url="@assets/wall_corner_top_left.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="49.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="51.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/THIEF.png" />
                      </image>
@@ -485,7 +485,7 @@
       </ImageView>
       <AnchorPane fx:id="myAboutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="636.0" styleClass="anchor-pane" visible="false">
          <children>
-            <Label layoutX="56.0" layoutY="42.0" prefHeight="101.0" prefWidth="500.0" text="Dungeon Adventure, is a single-player, interactive adventure game where a hero, the user, must navigate their way through a maze, fighting monsters and drinking potions along the way, to retrieve the four pillars of OO." textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="42.0" prefHeight="101.0" prefWidth="500.0" text="Dungeon Adventure, is a single-player, interactive adventure game where a hero, must navigate their way through a maze, fighting monsters and drinking potions along the way, to retrieve the four pillars of OO." textAlignment="CENTER" wrapText="true" />
             <Label layoutX="56.0" layoutY="152.0" prefHeight="17.0" prefWidth="500.0" text="Created by Luke Smith, Micaela Nomakchteinsky, and Michael Doan" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="56.0" layoutY="192.0" prefHeight="17.0" prefWidth="500.0" text="Dungeon Music by Crossed Killer" textAlignment="CENTER" wrapText="true" />
             <Label layoutX="56.0" layoutY="232.0" prefHeight="17.0" prefWidth="500.0" text="All other music by Marllon Silva a.k.a xDeviruchi" textAlignment="CENTER" wrapText="true" />
