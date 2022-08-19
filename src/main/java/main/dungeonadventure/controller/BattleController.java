@@ -26,33 +26,67 @@ import java.util.Random;
 /**
  * Starts battle with monster
  * @Author Micaela Nomakchteinsky
+ * @Author Luke Smith
  * @version 8-2022
  */
 public class BattleController {
+    /** Group representing hero with sword */
     @FXML
     private Group myHeroFight;
+    /**
+     * Label controls
+     * myMonsterNameLabel - label with monster type as text
+     * myHeroLabel - label with hero name as text
+     * myHeroHPLabel - label displaying hero HP
+     * myMonsterHPLabel - label displaying monster HP
+     * noItemLabel - label displayed if hero does not contain an item
+     */
     @FXML
     private Label myMonsterNameLabel, myHeroNameLabel, myHeroHPLabel, myMonsterHPLabel, noItemLabel;
+    /**
+     * ImageView controls
+     * myBattleHero - Image of the hero
+     * myBattleMonster - Image of the monster
+     */
     @FXML
     private ImageView myBattleHero, myBattleMonster;
+    /**
+     * ProgressBar controls
+     * myHeroHPBar - progress bar for hero
+     * myMonsterHPBar - progress bar for monster
+     */
     @FXML
     private ProgressBar myHeroHPBar, myMonsterHPBar;
-    @FXML
-    private Parent someRoot;
+    /** Button control used for attacking */
     @FXML
     private Button myAttackButton;
-
+    /** First Anchor Pane in hierarchy is the parent root */
+    @FXML
+    private Parent myRoot;
+    /** Game Dungeon */
     private static Dungeon myDungeon;
+    /** Current Room hero is in */
     private Room myRoom;
+    /** Game Hero */
     private Hero myHero;
+    /** Room dungeon */
     private Monster myMonster;
+    /** Game dungeon */
     private HashSet<RoomItem> myItems;
+    /** Random Object used in battle */
     private Random myRand = new Random();
+    /** Used to play Media */
     private MediaPlayer myMediaPlayer;
+    /** Image used for Hero */
     private Image myHeroImage;
+    /** Song Media for battle */
     private Media myMedia;
+    /** Decimal Format to 10th digit */
     private DecimalFormat myDf;
 
+    /**
+     * Makes Hero attack the room Monster
+     */
     @FXML
     private void attackClicked() {
             myAttackButton.setDisable(true);
@@ -65,6 +99,9 @@ public class BattleController {
             pt.play();
     }
 
+    /**
+     * Uses bomb on monster dealing 30 damage, checks if bomb is available and if monster is dead
+     */
     @FXML
     private void useBomb() {
         if (myHero.getBombCount() > 0) {
@@ -81,20 +118,32 @@ public class BattleController {
         }
     }
 
+    /**
+     * Uses a health potion. Checks if hero has health potion and gives Hero +30 HP if so.
+     * Sets progress bar and HP label for the hero.
+     */
     @FXML
-    private void useHealthPotion(ActionEvent event) {
+    private void useHealthPotion() {
         if (myHero.getHealthPotionCount() > 0) {
             int healingPoints = myHero.getHP() + 30;
             myHero.setHP(healingPoints);
             myHero.setHealPotionCount(-1);
             System.out.println("Health Potion used");
             myHeroHPLabel.setText("+30");
-            myHeroHPBar.setProgress(Double.valueOf(myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP())));
+            myHeroHPBar.setProgress(Double.valueOf(
+                    myDf.format((myHero.getHP() * 1.0) / myHero.getStartHP())));
         } else {
             noItemLabel.setText("No health potions available");
         }
     }
 
+    /**
+     * Sets room fields for screen changes. Sets battle screen with Hero and Monster images, HP progress bars
+     * and labels.
+     * @param theDungeon - Dungeon used in the game
+     * @param theHeroImage - Image used displaying the hero
+     * @param theMonsterImage - Image used displaying the monster
+     */
     protected void setScreen(Dungeon theDungeon, Image theHeroImage, Image theMonsterImage) {
         this.myDungeon = theDungeon;
         this.myRoom = myDungeon.getCurrentRoom();
@@ -107,21 +156,35 @@ public class BattleController {
         myBattleMonster.setImage(theMonsterImage);
         myMonsterNameLabel.setText(myMonster.getMonsterType().toString() + " HP");
         myHeroNameLabel.setText(myHero.getMyCharacterName() + " HP");
-        Double hp = myHero.getHP() * 1.0;
         myDf = new DecimalFormat("#,#");
-        Double hpDec = (myHero.getHP() * 1.0) / myHero.getStartHP();
         myHeroHPLabel.setText("" + myHero.getHP());
         myMonsterHPLabel.setText("" + myMonster.getHP());
-        //myHeroHPLabel.setText("" + Double.valueOf(myDf.format(hpDec)));
-        myHeroHPBar.setProgress((myHero.getHP() * 1.0) / myHero.getStartHP());
-        myMonsterHPBar.setProgress((myMonster.getHP() * 1.0) / myMonster.getStartHP());
+        myHeroHPBar.setProgress(getProgress(myHero));
+        myMonsterHPBar.setProgress(getProgress(myMonster));
     }
 
+    /**
+     * Calculates the ratio of the current character HP vs their start HP level.
+     * Used for progress bars
+     * @param theCharacter - either the hero or room monster
+     * @return Double - a Double representing the ratio of HP
+     */
+    private Double getProgress(DungeonCharacter theCharacter) {
+        return (theCharacter.getHP() * 1.0) / theCharacter.getStartHP();
+    }
+
+    /**
+     * Initializes music when entering screen
+     */
     public void initialize() {
         playMedia("/assets/battle.mp3");
     }
 
-
+    /**
+     * Goes through one round of battle;
+     * hero attacks monster a set amount of times based on their attack speed
+     * compared to the monster, then monster attacks hero, if alive.
+     */
     private void battle() {
         int monsterSpd = myMonster.getAtkSpd();
         int heroSpd = myHero.getAtkSpd();
@@ -144,6 +207,14 @@ public class BattleController {
         }
     }
 
+    /**
+     * Sets HP progress bar and labels for the character getting attacked.
+     * If character is dead the battle will end and switch to the specified screen.
+     * @param theProgressBar - attacked character progress bar
+     * @param theLabel - attacked character label
+     * @param theCharacter - the Dungeon Character getting attacked
+     * @param theFxmlName - the fxml file to switch screens
+     */
     private void attackCharacter(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter, String theFxmlName) {
         if (theCharacter.getHP() <= 0) {
             theProgressBar.setProgress(0.0);
@@ -155,16 +226,14 @@ public class BattleController {
                 switchScreen(theFxmlName);;
             });
         } else {
-            setHPChanges(theProgressBar, theLabel, theCharacter);
+            theProgressBar.setProgress(getProgress(theCharacter));
+            theLabel.setText("" + theCharacter.getHP());
         }
     }
 
-    private void setHPChanges(ProgressBar theProgressBar, Label theLabel, DungeonCharacter theCharacter) {
-        Double hpLevel = Double.valueOf(myDf.format((theCharacter.getHP() * 1.0) / theCharacter.getStartHP()));
-        theProgressBar.setProgress(hpLevel);
-        theLabel.setText("" + theCharacter.getHP());
-    }
-
+    /**
+     * Animates hero attack on Monster lasting 1 second
+     */
     private void animateAttack() {
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(myHeroFight);
@@ -176,6 +245,10 @@ public class BattleController {
         translate.play();
     }
 
+    /**
+     * Switches screen to dungeon or game over screen based on specified fxml name
+     * @param FxmlName
+     */
     private void switchScreen(String FxmlName) {
         try {
             myMediaPlayer.stop();
@@ -189,8 +262,7 @@ public class BattleController {
                 roomController.endBattle();
                 myMediaPlayer.stop();
             }
-//System.out.println("game_over_screen.fxml was loaded.");
-            Stage stage = (Stage) someRoot.getScene().getWindow();
+            Stage stage = (Stage) myRoot.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -199,6 +271,10 @@ public class BattleController {
         }
     }
 
+    /**
+     * Plays specified media
+     * @param theSongName - song to be played
+     */
     private void playMedia(String theSongName) {
         myMedia = new Media(getClass().getResource(theSongName).toString());
         myMediaPlayer = new MediaPlayer(myMedia);
