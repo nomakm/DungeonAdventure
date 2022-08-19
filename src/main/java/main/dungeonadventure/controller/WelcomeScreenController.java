@@ -14,7 +14,8 @@ import java.io.File;
 
 /**
  * Controller class for the welcome screen
- * @Author Micaela Nomakchteinsky
+ * @author Micaela Nomakchteinsky
+ * @author Luke Smith
  * @version 8-2022
  */
 public class WelcomeScreenController {

@@ -14,6 +14,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import java.util.LinkedList;
 
+/**
+ * Controller class for the tutorial screen
+ * @author Micaela Nomakchteinsky
+ * @version 8-2022
+ */
 public class TutorialController {
 
     /** Image holding specific tutorial step */
