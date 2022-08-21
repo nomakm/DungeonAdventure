@@ -286,4 +286,13 @@ public class DungeonCharacterTests {
         assertEquals(1, hero.getPillarCount());
     }
 
+    @Test
+    @DisplayName("Monster healing")
+    void monsterHeal() {
+        RandomGenInt rand = new MockRandomGen(0);
+        Monster monster = new MonsterFactory().buildMonster(MonsterType.SKELETON);
+        monster.setRandom(rand);
+        monster.heal();
+        assertEquals(160, monster.getHP());
+    }
 }

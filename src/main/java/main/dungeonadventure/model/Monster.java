@@ -67,4 +67,16 @@ public class Monster extends DungeonCharacter {
         return myMonsterType;
     }
 
+    /**
+     * Chance to heal monster
+     * Rolls for a chance to heal
+     */
+    public void heal() {
+        if (myChanceToHeal > myRand.nextInt(10) + 1) {
+            int heal = myRand.nextInt(myMaxHealPoints - myMinHealPoints + 1) + myMinHealPoints;
+            setHP(getHP() + heal);
+            System.out.println("Monster healing");
+        }
+    }
+
 }

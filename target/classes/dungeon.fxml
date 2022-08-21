@@ -593,7 +593,7 @@
                         <Font name="Arial Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Button fx:id="myUseVisionPotionButton" layoutX="236.0" layoutY="17.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
+                  <Button fx:id="myUseVisionPotionButton" layoutX="260.0" layoutY="19.0" mnemonicParsing="false" onAction="#useVisionPotion" styleClass="buttonControl" text="Use Vision Potion" visible="false" />
                </children>
             </Group>
             <Group layoutX="41.0" layoutY="244.0">

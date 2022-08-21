@@ -208,6 +208,7 @@ public class BattleController {
             if (myMonster.getHP() > 0) {
                 System.out.println("Hero attacking monster");
                 myHero.attack(myMonster);
+                myMonster.heal();
                 attackCharacter(myMonsterHPBar, myMonsterHPLabel, myMonster, "dungeon.fxml");
             }
         }

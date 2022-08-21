@@ -62,7 +62,7 @@ public class Warrior extends Hero {
     public void attack(final DungeonCharacter theOpponent) {
         if (mySurpriseAtk > (myRand.nextInt(10) + 1)) {
             System.out.println("Special Attack used");
-            int damage = myRand.nextInt(myCrushingBlowMax) + myCrushingBlowMin;
+            int damage = myRand.nextInt(myCrushingBlowMax - myCrushingBlowMin + 1) + myCrushingBlowMin;
             theOpponent.setHP(theOpponent.getHP() - damage);
             System.out.println(theOpponent.getClass().descriptorString() + " loses " + damage + " points");
         } else {

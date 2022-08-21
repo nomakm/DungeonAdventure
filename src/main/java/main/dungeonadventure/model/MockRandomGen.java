@@ -3,7 +3,7 @@ package main.dungeonadventure.model;
 /**
  * Mock Random Generator used for testing
  * @author Micaela Nomakchteinsky
- * @verion 8-2022
+ * @version 8-2022
  */
 public class MockRandomGen implements RandomGenInt {
 
