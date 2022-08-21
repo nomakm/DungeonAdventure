@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.GameOverController">
+   <children>
+      <Label fx:id="myFinishLabel" layoutX="189.0" layoutY="98.0" styleClass="largeLabel" text="You Won :)" />
+      <Button fx:id="myPlayAgain" layoutX="148.0" layoutY="229.0" mnemonicParsing="false" onAction="#playAgain" styleClass="buttonControl" text="Play Again?" />
+      <Button fx:id="myQuitGame" layoutX="370.0" layoutY="229.0" mnemonicParsing="false" onAction="#quitGame" styleClass="buttonControl" text="Quit Game?" />
+   </children>
+</AnchorPane>

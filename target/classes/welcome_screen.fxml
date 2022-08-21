@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="myRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="639.0" styleClass="anchor-pane" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dungeonadventure.controller.WelcomeScreenController">
+   <children>
+      <AnchorPane layoutY="-28.0" prefHeight="343.0" prefWidth="642.0">
+         <children>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@assets/floor_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                     <image>
+                        <Image url="@assets/floor_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+                     <image>
+                        <Image url="@assets/floor_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
+                     <image>
+                        <Image url="@assets/floor_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@assets/floor_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="7" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="7" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="8" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@assets/floor_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="8" GridPane.rowIndex="5">
+                     <image>
+                        <Image url="@assets/floor_6.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </GridPane>
+            <Group layoutX="1.0" layoutY="2.0">
+               <children>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_bottom_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="142.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_inner_corner_t_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="568.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="568.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="71.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_top_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="497.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="213.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_top_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="355.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_top_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="426.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_inner_corner_t_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="568.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_bottom_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mySouthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="568.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="568.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_side_mid_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" smooth="false">
+                     <image>
+                        <Image url="@assets/wall_corner_bottom_right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="568.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_inner_corner_l_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="71.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="142.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="213.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="myNorthDoor" fitHeight="102.0" fitWidth="71.0" layoutX="284.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="355.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="426.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="102.0" fitWidth="71.0" layoutX="497.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@assets/wall_corner_top_left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="51.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/THIEF.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="myNewGameButton" layoutX="229.0" layoutY="237.0" mnemonicParsing="false" onAction="#switchToCharacterSelection" styleClass="buttonControl" text="New Game" />
+                  <Button fx:id="myLoadGameButton" layoutX="331.0" layoutY="236.0" mnemonicParsing="false" onAction="#loadGame" styleClass="buttonControl" text="Load Game" />
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="67.0" fitWidth="539.0" layoutX="51.0" layoutY="128.0">
+         <image>
+            <Image url="@assets/title.png" />
+         </image>
+      </ImageView>
+      <MenuBar fx:id="menu" layoutX="-6.0" prefHeight="27.0" prefWidth="647.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="myNewGame" mnemonicParsing="false" onAction="#switchToCharacterSelection" text="New Game" />
+                  <MenuItem fx:id="myLoadGame" mnemonicParsing="false" onAction="#loadGame" text="Load Game" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Tutorial">
+            <items>
+              <MenuItem fx:id="myTutorial" mnemonicParsing="false" onAction="#startTutorial" text="Start Tutorial" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="About">
+               <items>
+                  <MenuItem fx:id="myAbout" mnemonicParsing="false" onAction="#about" text="About the Game" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="75.0" fitWidth="81.0" layoutX="511.0" layoutY="55.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/OGRE.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="myAboutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="636.0" styleClass="anchor-pane" visible="false">
+         <children>
+            <Label layoutX="56.0" layoutY="42.0" prefHeight="101.0" prefWidth="500.0" text="Dungeon Adventure, is a single-player, interactive adventure game where a hero, must navigate their way through a maze, fighting monsters and drinking potions along the way, to retrieve the four pillars of OO." textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="152.0" prefHeight="17.0" prefWidth="500.0" text="Created by Luke Smith, Micaela Nomakchteinsky, and Michael Doan" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="192.0" prefHeight="17.0" prefWidth="500.0" text="Dungeon Music by Crossed Killer" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="232.0" prefHeight="17.0" prefWidth="500.0" text="All other music by Marllon Silva a.k.a xDeviruchi" textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="56.0" layoutY="272.0" prefHeight="17.0" prefWidth="500.0" text="Pixel Art by 0x72" textAlignment="CENTER" wrapText="true" />
+            <Button layoutX="257.0" layoutY="346.0" mnemonicParsing="false" onAction="#exitAbout" styleClass="buttonControl" text="Exit About" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
